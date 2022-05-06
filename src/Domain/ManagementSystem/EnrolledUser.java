@@ -9,6 +9,7 @@ abstract class EnrolledUser extends User {
     private String password;
     private String name;
 
+
     private ArrayList<Notification> notifications;
 
 

@@ -15,6 +15,7 @@ public class Coach extends EnrolledUser {
 
     public void editPersonalInformation(){
         //TODO
+        
     }
 
     public void updatePersonalPage(){
