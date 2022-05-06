@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class GameEventSet {
     public Referee getReferee() {
         //Should return the referee object
-        return new Referee(1,"dsc","csdc","dcsc");
+        return new Referee(1,"dsc","csdc","dcsc", "A");
     }
-
     public ArrayList<GameEvent> getGameEvents() {
         //should return the gameEvents (list)
         return new ArrayList<>();
