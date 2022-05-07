@@ -84,7 +84,7 @@ public class Game {
             GameEventSet gameEventSet=gameEventSets.get(i);
             Referee referee=gameEventSet.getReferee();
             String refereeName=referee.getName();
-            report=report+refereeName+":\n";
+            report=report+"Refree: "+refereeName+":\n";
             ArrayList<GameEvent> gameEvents=gameEventSet.getGameEvents();
             for (int j=0; j<gameEvents.size();j++){
                 GameEvent gameEvent=gameEvents.get(i);

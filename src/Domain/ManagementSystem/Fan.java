@@ -52,6 +52,7 @@ public class Fan extends EnrolledUser {
         }
 
         public void viewSearchHistory(){
+
         //TODO: check if needed to print the history or just to return the list
     }
 

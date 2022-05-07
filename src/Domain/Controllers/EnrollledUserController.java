@@ -1,4 +1,6 @@
 package Domain.Controllers;
 
-public class EnrollledUserController{
+public abstract class EnrollledUserController extends UserController{
+    public abstract void showScreen();
+
 }

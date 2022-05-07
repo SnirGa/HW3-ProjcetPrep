@@ -1,4 +1,8 @@
 package Domain.Controllers;
 
-public class CoachController {
+public class CoachController extends EnrollledUserController{
+    @Override
+    public void showScreen() {
+
+    }
 }

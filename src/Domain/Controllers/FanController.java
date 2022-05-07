@@ -1,4 +1,8 @@
 package Domain.Controllers;
 
-public class FanController {
+public class FanController extends EnrollledUserController{
+    @Override
+    public void showScreen() {
+
+    }
 }
