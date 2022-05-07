@@ -51,9 +51,4 @@ public class Fan extends EnrolledUser {
             this.usersComplaints.add(userComplaint);
         }
 
-        public void viewSearchHistory(){
-
-        //TODO: check if needed to print the history or just to return the list
-    }
-
 }

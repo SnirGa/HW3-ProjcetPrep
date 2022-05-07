@@ -12,17 +12,6 @@ public class Coach extends EnrolledUser {
         this.qualification=qualification;
     }
 
-
-    public void editPersonalInformation(){
-        //TODO
-        
-    }
-
-    public void updatePersonalPage(){
-        //TODO
-
-    }
-
     public String getTeamRole() {
         return teamRole;
     }
