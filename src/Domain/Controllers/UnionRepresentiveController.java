@@ -1,10 +1,11 @@
 package Domain.Controllers;
 
-import Domain.ManagementSystem.GameSchedulingPolicy;
-import Domain.ManagementSystem.LeagueSeason;
-import Domain.ManagementSystem.Referee;
+import Domain.ManagementSystem.*;
 
 public class UnionRepresentiveController extends EnrollledUserController{
+    public void  addGameScore(){
+
+    }
     @Override
     public void showScreen() {
 

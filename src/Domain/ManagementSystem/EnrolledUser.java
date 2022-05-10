@@ -1,9 +1,8 @@
 package Domain.ManagementSystem;
-
 import javax.management.Notification;
 import java.util.ArrayList;
 
-abstract class EnrolledUser extends User {
+public abstract class EnrolledUser extends User {
     private int userId;
     private String userName;
     private String password;
