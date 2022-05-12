@@ -2,7 +2,6 @@ package Service;
 
 import Domain.Controllers.UnionRepresentiveController;
 import Domain.ManagementSystem.GameSchedulingPolicy;
-import Domain.ManagementSystem.League;
 import Domain.ManagementSystem.LeagueSeason;
 import Domain.ManagementSystem.Referee;
 

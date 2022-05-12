@@ -2,7 +2,6 @@ package DataAccess;
 
 import Domain.ManagementSystem.Coach;
 
-import java.sql.SQLException;
 import java.util.*;
 
 public class CoachDao implements Dao<Coach> {

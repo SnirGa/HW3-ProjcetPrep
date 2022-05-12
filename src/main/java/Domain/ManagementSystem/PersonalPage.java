@@ -1,5 +1,4 @@
 package Domain.ManagementSystem;
-import Domain.ManagementSystem.*;
 import java.util.ArrayList;
 
 public class PersonalPage {

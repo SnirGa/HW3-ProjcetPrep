@@ -4,7 +4,6 @@ import Domain.NotificationSystem.FanNotification;
 import Domain.RecommendationSystem.RecommendationSystem;
 import Domain.SearchSystem.SearchHistory;
 
-import javax.management.Notification;
 import java.util.ArrayList;
 
 public class Fan extends EnrolledUser {

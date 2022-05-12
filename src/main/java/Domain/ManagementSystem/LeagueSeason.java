@@ -1,6 +1,5 @@
 package Domain.ManagementSystem;
 
-import Domain.NotificationSystem.FanNotification;
 import Domain.RecommendationSystem.RecommendationSystem;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class LeagueSeason {
 
     public LeagueSeason() {
         league = new League();
-        unionRepresentive = new UnionRepresentive();
+        //unionRepresentive = new UnionRepresentive();
         lstGame = new ArrayList<>();
         lstReferee = new ArrayList<>();
         lstTeam = new ArrayList<>();

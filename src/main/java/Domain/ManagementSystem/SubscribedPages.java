@@ -8,6 +8,6 @@ import Domain.NotificationSystem.FanNotification;
         public SubscribedPages()
         {
             fanNotification = new FanNotification();
-            personalPage = new PersonalPage();
+            //personalPage = new PersonalPage();
         }
     }
