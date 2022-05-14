@@ -23,7 +23,7 @@ public class Main{
         //col.insertOne(sampleDoc);
 
 
-        PlayerDaoMongoDB playerDaoMongoDB=new PlayerDaoMongoDB();
+        PlayerDaoMongoDB playerDaoMongoDB=PlayerDaoMongoDB.getInstance();
         Player player=new Player("Roni123","123456","Roni Ronaldo",new Date(),GoalKeeper);
         //playerDaoMongoDB.save(player);
         player.setName("Roni Gu");
