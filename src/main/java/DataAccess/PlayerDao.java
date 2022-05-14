@@ -22,7 +22,7 @@ public class PlayerDao implements Dao<Player>{
     }
 
     @Override
-    public void update(Player player, String[] params) {
+    public void update(Player player) {
 
     }
 

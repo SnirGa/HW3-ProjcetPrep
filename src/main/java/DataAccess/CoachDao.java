@@ -36,7 +36,7 @@ public class CoachDao implements Dao<Coach> {
     }
 
     @Override
-    public void update(Coach coach, String[] params) {
+    public void update(Coach coach) {
 
     }
 
