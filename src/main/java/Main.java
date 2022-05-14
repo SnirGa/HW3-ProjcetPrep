@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,10 +22,12 @@ public class Main{
         //Document sampleDoc=new Document("_id","1").append("name","john smith");
         //col.insertOne(sampleDoc);
 
-        //
+
         PlayerDaoMongoDB playerDaoMongoDB=new PlayerDaoMongoDB();
         Player player=new Player("Roni123","123456","Roni Ronaldo",new Date(),GoalKeeper);
         //playerDaoMongoDB.save(player);
-        playerDaoMongoDB.getAll();
+        player.setName("Roni Gu");
+        playerDaoMongoDB.update(player);
+        ArrayList<Player> players=playerDaoMongoDB.getAll();
     }
 }

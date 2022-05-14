@@ -26,7 +26,7 @@ public class UnionRepresentiveMongoDB implements Dao {
     }
 
     @Override
-    public void update(Object o, String[] params) {
+    public void update(Object o) {
 
     }
 

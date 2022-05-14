@@ -22,25 +22,29 @@ public class PlayerDaoMongoDB implements Dao {
 
     public  static PlayerDaoMongoDB getInstance(){return instance;}
     public PlayerDaoMongoDB() {
-        this.gson=new Gson();
+        this.gson=new Gson(); //helps to convert from json to object and vice versa
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-        this.db=client.getDatabase("ProjectPrep");
-        this.col=db.getCollection("Players");
+        this.db=client.getDatabase("ProjectPrep"); //get the project database
+        this.col=db.getCollection("Players"); //get the players collection from the database
     }
 
     @Override
     public Optional get(String username) {
         Document doc = (Document) this.col.find(eq("userName", username)).first();
-        String docJson=doc.toJson();
-        Player player=gson.fromJson(docJson,Player.class);
-        return Optional.of(player);
+        try {
+            String docJson = doc.toJson(); //json of the document
+            Player player = gson.fromJson(docJson, Player.class); //convert json to Player Object
+            return Optional.of(player);
+        }
+        catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
     public ArrayList getAll() {
         ArrayList<Player> players=new ArrayList<>();
         for (Object obj : col.find()) {
-            // do something
             Document currDoc=(Document) obj;
             String docJson=currDoc.toJson();
             Player player=gson.fromJson(docJson,Player.class);
