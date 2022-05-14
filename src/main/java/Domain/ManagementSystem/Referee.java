@@ -45,25 +45,25 @@ public class Referee extends EnrolledUser {
     private void setQualification(String Qualification) {
         this.qualification = Qualification;
     }
-    public void editPersonalInformation(){
-        Scanner input = new Scanner(System.in);
-        System.out.println(this.viewInformation());
-        System.out.print("Enter userName and qualification, please press 'Enter' after any insertion.");
-        String newUserName = input.nextLine();
-        String newQualification = input.nextLine();
-        //to add check fot the inputs
-        setUserName(newUserName);
-        setQualification(newQualification);
-        System.out.println("your personal information has been updated successfully");
-    }
-    public void viewGames(){
-        getGames();
-    }
-    public void lockGameLog(){
-        Scanner inputGame = new Scanner(System.in);
-        System.out.println(this.viewInformation());
-        System.out.print("Please choose the game");
-        String game = inputGame.nextLine();
-        //to lock the GameLog !!
-    }
+//    public void editPersonalInformation(){
+//        Scanner input = new Scanner(System.in);
+//        System.out.println(this.viewInformation());
+//        System.out.print("Enter userName and qualification, please press 'Enter' after any insertion.");
+//        String newUserName = input.nextLine();
+//        String newQualification = input.nextLine();
+//        //to add check fot the inputs
+//        setUserName(newUserName);
+//        setQualification(newQualification);
+//        System.out.println("your personal information has been updated successfully");
+//    }
+//    public void viewGames(){
+//        getGames();
+//    }
+//    public void lockGameLog(){
+//        Scanner inputGame = new Scanner(System.in);
+//        System.out.println(this.viewInformation());
+//        System.out.print("Please choose the game");
+//        String game = inputGame.nextLine();
+//        //to lock the GameLog !!
+//    }
 }

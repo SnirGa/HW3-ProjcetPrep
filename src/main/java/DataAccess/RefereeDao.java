@@ -1,4 +1,4 @@
 package DataAccess;
 
-public class RefereeDao {
+public class RefereeDao  {
 }
