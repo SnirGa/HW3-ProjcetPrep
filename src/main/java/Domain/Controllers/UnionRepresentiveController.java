@@ -22,7 +22,7 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public boolean addRefTOSL(String league, int year, String refereeUserName) {
-        LeagueSeason leagueSeason = getLeagueBySeason(league, year);
+        LeagueSeason leagueSeason = LeagueController.getLeagueBySeason(league, year);
         Referee referee = (Referee)(Object)rMDB.get(refereeUserName);
         if (leagueSeason != null && referee != null){
             if(leagueSeason.getLstReferee().contains(referee)){
@@ -36,14 +36,6 @@ public class UnionRepresentiveController extends EnrollledUserController{
 
     public void ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) {
 
-    }
-
-    public LeagueSeason getLeagueBySeason(String League, int year){
-        if (leagueMDB.get(League).isPresent()){
-            League league = (League)(Object)leagueMDB.get(League);
-            return league.getLeagueSeasonByYear(year);
-        }
-        return null;
     }
 
 }
