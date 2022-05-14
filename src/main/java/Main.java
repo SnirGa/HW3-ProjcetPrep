@@ -25,6 +25,6 @@ public class Main{
         PlayerDaoMongoDB playerDaoMongoDB=new PlayerDaoMongoDB();
         Player player=new Player("Roni123","123456","Roni Ronaldo",new Date(),GoalKeeper);
         //playerDaoMongoDB.save(player);
-        playerDaoMongoDB.get("Roni123");
+        playerDaoMongoDB.getAll();
     }
 }

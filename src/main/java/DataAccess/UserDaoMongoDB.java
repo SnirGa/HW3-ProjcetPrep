@@ -30,7 +30,7 @@ public class UserDaoMongoDB implements Dao {
     }
 
     @Override
-    public void update(Object o, String[] params) {
+    public void update(Object o) {
 
     }
 
