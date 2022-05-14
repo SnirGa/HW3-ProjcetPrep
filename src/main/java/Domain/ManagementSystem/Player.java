@@ -1,11 +1,12 @@
 package Domain.ManagementSystem;
 import java.util.Date;
 
-public class Player {
+public class Player extends EnrolledUser {
     private Date birthday;
     private FilledRole filledRole;
 
-    public Player(Date birthday, FilledRole filledRole) {
+    public Player(int userId, String userName, String password, String name, Date birthday, FilledRole filledRole) {
+        super(userId, userName, password, name);
         this.birthday = birthday;
         this.filledRole = filledRole;
     }
