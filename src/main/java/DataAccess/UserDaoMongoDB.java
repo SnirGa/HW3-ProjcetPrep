@@ -6,7 +6,7 @@ import java.util.Optional;
 public class UserDaoMongoDB implements Dao {
     private static final UserDaoMongoDB instance = new UserDaoMongoDB();
 
-    private  UserDaoMongoDB(){
+    private UserDaoMongoDB(){
         // add default users
     }
 
@@ -30,7 +30,7 @@ public class UserDaoMongoDB implements Dao {
     }
 
     @Override
-    public void update(Object o, String[] params) {
+    public void update(Object o) {
 
     }
 

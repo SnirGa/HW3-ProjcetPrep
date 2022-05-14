@@ -2,13 +2,9 @@ package DataAccess;
 
 import Domain.ManagementSystem.Player;
 import com.google.gson.Gson;
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Projections;
-import com.mongodb.client.model.Sorts;
+import com.mongodb.MongoException;
+import com.mongodb.client.*;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -22,9 +18,9 @@ public class PlayerDaoMongoDB implements Dao {
     MongoDatabase db;
     MongoCollection col;
 
-    private static final PlayerDao instance=new PlayerDao();
+    private static final PlayerDaoMongoDB instance=new PlayerDaoMongoDB();
 
-    public  static PlayerDao getInstance(){return instance;}
+    public  static PlayerDaoMongoDB getInstance(){return instance;}
     public PlayerDaoMongoDB() {
         this.gson=new Gson();
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
@@ -35,14 +31,22 @@ public class PlayerDaoMongoDB implements Dao {
     @Override
     public Optional get(String username) {
         Document doc = (Document) this.col.find(eq("userName", username)).first();
-
-        return Optional.empty();
-
+        String docJson=doc.toJson();
+        Player player=gson.fromJson(docJson,Player.class);
+        return Optional.of(player);
     }
 
     @Override
     public ArrayList getAll() {
-        return null;
+        ArrayList<Player> players=new ArrayList<>();
+        for (Object obj : col.find()) {
+            // do something
+            Document currDoc=(Document) obj;
+            String docJson=currDoc.toJson();
+            Player player=gson.fromJson(docJson,Player.class);
+            players.add(player);
+        }
+        return players;
     }
 
     @Override
@@ -54,12 +58,22 @@ public class PlayerDaoMongoDB implements Dao {
     }
 
     @Override
-    public void update(Object o, String[] params) {
+    public void update(Object o) {
+        this.delete(o);
+        this.save(o);
 
     }
 
     @Override
     public void delete(Object o) {
+        Player player=(Player) o;
+        Bson query = eq("userName",player.getUserName() );
+        try {
+            DeleteResult result = this.col.deleteOne(query);
+        } catch (MongoException me) {
+            System.out.println("userName not found");
+        }
+
 
     }
 }
