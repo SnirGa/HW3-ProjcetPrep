@@ -1,7 +1,6 @@
 package Domain.ManagementSystem;
 
 import java.util.ArrayList;
-
 public class Team {
     Boolean isActive;
     String stadium;
@@ -25,8 +24,8 @@ public class Team {
         this.leagueSeasons = new ArrayList<>();
     }
 
-    public String getStatus() {
-        if (this.isActive) {
+    public String getStatus(){
+        if (this.isActive){
             return "Active";
         }
         return "notActive";
@@ -98,5 +97,13 @@ public class Team {
 
     public void setLeagueSeasons(ArrayList<LeagueSeason> leagueSeasons) {
         this.leagueSeasons = leagueSeasons;
+    }
+
+    public void openTeam(){
+        //ToDo
+    }
+
+    public void closeTeam(){
+        //ToDo
     }
 }
