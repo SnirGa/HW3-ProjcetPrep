@@ -1,4 +1,4 @@
 package DataAccess;
 
-public class LeagueDaoMongoDB {
+public class LeagueDaoMongoDB  {
 }
