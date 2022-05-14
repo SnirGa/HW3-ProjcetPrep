@@ -3,7 +3,7 @@ import javax.management.Notification;
 import java.util.ArrayList;
 
 public abstract class EnrolledUser extends User {
-    private int userId;
+
     private String userName;
     private String password;
     private String name;
@@ -12,21 +12,12 @@ public abstract class EnrolledUser extends User {
     private ArrayList<Notification> notifications;
 
 
-    public EnrolledUser(int userId, String userName, String password, String name) {
-        this.userId = userId;
+    public EnrolledUser(String userName, String password, String name) {
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.notifications=new ArrayList<>();
 
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getUserName() {

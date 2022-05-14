@@ -1,7 +1,7 @@
 package Domain.ManagementSystem;
 
 public class UnionRepresentive extends EnrolledUser{
-    public UnionRepresentive(int userId, String userName, String password, String name) {
-        super(userId, userName, password, name);
+    public UnionRepresentive(String userName, String password, String name) {
+        super(userName, password, name);
     }
 }

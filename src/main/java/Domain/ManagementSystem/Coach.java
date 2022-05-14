@@ -6,8 +6,8 @@ public class Coach extends EnrolledUser {
     private Team team;
     private PersonalPage personalPage;
 
-    public Coach(int userId, String userName, String password, String name,String teamRole,String qualification,PersonalPage personalPage) {
-        super(userId, userName, password, name);
+    public Coach(String userName, String password, String name,String teamRole,String qualification,PersonalPage personalPage) {
+        super(userName, password, name);
         this.teamRole=teamRole;
         this.qualification=qualification;
     }

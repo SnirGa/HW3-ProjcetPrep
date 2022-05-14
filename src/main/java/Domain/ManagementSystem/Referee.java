@@ -10,8 +10,8 @@ public class Referee extends EnrolledUser {
     private ArrayList<LeagueSeason> leagueSeasons;
 
 
-    public Referee(int userId, String userName, String password, String name, String qualification) {
-        super(userId, userName, password, name);
+    public Referee(String userName, String password, String name, String qualification) {
+        super(userName, password, name);
         this.qualification = qualification;
         this.games = new ArrayList<>();
         this.gameEventSets = new ArrayList<>();
@@ -44,11 +44,11 @@ public class Referee extends EnrolledUser {
 
     private void setQualification(String Qualification) {
         this.qualification = Qualification;
-    };
+    }
     public void editPersonalInformation(){
         Scanner input = new Scanner(System.in);
         System.out.println(this.viewInformation());
-        System.out.printf("Enter userName and qualification, please press 'Enter' after any insertion.");
+        System.out.print("Enter userName and qualification, please press 'Enter' after any insertion.");
         String newUserName = input.nextLine();
         String newQualification = input.nextLine();
         //to add check fot the inputs
@@ -62,7 +62,7 @@ public class Referee extends EnrolledUser {
     public void lockGameLog(){
         Scanner inputGame = new Scanner(System.in);
         System.out.println(this.viewInformation());
-        System.out.printf("Please choose the game");
+        System.out.print("Please choose the game");
         String game = inputGame.nextLine();
         //to lock the GameLog !!
     }

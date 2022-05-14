@@ -3,8 +3,8 @@ package Domain.ManagementSystem;
 public class TeamOwner extends EnrolledUser {
     private Team team;
 
-    public TeamOwner(int userId, String userName, String password, String name) {
-        super(userId, userName, password, name);
+    public TeamOwner(String userName, String password, String name) {
+        super(userName, password, name);
     }
 
     public void appointOwner(EnrolledUser user){

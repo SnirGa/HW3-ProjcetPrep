@@ -6,8 +6,8 @@ public class TeamManager extends EnrolledUser {
     ArrayList<String>Permissions;
     private Team team;
 
-    public TeamManager(int userId, String userName, String password, String name, ArrayList<String> permissions) {
-        super(userId, userName, password, name);
+    public TeamManager(String userName, String password, String name, ArrayList<String> permissions) {
+        super(userName, password, name);
         Permissions = permissions;
     }
 
