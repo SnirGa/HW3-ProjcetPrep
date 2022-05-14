@@ -18,7 +18,7 @@ public class RefereeDaoMongoDB implements Dao {
 
     }
     @Override
-    public Optional get(long id) {
+    public Optional get(String username) {
         return Optional.of(3); //c
     }
 

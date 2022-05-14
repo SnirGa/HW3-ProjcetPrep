@@ -14,10 +14,10 @@ public class CoachDao implements Dao<Coach> {
     @Override
 
 
-    public Optional<Coach> get(long id) {
+    public Optional<Coach> get(String username) {
         for (int i=0;i<this.coaches.size(); i++){
             Coach iterateCoach=this.coaches.get(i);
-            if (iterateCoach.getUserId()==id){
+            if (iterateCoach.getUserName()==username){
                 return Optional.of(iterateCoach);
             }
             }
