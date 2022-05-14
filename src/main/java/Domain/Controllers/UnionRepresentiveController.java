@@ -1,20 +1,33 @@
 package Domain.Controllers;
 
 import DataAccess.LeagueDaoMongoDB;
+import DataAccess.UnionRepresentiveMongoDB;
 import Domain.ManagementSystem.*;
 
 public class UnionRepresentiveController extends EnrollledUserController{
     LeagueDaoMongoDB leagueMDB;
+    UnionRepresentiveMongoDB urMDB;
+
+    public UnionRepresentiveController() {
+        urMDB = UnionRepresentiveMongoDB.getInstance();
+    }
 
     public void  addGameScore(){
-
     }
     @Override
     public void showScreen() {
-
     }
 
-    public void addRefTOSL(LeagueSeason leagueSeason, Referee referee) {
+    public boolean addRefTOSL(String league, int year, Referee referee) {
+        leagueSeason = getLeagueBySeason(league, year);
+        if (leagueSeason != null && referee != null){
+            if (leagueSeason.getLstReferee.contains(referee)){
+                return false;
+            }
+            leagueSeason.addReferee(referee);
+            return true;
+        }
+        return false;
     }
 
     public void ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) {
@@ -28,4 +41,5 @@ public class UnionRepresentiveController extends EnrollledUserController{
         }
         return null;
     }
+
 }
