@@ -24,7 +24,7 @@ public class RefereeDaoMongoDB implements Dao {
 
     public static RefereeDaoMongoDB getInstance(){return instance;}
 
-    public RefereeDaoMongoDB() {
+    private RefereeDaoMongoDB() {
         this.gson=new Gson();
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep");
@@ -32,10 +32,15 @@ public class RefereeDaoMongoDB implements Dao {
     }
     @Override
     public Optional get(String username) {
-        org.bson.Document doc = (Document) this.col.find(eq("userName", username)).first();
-        String docJson = doc.toJson();
-        Referee referee = gson.fromJson(docJson,Referee.class);
-        return Optional.of(referee);
+        Document doc = (Document) this.col.find(eq("userName", username)).first();
+        try {
+            String docJson = doc.toJson(); //json of the document
+            Referee referee = gson.fromJson(docJson, Referee.class); //convert json to Player Object
+            return Optional.of(referee);
+        }
+        catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -52,8 +57,8 @@ public class RefereeDaoMongoDB implements Dao {
     }
 
     @Override
-    public void save(Object objRef) {
-        Referee referee=(Referee)objRef;
+    public void save(Object o) {
+        Referee referee=(Referee)o;
         String jsonInString=gson.toJson(referee);
         Document doc = Document.parse(jsonInString);
         this.col.insertOne(doc);
