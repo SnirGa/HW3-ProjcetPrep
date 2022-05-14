@@ -19,9 +19,9 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public boolean addRefTOSL(String league, int year, Referee referee) {
-        leagueSeason = getLeagueBySeason(league, year);
+        LeagueSeason leagueSeason = getLeagueBySeason(league, year);
         if (leagueSeason != null && referee != null){
-            if (leagueSeason.getLstReferee.contains(referee)){
+            if(leagueSeason.getLstReferee().contains(referee)){
                 return false;
             }
             leagueSeason.addReferee(referee);
