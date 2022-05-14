@@ -13,8 +13,8 @@ public class UnionRepresentiveApplication {
         unionRepresentiveController.addRefTOSL(leagueSeason,referee);
     }
 
-    public void AddSchedulingPolicy(LeagueSeason leagueSeason, GameSchedulingPolicy gameSchedulingPolicy){
+    public void AddSchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy){
         //The game scheduling policy is an option from close predefined policies list.
-        unionRepresentiveController.ApplySchedulingPolicy(leagueSeason,gameSchedulingPolicy);
+        unionRepresentiveController.ApplySchedulingPolicy(League, year,gameSchedulingPolicy);
     }
 }

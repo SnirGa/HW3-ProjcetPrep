@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class LeagueSeason {
     League league;
+    int year;
     UnionRepresentive unionRepresentive;
     ArrayList<Game> lstGame;
     ArrayList<Referee> lstReferee;
@@ -14,9 +15,9 @@ public class LeagueSeason {
     GameSchedulingPolicy gameSchedulingPolicy;
     RecommendationSystem recommendationSystem;
 
-    public LeagueSeason() {
-        league = new League();
-        //unionRepresentive = new UnionRepresentive();
+    public LeagueSeason(League l, int y) {
+        league = l;
+        year = y;
         lstGame = new ArrayList<>();
         lstReferee = new ArrayList<>();
         lstTeam = new ArrayList<>();
@@ -29,6 +30,7 @@ public class LeagueSeason {
     {
         this.lstGame.add(game);
     }
+
     public ArrayList<Game> getLstGame()
     {
         return this.lstGame;
@@ -38,6 +40,7 @@ public class LeagueSeason {
     {
         this.lstReferee.add(referee);
     }
+
     public ArrayList<Referee> getLstReferee()
     {
         return this.lstReferee;
@@ -47,8 +50,13 @@ public class LeagueSeason {
     {
         this.lstTeam.add(team);
     }
+
     public ArrayList<Team> getLstTeam()
     {
         return this.lstTeam;
+    }
+
+    public int getYear() {
+        return  this.year;
     }
 }
