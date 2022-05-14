@@ -2,7 +2,8 @@ package Domain.ManagementSystem;
 
 import Service.UserApplication;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginTest {
 
@@ -10,11 +11,11 @@ public class LoginTest {
     void loginEventTestSet(){
         UserApplication userApp = new UserApplication();
         // User exist , correct password  - assert True
-//        assertEquals(true, userApp.login("", ""));
+//        assertTrue(userApp.login("", ""));
         // User exist , wrong password  - assert False
-//        assertEquals(false, userApp.login("", ""));
+//        assertFalse(userApp.login("", ""));
         // User Not exist - assert False
-//        assertEquals(false, userApp.login("", ""));
+//        assertFalse(userApp.login("", ""));
 
     }
 
