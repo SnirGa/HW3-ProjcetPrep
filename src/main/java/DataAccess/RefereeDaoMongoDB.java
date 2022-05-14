@@ -1,6 +1,7 @@
 package DataAccess;
 
 import Domain.ManagementSystem.Referee;
+import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 
 import javax.swing.text.Document;
@@ -14,6 +15,7 @@ public class RefereeDaoMongoDB implements Dao {
         this.db=new DB();
         this.mongoCollection=db.getCollection("Referees");
         this.referees= Arrays.asList(mongoCollection.find().into(new ArrayList<Referee>()).toArray());
+
     }
     @Override
     public Optional get(long id) {
@@ -26,7 +28,11 @@ public class RefereeDaoMongoDB implements Dao {
     }
 
     @Override
-    public void save(Object referee) {
+    public void save(Object objRef) {
+        Referee referee=(Referee) objRef;
+        Gson gson=new Gson();
+        String json=gson.toJson(referee);
+
 
     }
 
