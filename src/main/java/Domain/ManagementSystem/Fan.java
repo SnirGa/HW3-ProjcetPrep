@@ -14,9 +14,9 @@ public class Fan extends EnrolledUser {
 
 
 
-    public Fan(int userId, String userName, String password, String name,RecommendationSystem recommendationSystem) {
-        super(userId, userName, password, name);
-        this.notifications=new ArrayList<FanNotification>();
+    public Fan(String userName, String password, String name,RecommendationSystem recommendationSystem) {
+        super(userName, password, name);
+        this.notifications=new ArrayList<>();
         this.searchHistories=new ArrayList<>();
         this.recommendationSystem=recommendationSystem;
         this.usersComplaints=new ArrayList<>();

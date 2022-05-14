@@ -5,8 +5,8 @@ public class Player extends EnrolledUser {
     private Date birthday;
     private FilledRole filledRole;
 
-    public Player(int userId, String userName, String password, String name, Date birthday, FilledRole filledRole) {
-        super(userId, userName, password, name);
+    public Player(String userName, String password, String name, Date birthday, FilledRole filledRole) {
+        super(userName, password, name);
         this.birthday = birthday;
         this.filledRole = filledRole;
     }
