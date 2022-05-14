@@ -22,6 +22,8 @@ public class RefereeDaoMongoDB implements Dao {
     MongoCollection col;
     private static final RefereeDaoMongoDB instance=new RefereeDaoMongoDB();
 
+    public static RefereeDaoMongoDB getInstance(){return instance;}
+
     public RefereeDaoMongoDB() {
         this.gson=new Gson();
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
