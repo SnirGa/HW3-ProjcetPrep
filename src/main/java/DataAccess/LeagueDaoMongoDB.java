@@ -30,7 +30,7 @@ public class LeagueDaoMongoDB implements Dao{
     }
 
     @Override
-    public void update(Object o, String[] params) {
+    public void update(Object o) {
 
     }
 
