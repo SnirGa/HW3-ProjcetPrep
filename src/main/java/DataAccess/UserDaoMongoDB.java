@@ -6,7 +6,7 @@ import java.util.Optional;
 public class UserDaoMongoDB implements Dao {
     private static final UserDaoMongoDB instance = new UserDaoMongoDB();
 
-    private  UserDaoMongoDB(){
+    private UserDaoMongoDB(){
         // add default users
     }
 

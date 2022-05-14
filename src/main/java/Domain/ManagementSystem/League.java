@@ -1,15 +1,21 @@
 package Domain.ManagementSystem;
 
 import java.util.ArrayList;
-    public class League {
+import java.util.Dictionary;
+import java.util.Hashtable;
 
-        ArrayList<LeagueSeason> lstLeagueSeason;
-        public League() { lstLeagueSeason = new ArrayList<>(); }
-
-        public void addLstLeagueSeason(LeagueSeason leagueSeason) {
-            this.lstLeagueSeason.add(leagueSeason);
+public class League {
+    Hashtable <Integer, LeagueSeason> leagueSeasonDict;
+        public League() {
+            leagueSeasonDict = new Hashtable<>();
         }
-        public ArrayList<LeagueSeason> getLstLeagueSeason() {
-            return this.lstLeagueSeason;
+
+
+        public void addLeagueSeason(LeagueSeason leagueSeason){
+            leagueSeasonDict.put(leagueSeason.getYear(), leagueSeason);
+        }
+
+        public LeagueSeason getLeagueSeasonByYear(int year){
+            return leagueSeasonDict.get(year);
         }
     }
