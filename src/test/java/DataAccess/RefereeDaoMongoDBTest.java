@@ -35,8 +35,8 @@ class RefereeDaoMongoDBTest {
         refereeDaoMongoDB.save(referee2);
         referees=refereeDaoMongoDB.getAll();
         assertTrue(referees.size()==2);
-//        refereeDaoMongoDB.delete(referee1);
-//        refereeDaoMongoDB.delete(referee2);
+        refereeDaoMongoDB.delete(referee1);
+        refereeDaoMongoDB.delete(referee2);
     }
 
     @Test
