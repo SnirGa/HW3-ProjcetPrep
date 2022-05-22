@@ -8,13 +8,14 @@ import Domain.ManagementSystem.Referee;
 public class UnionRepresentiveApplication {
     UnionRepresentiveController unionRepresentiveController=new UnionRepresentiveController();
 
-    public boolean addRefereetoSL(String league, int year , Referee referee){
+    public boolean addRefereetoSL(String league, int year , String refereeUserName){
         //UC- add referee to league
-        return unionRepresentiveController.addRefTOSL(league,year,referee);
+        return unionRepresentiveController.addRefTOSL(league,year,refereeUserName);
     }
 
     public void AddSchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy){
         //The game scheduling policy is an option from close predefined policies list.
         unionRepresentiveController.ApplySchedulingPolicy(League, year,gameSchedulingPolicy);
     }
+
 }

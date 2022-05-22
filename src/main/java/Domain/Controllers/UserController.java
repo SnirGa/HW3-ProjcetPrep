@@ -4,7 +4,7 @@ import Domain.ManagementSystem.EnrolledUser;
 
 
 public class UserController {
-    UserDaoMongoDB udMDB;
+    static UserDaoMongoDB udMDB;
 
     public UserController(){
         udMDB = UserDaoMongoDB.getInstance();
@@ -21,6 +21,10 @@ public class UserController {
             return user.getPassword().equals(password);
         }
         return false;
+    }
+
+    public static EnrolledUser getUser(String userName){
+        return (EnrolledUser)(Object)udMDB.get(userName);
     }
 
     public void logout(){
