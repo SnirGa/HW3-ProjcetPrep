@@ -21,7 +21,7 @@ class PlayerDaoMongoDBTest {
         assertNotNull(fromdb.get());
         Optional<Player> fromdb2=playerDaoMongoDB.get("notExist");
         assertTrue(fromdb2.isEmpty());
-        playerDaoMongoDB.delete(player);
+        //playerDaoMongoDB.delete(player);
 
     }
     @Test
