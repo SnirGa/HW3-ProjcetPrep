@@ -25,8 +25,8 @@ public class GameSchedulingPolicy2Games implements GameSchedulingPolicy{
             Team curr = lstTeam.get(i);
             for (int j=i+1; j< nuOfTeams; j++) {
                 Team team = lstTeam.get(j);
-                Game firstGame = new Game(null, curr, team, null, leagueSeason);
-                Game secondGame = new Game(null, curr, team, null, leagueSeason);
+                Game firstGame = new Game(null, curr, team, null, null ,leagueSeason);
+                Game secondGame = new Game(null, curr, team, null, null ,leagueSeason);
                 lstGames.add(firstGame);
                 lstGames.add(secondGame);
             }

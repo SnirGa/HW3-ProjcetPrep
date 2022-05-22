@@ -4,26 +4,25 @@ import Domain.RecommendationSystem.RecommendationSystem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class LeagueSeason {
-    League league;
-    int year;
-    LocalDate startDate;
-    LocalDate finishDate;
-    UnionRepresentive unionRepresentive;
-    ArrayList<Game> lstGame;
-    ArrayList<Referee> lstReferee;
-    ArrayList<Team> lstTeam;
-    PointsPolicy pointsPolicy;
-    GameSchedulingPolicy gameSchedulingPolicy;
-    RecommendationSystem recommendationSystem;
+    private League league;
+    private int year;
+    private LocalDate startDate;
+    private LocalDate finishDate;
+    private UnionRepresentive unionRepresentive;
+    private ArrayList<Game> lstGame;
+    private ArrayList<Referee> lstReferee;
+    private ArrayList<Team> lstTeam;
+    private PointsPolicy pointsPolicy;
+    private GameSchedulingPolicy gameSchedulingPolicy;
+    private RecommendationSystem recommendationSystem;
 
-    public LeagueSeason(League l, int y, LocalDate start, LocalDate finish) {
+    public LeagueSeason(League l, int y, LocalDate startdate, LocalDate finishdate) {
         league = l;
         year = y;
-        startDate = start;
-        finishDate = finish;
+        startDate = startdate;
+        finishDate = finishdate;
         lstGame = new ArrayList<>();
         lstReferee = new ArrayList<>();
         lstTeam = new ArrayList<>();
@@ -36,7 +35,7 @@ public class LeagueSeason {
     }
 
     public int getYear() {
-        return  this.year;
+        return this.year;
     }
 
     public LocalDate getStartDate() {

@@ -2,7 +2,6 @@ package Domain.ManagementSystem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Game {
     //TODO: check if need to add referees.
@@ -10,11 +9,12 @@ public class Game {
     private Team home;
     private Team away;
     private Time time;
+    private String location;
     private GameScore gameScore;
     private ArrayList<GameEventSet> gameEventSets;
     private LeagueSeason leagueSeason;
 
-    public Game(LocalDate date, Team home, Team away, Time time, LeagueSeason leagueSeason) {
+    public Game(LocalDate date, Team home, Team away, Time time, String location, LeagueSeason leagueSeason) {
         this.date = date;
         this.home = home;
         this.away = away;
@@ -23,6 +23,7 @@ public class Game {
         this.gameScore=new GameScore();
         this.gameEventSets=new ArrayList<>();
     }
+
     public LocalDate getDate() {
         return date;
     }
