@@ -34,8 +34,15 @@ public class UnionRepresentiveController extends EnrollledUserController{
         return false;
     }
 
-    public void ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) {
-
+    public boolean ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) {
+        LeagueSeason leagueSeason = LeagueController.getLeagueBySeason(League, year);
+        if (leagueSeason != null){
+            leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
+            if (gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

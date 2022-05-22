@@ -22,7 +22,7 @@ public class LeagueSeason {
         lstReferee = new ArrayList<>();
         lstTeam = new ArrayList<>();
         pointsPolicy = new PointsPolicy();
-        gameSchedulingPolicy = new GameSchedulingPolicy();
+//        gameSchedulingPolicy = new GameSchedulingPolicy();
         recommendationSystem = new RecommendationSystem();
     }
 
@@ -98,6 +98,7 @@ public class LeagueSeason {
 
     public void setGameSchedulingPolicy(GameSchedulingPolicy gameSchedulingPolicy) {
         this.gameSchedulingPolicy = gameSchedulingPolicy;
+
     }
 
     public RecommendationSystem getRecommendationSystem() {
