@@ -2,13 +2,15 @@ package Domain.ManagementSystem;
 
 import Domain.RecommendationSystem.RecommendationSystem;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LeagueSeason {
     League league;
     int year;
-    int startMonth;
-    int finishMonth;
+    LocalDate startDate;
+    LocalDate finishDate;
     UnionRepresentive unionRepresentive;
     ArrayList<Game> lstGame;
     ArrayList<Referee> lstReferee;
@@ -17,11 +19,11 @@ public class LeagueSeason {
     GameSchedulingPolicy gameSchedulingPolicy;
     RecommendationSystem recommendationSystem;
 
-    public LeagueSeason(League l, int y, int startmonth, int finishmonth) {
+    public LeagueSeason(League l, int y, LocalDate start, LocalDate finish) {
         league = l;
         year = y;
-        startMonth = startmonth;
-        finishMonth = finishmonth;
+        startDate = start;
+        finishDate = finish;
         lstGame = new ArrayList<>();
         lstReferee = new ArrayList<>();
         lstTeam = new ArrayList<>();
@@ -37,20 +39,20 @@ public class LeagueSeason {
         return  this.year;
     }
 
-    public int getStartMonth() {
-        return startMonth;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStartMonth(int startMonth) {
-        this.startMonth = startMonth;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public int getFinishMonth() {
-        return finishMonth;
+    public LocalDate getFinishDate() {
+        return finishDate;
     }
 
-    public void setFinishMonth(int finishMonth) {
-        this.finishMonth = finishMonth;
+    public void setFinishDate(LocalDate finishDate) {
+        this.finishDate = finishDate;
     }
 
     public void addGame(Game game)
