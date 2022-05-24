@@ -21,7 +21,7 @@ class RefereeDaoMongoDBTest {
         assertNotNull(fromdb.get());
         Optional<Referee> fromdb2=refereeDaoMongoDB.get("notExist");
         assertTrue(fromdb2.isEmpty());
-        refereeDaoMongoDB.delete(referee);
+//        refereeDaoMongoDB.delete(referee);
 
     }
     @Test
@@ -35,8 +35,8 @@ class RefereeDaoMongoDBTest {
         refereeDaoMongoDB.save(referee2);
         referees=refereeDaoMongoDB.getAll();
         assertTrue(referees.size()==2);
-        refereeDaoMongoDB.delete(referee1);
-        refereeDaoMongoDB.delete(referee2);
+//        refereeDaoMongoDB.delete(referee1);
+//        refereeDaoMongoDB.delete(referee2);
     }
 
     @Test
@@ -52,8 +52,8 @@ class RefereeDaoMongoDBTest {
         Optional optional2=refereeDaoMongoDB.get("Roni123");
         assertNotNull(optional1.get());
         assertNotNull(optional2.get());
-        refereeDaoMongoDB.delete(referee1);
-        refereeDaoMongoDB.delete(referee2);
+//        refereeDaoMongoDB.delete(referee1);
+//        refereeDaoMongoDB.delete(referee2);
 
     }
 
@@ -65,20 +65,20 @@ class RefereeDaoMongoDBTest {
         refereeDaoMongoDB.update(referee);
         Optional<Referee> op=refereeDaoMongoDB.get(referee.getUserName());
         assertTrue(referee.getName().equals(op.get().getName()));
-        refereeDaoMongoDB.delete(referee);
+//        refereeDaoMongoDB.delete(referee);
     }
 
-    @Test
-    void delete() {
-        RefereeDaoMongoDB refereeDaoMongoDB=RefereeDaoMongoDB.getInstance();
-        Referee referee=new Referee("Hodaya123","123456","Hodaya Messi", "high");
-        refereeDaoMongoDB.save(referee);
-        ArrayList<Referee> referees=refereeDaoMongoDB.getAll();
-        refereeDaoMongoDB.delete(referee);
-        referees=refereeDaoMongoDB.getAll();
-        assertTrue(referees.size()==0);
+//    @Test
+//    void delete() {
+//        RefereeDaoMongoDB refereeDaoMongoDB=RefereeDaoMongoDB.getInstance();
+//        Referee referee=new Referee("Hodaya123","123456","Hodaya Messi", "high");
+//        refereeDaoMongoDB.save(referee);
+//        ArrayList<Referee> referees=refereeDaoMongoDB.getAll();
+//        refereeDaoMongoDB.delete(referee);
+//        referees=refereeDaoMongoDB.getAll();
+//        assertTrue(referees.size()==0);
+//
 
 
-
-    }
+//    }
 }
