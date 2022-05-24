@@ -2,28 +2,56 @@ package Domain.ManagementSystem;
 
 import Domain.RecommendationSystem.RecommendationSystem;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LeagueSeason {
-    League league;
-    int year;
-    UnionRepresentive unionRepresentive;
-    ArrayList<Game> lstGame;
-    ArrayList<Referee> lstReferee;
-    ArrayList<Team> lstTeam;
-    PointsPolicy pointsPolicy;
-    GameSchedulingPolicy gameSchedulingPolicy;
-    RecommendationSystem recommendationSystem;
+    private League league;
+    private int year;
+    private LocalDate startDate;
+    private LocalDate finishDate;
+    private UnionRepresentive unionRepresentive;
+    private ArrayList<Game> lstGame;
+    private ArrayList<Referee> lstReferee;
+    private ArrayList<Team> lstTeam;
+    private PointsPolicy pointsPolicy;
+    private GameSchedulingPolicy gameSchedulingPolicy;
+    private RecommendationSystem recommendationSystem;
 
-    public LeagueSeason(League l, int y) {
+    public LeagueSeason(League l, int y, LocalDate startdate, LocalDate finishdate) {
         league = l;
         year = y;
+        startDate = startdate;
+        finishDate = finishdate;
         lstGame = new ArrayList<>();
         lstReferee = new ArrayList<>();
         lstTeam = new ArrayList<>();
         pointsPolicy = new PointsPolicy();
-        gameSchedulingPolicy = new GameSchedulingPolicy();
         recommendationSystem = new RecommendationSystem();
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getYear() {
+        return this.year;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(LocalDate finishDate) {
+        this.finishDate = finishDate;
     }
 
     public void addGame(Game game)
@@ -98,6 +126,7 @@ public class LeagueSeason {
 
     public void setGameSchedulingPolicy(GameSchedulingPolicy gameSchedulingPolicy) {
         this.gameSchedulingPolicy = gameSchedulingPolicy;
+
     }
 
     public RecommendationSystem getRecommendationSystem() {
@@ -108,7 +137,4 @@ public class LeagueSeason {
         this.recommendationSystem = recommendationSystem;
     }
 
-    public int getYear() {
-        return  this.year;
-    }
 }

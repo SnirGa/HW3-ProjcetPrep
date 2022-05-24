@@ -2,15 +2,15 @@ package Domain.ManagementSystem;
 
 import java.util.ArrayList;
 public class Team {
-    Boolean isActive;
-    String stadium;
-    ArrayList<TeamOwner> teamOwners;
-    ArrayList<TeamManager> teamManagers;
-    ArrayList<Coach> coaches;
-    ArrayList<Player> players;
-    ArrayList<Game> homeGames;
-    ArrayList<Game> awayGames;
-    ArrayList<LeagueSeason> leagueSeasons;
+    private Boolean isActive;
+    private String stadium;
+    private ArrayList<TeamOwner> teamOwners;
+    private ArrayList<TeamManager> teamManagers;
+    private ArrayList<Coach> coaches;
+    private ArrayList<Player> players;
+    private ArrayList<Game> homeGames;
+    private ArrayList<Game> awayGames;
+    private ArrayList<LeagueSeason> leagueSeasons;
 
     public Team(Boolean isActive, String stadium, ArrayList<TeamOwner> teamOwner) {
         this.isActive = isActive;
