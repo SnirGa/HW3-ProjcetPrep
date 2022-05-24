@@ -7,7 +7,7 @@ import Domain.SearchSystem.SearchHistory;
 import java.util.ArrayList;
 
 public class Fan extends EnrolledUser {
-    private ArrayList<FanNotification> notifications;
+    private ArrayList<FanNotification> fanNotifications;
     private ArrayList<SearchHistory> searchHistories;
     private RecommendationSystem recommendationSystem;
     private ArrayList<UserComplaint> usersComplaints;
@@ -16,14 +16,14 @@ public class Fan extends EnrolledUser {
 
     public Fan(String userName, String password, String name,RecommendationSystem recommendationSystem) {
         super(userName, password, name);
-        this.notifications=new ArrayList<>();
+        this.fanNotifications=new ArrayList<>();
         this.searchHistories=new ArrayList<>();
         this.recommendationSystem=recommendationSystem;
         this.usersComplaints=new ArrayList<>();
     }
 
     public ArrayList<FanNotification> getNotifications() {
-        return notifications;
+        return fanNotifications;
     }
 
     public ArrayList<SearchHistory> getSearchHistories() {
@@ -43,7 +43,7 @@ public class Fan extends EnrolledUser {
     }
 
     public void addNotification(FanNotification notification){
-        this.notifications.add(notification);
+        this.fanNotifications.add(notification);
     }
 
     public void addComplaint(UserComplaint userComplaint){

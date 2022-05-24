@@ -1,6 +1,6 @@
 package DataAccess;
 
-import Domain.ManagementSystem.Fan;
+import Domain.ManagementSystem.TeamManager;
 import com.google.gson.Gson;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
@@ -16,66 +16,66 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class FanDaoMongoDB implements Dao<Fan> {
+public class TeamManagerDaoMongoDB implements Dao<TeamManager> {
     Gson gson;
     MongoDatabase db;
     MongoCollection col;
-    private static final FanDaoMongoDB instance = new FanDaoMongoDB();
-    public  static FanDaoMongoDB getInstance(){return instance;}
+    private static final TeamManagerDaoMongoDB instance = new TeamManagerDaoMongoDB();
+    public  static TeamManagerDaoMongoDB getInstance(){return instance;}
 
-
-    public FanDaoMongoDB() {
+    public TeamManagerDaoMongoDB() {
         this.gson = new Gson(); //helps to convert from json to object and vice versa
         MongoClient client = MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db = client.getDatabase("ProjectPrep"); //get the project database
-        this.col = db.getCollection("Fans"); //get the fan collection from the database
+        this.col = db.getCollection("TeamManagers"); //get the team manager collection from the database
     }
 
+
     @Override
-    public Optional<Fan> get(String username) {
+    public Optional<TeamManager> get(String username) {
         Document doc = (Document) this.col.find(eq("userName", username)).first();
         try {
             String docJson = doc.toJson(); //json of the document
-            Fan fan = gson.fromJson(docJson, Fan.class); //convert json to fan Object
-            return Optional.of(fan);
+            TeamManager teamManager = gson.fromJson(docJson, TeamManager.class); //convert json to team manager Object
+            return Optional.of(teamManager);
         } catch (Exception e) {
             return Optional.empty();
-        }    }
+        }
+    }
 
     @Override
-    public ArrayList<Fan> getAll() {
-        ArrayList<Fan> fans = new ArrayList<>();
+    public ArrayList<TeamManager> getAll() {
+        ArrayList<TeamManager> teamManagers = new ArrayList<>();
         for (Object obj : col.find()) {
             Document currDoc = (Document) obj;
             String docJson = currDoc.toJson();
-            Fan fan = gson.fromJson(docJson, Fan.class);
-            fans.add(fan);
+            TeamManager teamManager = gson.fromJson(docJson, TeamManager.class);
+            teamManagers.add(teamManager);
         }
-        return fans;
+        return teamManagers;
     }
 
     @Override
-    public void save(Fan fan) {
-        String jsonInString = gson.toJson(fan);
+    public void save(TeamManager teamManager) {
+        String jsonInString = gson.toJson(teamManager);
         Document doc = Document.parse(jsonInString);
         this.col.insertOne(doc);
+    }
+
+    @Override
+    public void update(TeamManager teamManager) {
+        this.delete(teamManager);
+        this.save(teamManager);
 
     }
 
     @Override
-    public void update(Fan fan) {
-        this.delete(fan);
-        this.save(fan);
-    }
-
-    @Override
-    public void delete(Fan fan) {
-        Bson query = eq("userName", fan.getUserName());
+    public void delete(TeamManager teamManager) {
+        Bson query = eq("userName", teamManager.getUserName());
         try {
             DeleteResult result = this.col.deleteOne(query);
         } catch (MongoException me) {
             System.out.println("userName not found");
         }
-
     }
 }

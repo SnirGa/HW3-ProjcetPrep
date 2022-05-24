@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class PlayerDaoMongoDB implements Dao {
+public class PlayerDaoMongoDB implements Dao<Player> {
     Gson gson;
     MongoDatabase db;
     MongoCollection col;
@@ -53,24 +53,22 @@ public class PlayerDaoMongoDB implements Dao {
         return players;
     }
 
-    @Override
-    public void save(Object o) {
-        Player player=(Player)o;
+    @Override 
+    public void save(Player player) {
         String jsonInString=gson.toJson(player);
         Document doc = Document.parse(jsonInString);
         this.col.insertOne(doc);
     }
 
     @Override
-    public void update(Object o) {
-        this.delete(o);
-        this.save(o);
+    public void update(Player player) {
+        this.delete(player);
+        this.save(player);
 
     }
 
     @Override
-    public void delete(Object o) {
-        Player player=(Player) o;
+    public void delete(Player player) {
         Bson query = eq("userName",player.getUserName() );
         try {
             DeleteResult result = this.col.deleteOne(query);

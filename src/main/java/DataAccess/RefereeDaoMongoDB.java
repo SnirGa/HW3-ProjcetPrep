@@ -1,4 +1,5 @@
 package DataAccess;
+import Domain.ManagementSystem.EnrolledUser;
 import Domain.ManagementSystem.Referee;
 import com.google.gson.Gson;
 import com.mongodb.MongoException;
@@ -14,7 +15,7 @@ import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class RefereeDaoMongoDB implements Dao {
+public class RefereeDaoMongoDB implements Dao<Referee> {
     Gson gson;
     MongoDatabase db;
     List referees;
@@ -29,6 +30,7 @@ public class RefereeDaoMongoDB implements Dao {
         this.db=client.getDatabase("ProjectPrep");
         this.col=db.getCollection("Referees");
     }
+
     @Override
     public Optional get(String username) {
         Document doc = (Document) this.col.find(eq("userName", username)).first();
@@ -44,39 +46,39 @@ public class RefereeDaoMongoDB implements Dao {
 
     @Override
     public ArrayList getAll() {
-        ArrayList<Referee> referees =new ArrayList<>();
+        ArrayList<Referee> referees=new ArrayList<>();
         for (Object obj : col.find()) {
-            // do something
             Document currDoc=(Document) obj;
             String docJson=currDoc.toJson();
-            Referee referee =gson.fromJson(docJson,Referee.class);
+            Referee referee=gson.fromJson(docJson,Referee.class);
+
             referees.add(referee);
         }
         return referees;
     }
 
     @Override
-    public void save(Object o) {
-        Referee referee=(Referee)o;
+    public void save(Referee referee) {
         String jsonInString=gson.toJson(referee);
         Document doc = Document.parse(jsonInString);
         this.col.insertOne(doc);
     }
 
     @Override
-    public void update(Object o) {
-        this.delete(o);
-        this.save(o);
+    public void update(Referee referee) {
+        this.delete(referee);
+        this.save(referee);
     }
 
     @Override
-    public void delete(Object o) {
-        Referee referee=(Referee) o;
-        Bson query = eq("userName", referee.getUserName() );
+    public void delete(Referee referee) {
+        Bson query = eq("userName",(referee.getUserName()));
         try {
             DeleteResult result = this.col.deleteOne(query);
         } catch (MongoException me) {
             System.out.println("userName not found");
         }
     }
+
+
 }
