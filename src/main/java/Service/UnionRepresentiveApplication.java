@@ -2,8 +2,6 @@ package Service;
 
 import Domain.Controllers.UnionRepresentiveController;
 import Domain.ManagementSystem.GameSchedulingPolicy;
-import Domain.ManagementSystem.LeagueSeason;
-import Domain.ManagementSystem.Referee;
 
 public class UnionRepresentiveApplication {
     UnionRepresentiveController unionRepresentiveController=new UnionRepresentiveController();
