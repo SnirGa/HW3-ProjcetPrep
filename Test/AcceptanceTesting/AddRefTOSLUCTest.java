@@ -11,12 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AddRefTOSLUCTest {
 
     @Test
-    void AddRefTOSLAcceptanceTestSet() {
-        UnionRepresentiveApplication URuser = new UnionRepresentiveApplication();
-        //Referee exist, league exist - assert True
-        assertTrue(URuser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi"));
+    public void AddRefTOSLAcceptanceTestSet() {
+        UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         //Referee does not exist - assert false
-        assertFalse(URuser.addRefereetoSL("ChampionLeague", 2022, "Yossi2"));
-
+        assertFalse(URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2"));
+        //Referee exist, league exist - assert True
+        assertTrue(URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi"));
     }
 }
