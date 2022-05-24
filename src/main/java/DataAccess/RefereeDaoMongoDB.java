@@ -1,5 +1,4 @@
 package DataAccess;
-import Domain.ManagementSystem.Player;
 import Domain.ManagementSystem.Referee;
 import com.google.gson.Gson;
 import com.mongodb.MongoException;
