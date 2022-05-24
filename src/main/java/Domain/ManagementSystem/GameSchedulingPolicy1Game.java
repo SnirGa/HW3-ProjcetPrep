@@ -2,7 +2,6 @@ package Domain.ManagementSystem;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class GameSchedulingPolicy1Game implements GameSchedulingPolicy {
