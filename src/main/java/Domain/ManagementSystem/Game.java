@@ -1,6 +1,7 @@
 package Domain.ManagementSystem;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Game {
@@ -8,13 +9,14 @@ public class Game {
     private LocalDate date;
     private Team home;
     private Team away;
-    private Time time;
+    private LocalTime time;
+//    private Time time;
     private String location;
     private GameScore gameScore;
     private ArrayList<GameEventSet> gameEventSets;
     private LeagueSeason leagueSeason;
 
-    public Game(LocalDate date, Team home, Team away, Time time, String location, LeagueSeason leagueSeason) {
+    public Game(LocalDate date, Team home, Team away, LocalTime time, String location, LeagueSeason leagueSeason) {
         this.date = date;
         this.home = home;
         this.away = away;
@@ -48,11 +50,11 @@ public class Game {
         this.away = away;
     }
 
-    public Time getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
