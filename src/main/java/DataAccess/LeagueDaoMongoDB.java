@@ -20,6 +20,7 @@ public class LeagueDaoMongoDB implements Dao<League> {
     MongoCollection col;
 
     private static final LeagueDaoMongoDB instance = new LeagueDaoMongoDB();
+    public  static LeagueDaoMongoDB getInstance(){return instance;}
 
     private LeagueDaoMongoDB(){
         // add default leagues
