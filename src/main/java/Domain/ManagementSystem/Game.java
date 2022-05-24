@@ -19,6 +19,7 @@ public class Game {
         this.home = home;
         this.away = away;
         this.time = time;
+        this.location = location;
         this.leagueSeason = leagueSeason;
         this.gameScore=new GameScore();
         this.gameEventSets=new ArrayList<>();
