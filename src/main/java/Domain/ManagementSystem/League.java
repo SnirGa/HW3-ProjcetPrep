@@ -6,12 +6,21 @@ import java.util.Hashtable;
 
 public class League {
     Hashtable <Integer, LeagueSeason> leagueSeasonDict;
-        public League() {
+    String name;
+        public League(String name) {
             leagueSeasonDict = new Hashtable<>();
+            name = name;
         }
 
+    public String getName() {
+        return name;
+    }
 
-        public void addLeagueSeason(LeagueSeason leagueSeason){
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void addLeagueSeason(LeagueSeason leagueSeason){
             leagueSeasonDict.put(leagueSeason.getYear(), leagueSeason);
         }
 
