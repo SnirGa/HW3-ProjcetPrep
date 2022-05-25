@@ -3,7 +3,8 @@ package AcceptanceTesting;
 import Domain.Controllers.LeagueController;
 import Domain.Controllers.UserController;
 import Service.UnionRepresentiveApplication;
-import org.testng.annotations.Test;
+import org.junit.Test;
+//import org.testng.annotations.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
