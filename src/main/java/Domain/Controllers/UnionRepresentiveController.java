@@ -6,6 +6,8 @@ import DataAccess.LeagueDaoMongoDB;
 import DataAccess.RefereeDaoMongoDB;
 import Domain.ManagementSystem.*;
 
+import java.util.NoSuchElementException;
+
 public class UnionRepresentiveController extends EnrollledUserController{
     Dao rMDB;
     Dao leagueMDB;
@@ -16,7 +18,7 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public UnionRepresentiveController(Dao lc, Dao rmdb) {
-        if(rMDB == null){
+        if(rmdb == null){
             rMDB = RefereeDaoMongoDB.getInstance();
         }
         else {
@@ -38,15 +40,22 @@ public class UnionRepresentiveController extends EnrollledUserController{
 
     public boolean addRefTOSL(String league, int year, String refereeUserName) {
         LeagueSeason leagueSeason = getLeagueBySeason(league, year);
-        Referee referee = (Referee)(Object)rMDB.get(refereeUserName);
-        if (leagueSeason != null && referee != null){
-            if(leagueSeason.getLstReferee().contains(referee)){
-                return false;
+        try {
+            Referee referee = (Referee)(Object)rMDB.get(refereeUserName).get();
+            if (leagueSeason != null){
+                if(leagueSeason.getLstReferee().contains(referee)){
+                    return false;
+                }
+                leagueSeason.addReferee(referee);
+                rMDB.update(referee);
+                leagueMDB.update(leagueSeason.getLeague());
+                return true;
             }
-            leagueSeason.addReferee(referee);
-            return true;
+            return false;
         }
-        return false;
+        catch (NoSuchElementException e){
+            return false;
+        }
     }
 
     public boolean ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) {
@@ -61,7 +70,7 @@ public class UnionRepresentiveController extends EnrollledUserController{
 
     private LeagueSeason getLeagueBySeason(String League, int year){
         if (leagueMDB.get(League).isPresent()){
-            League league = (League)(Object)leagueMDB.get(League);
+            League league = (League)(Object)leagueMDB.get(League).get();
             return league.getLeagueSeasonByYear(year);
         }
         return null;
