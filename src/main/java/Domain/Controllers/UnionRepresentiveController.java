@@ -60,6 +60,9 @@ public class UnionRepresentiveController extends EnrollledUserController{
 
     public boolean ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) {
         LeagueSeason leagueSeason = getLeagueBySeason(League, year);
+        if(gameSchedulingPolicy == null){
+            return false;
+        }
         if (leagueSeason != null){
             leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
             return gameSchedulingPolicy.ApplyGamePolicy(leagueSeason);
@@ -68,7 +71,7 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
 
-    private LeagueSeason getLeagueBySeason(String League, int year){
+    public LeagueSeason getLeagueBySeason(String League, int year){
         if (leagueMDB.get(League).isPresent()){
             League league = (League)(Object)leagueMDB.get(League).get();
             return league.getLeagueSeasonByYear(year);
