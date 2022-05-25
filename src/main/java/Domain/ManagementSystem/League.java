@@ -9,7 +9,7 @@ public class League {
     String name;
         public League(String name) {
             leagueSeasonDict = new Hashtable<>();
-            name = name;
+            this.name = name;
         }
 
     public String getName() {
@@ -26,5 +26,7 @@ public class League {
 
         public LeagueSeason getLeagueSeasonByYear(int year){
             return leagueSeasonDict.get(year);
-        }
-    }
+        }}
+
+
+

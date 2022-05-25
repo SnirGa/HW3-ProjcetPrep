@@ -49,6 +49,17 @@ public class GameDaoMongoDB implements Dao<Game>{
         }
     }
 
+    public Optional<Game> get(Date date) {
+        Document doc = (Document) this.col.find(eq("date", date)).first();
+        try {
+            String docJson = doc.toJson(); //json of the document
+            Game game = gson.fromJson(docJson, Game.class); //convert json to Player Object
+            return Optional.of(game);
+        }
+        catch (Exception e){
+            return Optional.empty();
+        }
+    }
     @Override
     public ArrayList<Game> getAll() {
         ArrayList<Game> games=new ArrayList<>();

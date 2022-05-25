@@ -1,12 +1,16 @@
 package DataAccess;
 
+import Domain.ManagementSystem.Coach;
 import Domain.ManagementSystem.League;
 import com.google.gson.Gson;
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -32,27 +36,51 @@ public class LeagueDaoMongoDB implements Dao<League> {
 
     @Override
     public Optional<League> get(String username) {
-        return Optional.empty();
+        Document doc = (Document) this.col.find(eq("userName", username)).first();
+        try {
+            String docJson = doc.toJson(); //json of the document
+            League league = gson.fromJson(docJson, League.class); //convert json to collection Object
+            return Optional.of(league);
+        }
+        catch (Exception e){
+            return Optional.empty();
+        }
     }
 
     @Override
     public ArrayList<League> getAll() {
-        return null;
+        ArrayList<League> leagues=new ArrayList<>();
+        for (Object obj : col.find()) {
+            Document currDoc=(Document) obj;
+            String docJson=currDoc.toJson();
+            League league=gson.fromJson(docJson,League.class);
+            leagues.add(league);
+        }
+        return leagues;
     }
 
     @Override
     public void save(League league) {
+        String jsonInString=gson.toJson(league);
+        Document doc = Document.parse(jsonInString);
+        this.col.insertOne(doc);
 
     }
 
     @Override
     public void update(League league) {
-
+        this.delete(league);
+        this.save(league);
     }
 
     @Override
     public void delete(League league) {
-
+        Bson query = eq("userName",league.getName());
+        try {
+            DeleteResult result = this.col.deleteOne(query);
+        } catch (MongoException me) {
+            System.out.println("userName not found");
+        }
     }
 
 //    public static LeagueDaoMongoDB getInstance(){return instance;}
