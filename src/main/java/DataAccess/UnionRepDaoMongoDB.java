@@ -58,8 +58,9 @@ public class UnionRepDaoMongoDB implements Dao<UnionRepresentive> {
 
     @Override
     public void save(UnionRepresentive unionRepresentive) {
-        this.delete(unionRepresentive);
-        this.save(unionRepresentive );
+        String jsonInString=gson.toJson(unionRepresentive);
+        Document doc = Document.parse(jsonInString);
+        this.col.insertOne(doc);
     }
 
     @Override

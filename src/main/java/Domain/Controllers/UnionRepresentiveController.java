@@ -68,7 +68,7 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
 
-    public LeagueSeason getLeagueBySeason(String League, int year){
+    private LeagueSeason getLeagueBySeason(String League, int year){
         if (leagueMDB.get(League).isPresent()){
             League league = (League)(Object)leagueMDB.get(League).get();
             return league.getLeagueSeasonByYear(year);

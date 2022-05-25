@@ -23,8 +23,11 @@ public class UserController {
 
     public boolean login(String userName,String password){
         if (udMDB.get(userName) != null){
-            EnrolledUser user = (EnrolledUser)(Object)udMDB.get(userName).get();
-            return user.getPassword().equals(password);
+            if(!udMDB.get(userName).isEmpty()) {
+                EnrolledUser user = (EnrolledUser) (Object) udMDB.get(userName).get();
+                return user.getPassword().equals(password);
+
+            }
         }
         return false;
     }

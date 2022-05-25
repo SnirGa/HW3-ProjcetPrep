@@ -1,9 +1,5 @@
 package UnitTesting;
-import Domain.ManagementSystem.GameSchedulingPolicy1Game;
-import Domain.ManagementSystem.GameSchedulingPolicy2Games;
-import Domain.ManagementSystem.League;
-import Domain.ManagementSystem.LeagueSeason;
-import Domain.ManagementSystem.Team;
+import Domain.ManagementSystem.*;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -18,7 +14,8 @@ public class TestGameSchedulingPolicy {
     public void testGameSchedulingPolicy1Game(){
         // create leagueSeason with the relevant methods
         // Test ApplyGamePolicy Method
-        League league = new League("England");
+        UnionRepresentive ur = new UnionRepresentive("SnirTheKing", "123456", "SnirGa");
+        League league = new League("England", ur);
         LocalDate start_date = null;
         LocalDate finish_date = LocalDate.of(1992,6,1);
         LeagueSeason league_season = new LeagueSeason(league,1992,start_date,finish_date);
@@ -65,7 +62,8 @@ public class TestGameSchedulingPolicy {
     public void testGameSchedulingPolicy2Games(){
         // create leagueSeason with the relevant methods
         // Test ApplyGamePolicy Method
-        League league = new League("England");
+        UnionRepresentive ur = new UnionRepresentive("SnirTheKing", "123456", "SnirGa");
+        League league = new League("England", ur);
         LocalDate start_date = null;
         LocalDate finish_date = LocalDate.of(1992,6,1);
         LeagueSeason league_season = new LeagueSeason(league,1992,start_date,finish_date);

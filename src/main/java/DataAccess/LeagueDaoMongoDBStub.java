@@ -23,7 +23,8 @@ public class LeagueDaoMongoDBStub implements Dao {
         RefereeDaoMongoDBStub refereeDaoMongoDBStub = RefereeDaoMongoDBStub.getInstance();
 
         if (username.equals("Champion")){
-            League league = new League("Champion");
+            UnionRepresentive ur = new UnionRepresentive("SnirTheKing", "123456", "SnirGa");
+            League league = new League("Champion", ur);
             LocalDate startDate = LocalDate.of(2022,1,1);
             LocalDate endDate = LocalDate.of(2022,12,1);
             LeagueSeason leagueSeason = new LeagueSeason(league, 2022, startDate, endDate);
@@ -35,7 +36,8 @@ public class LeagueDaoMongoDBStub implements Dao {
             return Optional.of(league);
         }
         else if (username.equals("ChampionWithOutLeagueSeason")){
-            League leagueWithOutLeagueSeason = new League("ChampionWithOutLeagueSeason");
+            UnionRepresentive ur = new UnionRepresentive("SnirTheKing", "123456", "SnirGa");
+            League leagueWithOutLeagueSeason = new League("ChampionWithOutLeagueSeason", ur);
             return Optional.of(leagueWithOutLeagueSeason);
         }
         return Optional.empty();

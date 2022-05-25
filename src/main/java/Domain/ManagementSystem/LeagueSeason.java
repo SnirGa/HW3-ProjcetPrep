@@ -10,7 +10,7 @@ public class LeagueSeason {
     private int year;
     private LocalDate startDate;
     private LocalDate finishDate;
-    private UnionRepresentive unionRepresentive;
+//    private UnionRepresentive unionRepresentive;
     private ArrayList<Game> lstGame;
     private ArrayList<Referee> lstReferee;
     private ArrayList<Team> lstTeam;
@@ -27,6 +27,7 @@ public class LeagueSeason {
         lstReferee = new ArrayList<>();
         lstTeam = new ArrayList<>();
         pointsPolicy = new PointsPolicy();
+        gameSchedulingPolicy = new GameSchedulingPolicy1Game();
         recommendationSystem = new RecommendationSystem();
     }
 
@@ -92,13 +93,13 @@ public class LeagueSeason {
         this.league = league;
     }
 
-    public UnionRepresentive getUnionRepresentive() {
-        return unionRepresentive;
-    }
-
-    public void setUnionRepresentive(UnionRepresentive unionRepresentive) {
-        this.unionRepresentive = unionRepresentive;
-    }
+//    public UnionRepresentive getUnionRepresentive() {
+//        return unionRepresentive;
+//    }
+//
+//    public void setUnionRepresentive(UnionRepresentive unionRepresentive) {
+//        this.unionRepresentive = unionRepresentive;
+//    }
 
     public void setLstGame(ArrayList<Game> lstGame) {
         this.lstGame = lstGame;

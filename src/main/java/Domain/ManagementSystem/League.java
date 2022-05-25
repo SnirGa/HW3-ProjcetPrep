@@ -7,10 +7,12 @@ import java.util.Hashtable;
 public class League {
     Hashtable <Integer, LeagueSeason> leagueSeasonDict;
     String name;
-        public League(String name) {
-            leagueSeasonDict = new Hashtable<>();
-            this.name = name;
-        }
+    UnionRepresentive unionRepresentive;
+    public League(String name, UnionRepresentive ur) {
+        leagueSeasonDict = new Hashtable<>();
+        this.name = name;
+        this.unionRepresentive= ur;
+    }
 
     public String getName() {
         return name;
@@ -21,12 +23,14 @@ public class League {
     }
 
     public void addLeagueSeason(LeagueSeason leagueSeason){
-            leagueSeasonDict.put(leagueSeason.getYear(), leagueSeason);
+        leagueSeasonDict.put(leagueSeason.getYear(), leagueSeason);
+    }
+
+    public LeagueSeason getLeagueSeasonByYear(int year){
+            return leagueSeasonDict.get(year);
         }
 
-        public LeagueSeason getLeagueSeasonByYear(int year){
-            return leagueSeasonDict.get(year);
-        }}
+}
 
 
 
