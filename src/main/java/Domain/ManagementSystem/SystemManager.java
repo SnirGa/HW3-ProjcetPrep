@@ -1,6 +1,8 @@
 package Domain.ManagementSystem;
 
-public class SystemManager {
+import java.io.Serializable;
+
+public class SystemManager implements Serializable{
     int userId;
     String userName;
     String password;

@@ -22,7 +22,7 @@ public class CoachDaoMongoDB implements Dao<Coach>
     MongoDatabase db;
     MongoCollection col;
     private static final CoachDaoMongoDB instance=new CoachDaoMongoDB();
-    public  static CoachDaoMongoDB getInstance(){return instance;}
+    public static CoachDaoMongoDB getInstance(){return instance;}
 
 
     public CoachDaoMongoDB() {

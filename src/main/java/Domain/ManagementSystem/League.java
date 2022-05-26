@@ -1,17 +1,17 @@
 package Domain.ManagementSystem;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
+import java.io.Serializable;
 import java.util.Hashtable;
 
-public class League {
+public class League implements Serializable {
     Hashtable <Integer, LeagueSeason> leagueSeasonDict;
     String name;
-    UnionRepresentive unionRepresentive;
-    public League(String name, UnionRepresentive ur) {
+    UnionRepresentative unionRepresentative;
+
+    public League(String name, UnionRepresentative ur) {
         leagueSeasonDict = new Hashtable<>();
         this.name = name;
-        this.unionRepresentive= ur;
+        this.unionRepresentative = ur;
     }
 
     public String getName() {

@@ -9,8 +9,16 @@ public class UserApplication {
     public UserApplication(){
 
     }
-    public boolean login(String userName,String password){
-        return userController.login(userName,password);
+    public String login(String userName,String password){
+        try {
+            if (userController.login(userName, password))
+                return("Successful login");
+            else{
+                return("userName or password are not valid");
+            }
+        }catch(Exception e){
+            return e.getMessage();
+        }
     }
 
 }

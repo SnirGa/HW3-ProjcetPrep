@@ -1,8 +1,9 @@
 package Domain.ManagementSystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameEventSet {
+public class GameEventSet implements Serializable {
     private ArrayList<GameEvent> GameEvents;
     private Referee referee;
     private Game game;
@@ -23,7 +24,6 @@ public class GameEventSet {
 
     public Referee getReferee() {
         return this.referee;
-        //return new Referee(1,"dsc","csdc","dcsc", "A");
     }
 
     public void setReferee(Referee referee) {

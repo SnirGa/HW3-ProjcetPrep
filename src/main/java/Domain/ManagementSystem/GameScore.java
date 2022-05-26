@@ -1,6 +1,8 @@
 package Domain.ManagementSystem;
 
-public class GameScore {
+import java.io.Serializable;
+
+public class GameScore  implements Serializable {
     private int homeScore;
     private int awayScore;
     private String result;

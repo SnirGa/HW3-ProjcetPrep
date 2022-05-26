@@ -15,7 +15,13 @@ public class UserController {
     public UserController(Dao ud){
         udMDB = ud;
     }
-    public boolean login(String userName,String password){
+
+
+    public boolean login(String userName,String password) throws Exception {
+        if(userName == null)
+            throw new Exception("userName have to be entered");
+        if(password == null)
+            throw new Exception("password have to be entered");
         if (udMDB.get(userName) != null){
             if(!udMDB.get(userName).isEmpty()) {
                 EnrolledUser user = (EnrolledUser) (Object) udMDB.get(userName).get();

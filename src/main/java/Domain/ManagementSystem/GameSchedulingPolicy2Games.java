@@ -1,16 +1,14 @@
 package Domain.ManagementSystem;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-
-public class GameSchedulingPolicy2Games implements GameSchedulingPolicy{
+public class GameSchedulingPolicy2Games implements GameSchedulingPolicy, Serializable {
 
     @Override
     public boolean ApplyGamePolicy(LeagueSeason leagueSeason) {
-        //get all teams create game for each pair, for each game include date, hour, location, hometeam, awayteam, (Game obj) empty GameScore (obj) - by default on constructor
-        //save game in leagueSeason
         ArrayList<Team> lstTeam = leagueSeason.getLstTeam();
         if (lstTeam != null) {
             LocalDate gameDate = leagueSeason.getStartDate();

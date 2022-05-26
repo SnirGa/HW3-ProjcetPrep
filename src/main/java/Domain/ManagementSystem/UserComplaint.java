@@ -1,8 +1,9 @@
 package Domain.ManagementSystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserComplaint {
+public class UserComplaint implements Serializable {
     int complaintId;
     String description;
     ArrayList<String> replies;
@@ -20,6 +21,7 @@ public class UserComplaint {
     public void addReply(String reply){
         this.replies.add(reply);
     }
+
     public int getComplaintId() {
         return complaintId;
     }

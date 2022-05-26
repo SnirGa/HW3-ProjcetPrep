@@ -1,6 +1,8 @@
 package Domain.ManagementSystem;
 
-public class GameEvent {
+import java.io.Serializable;
+
+public class GameEvent implements Serializable{
     EventType type;
     Time time;
     int minute;
@@ -24,6 +26,7 @@ public class GameEvent {
     public String getDescription() {
         return description;
     }
+
     public EventType getEventType() {
         return type;
     }

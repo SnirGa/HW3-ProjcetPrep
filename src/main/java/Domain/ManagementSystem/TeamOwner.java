@@ -31,20 +31,22 @@ public class TeamOwner extends EnrolledUser {
         this.team.openTeam();
     }
 
-    //Asset object???
     public void addAsset(){
+        //Asset object???
         //ToDo
     }
 
     public void removeAsset(){
         //ToDo
     }
-    //Income object???
+
     public void reportIncome(){
+        //Income object???
         //ToDo
     }
-    //Expense object???
+
     public void reportExpense(){
+        //Expense object???
         //ToDo
     }
 

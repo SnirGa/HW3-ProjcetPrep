@@ -1,6 +1,6 @@
 package DataAccess;
 
-import Domain.ManagementSystem.UnionRepresentive;
+import Domain.ManagementSystem.UnionRepresentative;
 import com.google.gson.Gson;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class UnionRepDaoMongoDB implements Dao<UnionRepresentive> {
+public class UnionRepDaoMongoDB implements Dao<UnionRepresentative> {
     Gson gson;
     MongoDatabase db;
     MongoCollection col;
@@ -36,8 +36,8 @@ public class UnionRepDaoMongoDB implements Dao<UnionRepresentive> {
         Document doc = (Document) this.col.find(eq("userName", username)).first();
         try {
             String docJson = doc.toJson(); //json of the document
-            UnionRepresentive unionRepresentive = gson.fromJson(docJson, UnionRepresentive.class); //convert json to teamOwner Object
-            return Optional.of(unionRepresentive);
+            UnionRepresentative unionRepresentative = gson.fromJson(docJson, UnionRepresentative.class); //convert json to teamOwner Object
+            return Optional.of(unionRepresentative);
         }
         catch (Exception e){
             return Optional.empty();
@@ -45,33 +45,33 @@ public class UnionRepDaoMongoDB implements Dao<UnionRepresentive> {
     }
 
     @Override
-    public ArrayList<UnionRepresentive> getAll() {
-        ArrayList<UnionRepresentive> unionRepresentives=new ArrayList<>();
+    public ArrayList<UnionRepresentative> getAll() {
+        ArrayList<UnionRepresentative> unionRepresentatives =new ArrayList<>();
         for (Object obj : col.find()) {
             Document currDoc=(Document) obj;
             String docJson=currDoc.toJson();
-            UnionRepresentive unionRepresentive=gson.fromJson(docJson,UnionRepresentive.class);
-            unionRepresentives.add(unionRepresentive);
+            UnionRepresentative unionRepresentative =gson.fromJson(docJson, UnionRepresentative.class);
+            unionRepresentatives.add(unionRepresentative);
         }
-        return unionRepresentives;
+        return unionRepresentatives;
     }
 
     @Override
-    public void save(UnionRepresentive unionRepresentive) {
-        String jsonInString=gson.toJson(unionRepresentive);
+    public void save(UnionRepresentative unionRepresentative) {
+        String jsonInString=gson.toJson(unionRepresentative);
         Document doc = Document.parse(jsonInString);
         this.col.insertOne(doc);
     }
 
     @Override
-    public void update(UnionRepresentive unionRepresentive) {
-        this.delete(unionRepresentive);
-        this.save(unionRepresentive);
+    public void update(UnionRepresentative unionRepresentative) {
+        this.delete(unionRepresentative);
+        this.save(unionRepresentative);
     }
 
     @Override
-    public void delete(UnionRepresentive unionRepresentive) {
-        Bson query = eq("userName",unionRepresentive.getUserName());
+    public void delete(UnionRepresentative unionRepresentative) {
+        Bson query = eq("userName", unionRepresentative.getUserName());
         try {
             DeleteResult result = this.col.deleteOne(query);
         } catch (MongoException me) {

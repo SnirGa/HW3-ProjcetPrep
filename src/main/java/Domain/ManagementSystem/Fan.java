@@ -3,7 +3,6 @@ package Domain.ManagementSystem;
 import Domain.NotificationSystem.FanNotification;
 import Domain.RecommendationSystem.RecommendationSystem;
 import Domain.SearchSystem.SearchHistory;
-
 import java.util.ArrayList;
 
 public class Fan extends EnrolledUser {
@@ -11,8 +10,6 @@ public class Fan extends EnrolledUser {
     private ArrayList<SearchHistory> searchHistories;
     private RecommendationSystem recommendationSystem;
     private ArrayList<UserComplaint> usersComplaints;
-
-
 
     public Fan(String userName, String password, String name,RecommendationSystem recommendationSystem) {
         super(userName, password, name);

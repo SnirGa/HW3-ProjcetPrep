@@ -1,16 +1,15 @@
 package Domain.ManagementSystem;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Game {
-    //TODO: check if need to add referees.
+public class Game implements Serializable {
     private LocalDate date;
     private Team home;
     private Team away;
     private LocalTime time;
-//    private Time time;
     private String location;
     private GameScore gameScore;
     private ArrayList<GameEventSet> gameEventSets;

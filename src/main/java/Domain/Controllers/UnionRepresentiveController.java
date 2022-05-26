@@ -33,6 +33,7 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public boolean addRefTOSL(String league, int year, String refereeUserName) {
+        // check all arguments are not null throw Exception if yes
         LeagueSeason leagueSeason = getLeagueBySeason(league, year);
         try {
             Referee referee = (Referee)(Object)rMDB.get(refereeUserName).get();

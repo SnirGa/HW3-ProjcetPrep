@@ -2,14 +2,10 @@ package DataAccess;
 
 import Domain.ManagementSystem.*;
 import com.google.gson.Gson;
-import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.DeleteResult;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -94,7 +90,7 @@ public class UserDaoMongoDB implements Dao<User> {
         ArrayList<Coach> coaches=this.coachDaoMongoDB.getAll();
         ArrayList<Player> players=this.playerDaoMongoDB.getAll();
         ArrayList<Referee> referees= this.refereeDaoMongoDB.getAll();
-        ArrayList<UnionRepresentive> uniononReps=this.unionRepDaoMongoDB.getAll();;
+        ArrayList<UnionRepresentative> uniononReps=this.unionRepDaoMongoDB.getAll();;
         ArrayList<Fan> fans=this.fanDaoMongoDB.getAll();
         for (int i=0;i<teamOwners.size();i++){
             User cast=(User)teamOwners.get(i);
@@ -149,8 +145,8 @@ public class UserDaoMongoDB implements Dao<User> {
         else if (user instanceof Referee){
             this.refereeDaoMongoDB.save((Referee) user);
         }
-        else if (user instanceof UnionRepresentive){
-            this.unionRepDaoMongoDB.save((UnionRepresentive) user);
+        else if (user instanceof UnionRepresentative){
+            this.unionRepDaoMongoDB.save((UnionRepresentative) user);
         }
         else if (user instanceof Fan){
             this.fanDaoMongoDB.save((Fan) user);
@@ -180,8 +176,8 @@ public class UserDaoMongoDB implements Dao<User> {
         else if (user instanceof Referee){
             this.refereeDaoMongoDB.delete((Referee) user);
         }
-        else if (user instanceof UnionRepresentive){
-            this.unionRepDaoMongoDB.delete((UnionRepresentive) user);
+        else if (user instanceof UnionRepresentative){
+            this.unionRepDaoMongoDB.delete((UnionRepresentative) user);
         }
         else if (user instanceof Fan){
             this.fanDaoMongoDB.delete((Fan) user);

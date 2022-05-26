@@ -1,6 +1,6 @@
 package DataAccess;
 
-import Domain.ManagementSystem.UnionRepresentive;
+import Domain.ManagementSystem.UnionRepresentative;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -19,7 +19,7 @@ public class UserDaoMongoDBStub implements Dao {
     @Override
     public Optional get(String username) {
         if (username.equals("Admin")){
-            UnionRepresentive user = new UnionRepresentive("Admin", "Admin1", "admin");
+            UnionRepresentative user = new UnionRepresentative("Admin", "Admin1", "admin");
             return Optional.of(user);
         }
         return null;

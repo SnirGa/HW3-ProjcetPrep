@@ -8,7 +8,12 @@ public class UnionRepresentiveApplication {
 
     public boolean addRefereetoSL(String league, int year , String refereeUserName){
         //UC- add referee to league
-        return unionRepresentiveController.addRefTOSL(league,year,refereeUserName);
+        try {
+            return unionRepresentiveController.addRefTOSL(league, year, refereeUserName);
+        }catch (Exception e){
+
+        }
+        return false;
     }
 
     public boolean AddSchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy){

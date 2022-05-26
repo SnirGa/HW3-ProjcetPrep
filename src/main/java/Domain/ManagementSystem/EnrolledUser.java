@@ -1,23 +1,20 @@
 package Domain.ManagementSystem;
+
 import Domain.NotificationSystem.Notification;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class EnrolledUser extends User {
-
+public abstract class EnrolledUser extends User implements Serializable {
     private String userName;
     private String password;
     private String name;
-
-
     private ArrayList<Notification> notifications;
-
 
     public EnrolledUser(String userName, String password, String name) {
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.notifications=new ArrayList<>();
-
     }
 
     public String getUserName() {

@@ -1,20 +1,42 @@
 package AcceptanceTesting;
 
-import Domain.Controllers.LeagueController;
-import Domain.Controllers.UserController;
+import DataAccess.LeagueDaoMongoDB;
+import DataAccess.RefereeDaoMongoDB;
+import Domain.ManagementSystem.League;
+import Domain.ManagementSystem.LeagueSeason;
+import Domain.ManagementSystem.Referee;
+import Domain.ManagementSystem.UnionRepresentative;
 import Service.UnionRepresentiveApplication;
 import org.junit.Test;
-//import org.testng.annotations.Test;
-
+import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddRefTOSLUCTest {
+    private void setUp(){
+        // Get league and referee mongodb classes
+        LeagueDaoMongoDB leagueDaoMongoDB = LeagueDaoMongoDB.getInstance();
+        RefereeDaoMongoDB refereeDaoMongoDB = RefereeDaoMongoDB.getInstance();
+        // Create Union Representative for the league
+        UnionRepresentative user = new UnionRepresentative("ChampionLeagueUR", "Admin1","ChampionLeagueUR");
+        // Create League
+        League league = new League("ChampionLeague", user);
+        LocalDate startDate = LocalDate.of(2022, 1,1);
+        LocalDate finishDate = LocalDate.of(2022, 4,1);
+        LeagueSeason leagueSeason = new LeagueSeason(league,2022, startDate, finishDate);
+        league.addLeagueSeason(leagueSeason);
+        leagueDaoMongoDB.save(league);
+        // Create new Referee to add
+        Referee referee = new Referee("YossiYossi", "123456", "Yossile", "mainReferee");
+        refereeDaoMongoDB.update(referee);
+    }
 
     @Test
     public void AddRefTOSLAcceptanceTestSet() {
+        setUp();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         //Referee does not exist - assert false
+        URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2");
         assertFalse(URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2"));
         //Referee exist, league exist - assert True
         assertTrue(URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi"));

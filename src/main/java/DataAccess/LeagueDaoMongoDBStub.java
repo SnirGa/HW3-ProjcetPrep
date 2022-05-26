@@ -3,7 +3,7 @@ package DataAccess;
 import Domain.ManagementSystem.League;
 import Domain.ManagementSystem.LeagueSeason;
 import Domain.ManagementSystem.Referee;
-import Domain.ManagementSystem.UnionRepresentive;
+import Domain.ManagementSystem.UnionRepresentative;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class LeagueDaoMongoDBStub implements Dao {
         RefereeDaoMongoDBStub refereeDaoMongoDBStub = RefereeDaoMongoDBStub.getInstance();
 
         if (username.equals("Champion")){
-            UnionRepresentive ur = new UnionRepresentive("SnirTheKing", "123456", "SnirGa");
+            UnionRepresentative ur = new UnionRepresentative("SnirTheKing", "123456", "SnirGa");
             League league = new League("Champion", ur);
             LocalDate startDate = LocalDate.of(2022,1,1);
             LocalDate endDate = LocalDate.of(2022,12,1);
@@ -36,7 +36,7 @@ public class LeagueDaoMongoDBStub implements Dao {
             return Optional.of(league);
         }
         else if (username.equals("ChampionWithOutLeagueSeason")){
-            UnionRepresentive ur = new UnionRepresentive("SnirTheKing", "123456", "SnirGa");
+            UnionRepresentative ur = new UnionRepresentative("SnirTheKing", "123456", "SnirGa");
             League leagueWithOutLeagueSeason = new League("ChampionWithOutLeagueSeason", ur);
             return Optional.of(leagueWithOutLeagueSeason);
         }
