@@ -2,6 +2,7 @@ package DataAccess;
 
 import Domain.ManagementSystem.League;
 
+import com.google.gson.*;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -11,20 +12,12 @@ import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -50,35 +43,45 @@ public class LeagueDaoMongoDB implements Dao<League> {
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("Leagues"); //get the players collection from the database
-//        createGsonBuilder();
+        createGsonBuilder();
     }
 
-//    private void createGsonBuilder(){
-//        GsonBuilder builder = new GsonBuilder();
-//        builder.registerTypeAdapter(new TypeToken<LocalDate>(){}.getType(), new LocalDateJsonSerializer());
-//        this.gson = builder.create();
-//    }
-//
-//    private class LocalDateJsonSerializer: JsonSerializer<LocalDate>, JsonDeserializer<LocalDate>{
-////        override fun serialize(src: LocalDate, typeOfSrc: Type, context: JsonSerializationContext): JsonElement {
-////            return JsonObject().also {
-////                it.addProperty("year", src.year)
-////                it.addProperty("month", src.monthValue)
-////                it.addProperty("day", src.dayOfMonth)
-////            }
-////        }
-//    }
+    private void createGsonBuilder(){
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(new TypeToken<LocalDate>(){}.getType(), new LocalDateJsonSerializer());
+        builder.registerTypeAdapter(new TypeToken<LocalTime>(){}.getType(), new LocalTimeJsonSerializer());
+        this.gson = builder.create();
+    }
 
-//    private class LocalDateConverter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
-//        public JsonElement serialize(LocalDate src, Type typeOfSrc, JsonSerializationContext context) {
-//            return new JsonPrimitive(DateTimeFormatter.ISO_LOCAL_DATE.format(src));
-//        }
-//
-//        public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-//                throws JsonParseException {
-//            return DateTimeFormatter.ISO_LOCAL_DATE.parse(json.getAsString(), LocalDate::from);
-//        }
-//    }
+    private class LocalDateJsonSerializer implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate>{
+        public JsonElement serialize(LocalDate src, Type typeOfSrc, JsonSerializationContext context) {
+            JsonObject LCJsonObject = new JsonObject();
+            LCJsonObject.addProperty("year", src.getYear());
+            LCJsonObject.addProperty("month", src.getMonthValue());
+            LCJsonObject.addProperty("day", src.getDayOfMonth());
+            return LCJsonObject;
+        }
+
+        public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            JsonArray LCJasonString = json.getAsJsonArray();
+            return LocalDate.of(LCJasonString.get(0).getAsInt(),LCJasonString.get(1).getAsInt(),LCJasonString.get(2).getAsInt());
+        }
+    }
+
+    private class LocalTimeJsonSerializer implements JsonSerializer<LocalTime>, JsonDeserializer<LocalTime>{
+        public JsonElement serialize(LocalTime src, Type typeOfSrc, JsonSerializationContext context) {
+            JsonObject LTJsonObject = new JsonObject();
+            LTJsonObject.addProperty("hour", src.getHour());
+            LTJsonObject.addProperty("minute", src.getMinute());
+            return LTJsonObject;
+        }
+
+        public LocalTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            JsonArray LTJasonString = json.getAsJsonArray();
+            return LocalTime.of(LTJasonString.get(0).getAsInt(),LTJasonString.get(1).getAsInt());
+        }
+    }
+
 
 
     @Override
