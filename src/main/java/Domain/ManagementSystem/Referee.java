@@ -1,20 +1,21 @@
 package Domain.ManagementSystem;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Referee extends EnrolledUser {
     private String qualification;
     private ArrayList<Game> games;
     private ArrayList<GameEventSet> gameEventSets;
-    private ArrayList<LeagueSeason> leagueSeasons;
-
+    private Hashtable<String, HashSet<Integer>> leagueSeasonDict;
+    //    private ArrayList<String> leagueSeasons;
 
     public Referee(String userName, String password, String name, String qualification) {
         super(userName, password, name);
         this.qualification = qualification;
         this.games = new ArrayList<>();
         this.gameEventSets = new ArrayList<>();
-        this.leagueSeasons = new ArrayList<>();
+        this.leagueSeasonDict = new Hashtable<>();
+//        this.leagueSeasons = new ArrayList<>();
     }
 
     public String getQualification() {
@@ -29,24 +30,46 @@ public class Referee extends EnrolledUser {
         return gameEventSets;
     }
 
-    public ArrayList<LeagueSeason> getLeagueSeasons() {
-        return leagueSeasons;
+    public void setQualification(String Qualification) {
+        this.qualification = Qualification;
     }
 
     public void setGameEventSets(ArrayList<GameEventSet> gameEventSets) {
         this.gameEventSets = gameEventSets;
     }
 
-    public void setLeagueSeasons(ArrayList<LeagueSeason> leagueSeasons) {
-        this.leagueSeasons = leagueSeasons;
+    public void addLeagueSeason(LeagueSeason leagueSeason) {
+        String leagueName = leagueSeason.getLeagueName();
+        Integer leagueSeasonYear = leagueSeason.getYear();
+        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
+        if (leagueSeasons!=null)
+            leagueSeasons.add(leagueSeasonYear);
+        else
+            this.leagueSeasonDict.put(leagueName, new HashSet<>(Arrays.asList(leagueSeasonYear)));
     }
 
-    public void setQualification(String Qualification) {
-        this.qualification = Qualification;
+    public void removeLeagueSeason(LeagueSeason leagueSeason) {
+        String leagueName = leagueSeason.getLeagueName();
+        Integer leagueSeasonYear = leagueSeason.getYear();
+        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
+        if (leagueSeasons!=null && leagueSeasons.contains(leagueSeasonYear))
+            leagueSeasons.remove(leagueSeasonYear);
     }
 
-    public void addLeagueSeasons(LeagueSeason leagueSeasons) {
-        this.leagueSeasons.add(leagueSeasons);
+    public Hashtable<String, HashSet<Integer>> getLeagueSeasonDict() {
+        return leagueSeasonDict;
     }
+
+    public void setLeagueSeasonDict(Hashtable<String, HashSet<Integer>>leagueSeasonDict) {
+        this.leagueSeasonDict = leagueSeasonDict;
+    }
+
+//    public ArrayList<String> getLeagueSeasons() {
+//        return leagueSeasons;
+//    }
+
+//    public void setLeagueSeasons(ArrayList<String> leagueSeasons) {
+//        this.leagueSeasons = leagueSeasons;
+//    }
 
 }

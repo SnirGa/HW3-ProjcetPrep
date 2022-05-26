@@ -1,12 +1,27 @@
 package AcceptanceTesting;
 
-import Domain.ManagementSystem.GameSchedulingPolicy1Game;
-import Domain.ManagementSystem.GameSchedulingPolicy2Games;
+import DataAccess.LeagueDaoMongoDB;
+import DataAccess.RefereeDaoMongoDB;
+import Domain.ManagementSystem.*;
 import Service.UnionRepresentiveApplication;
 import org.junit.Test;
+import java.time.LocalDate;
 import static org.junit.Assert.assertEquals;
 
 public class AddSchedulingPolicyUCTest {
+    private void setUp(){
+        // Get referee mongodb classes
+        LeagueDaoMongoDB leagueDaoMongoDB = LeagueDaoMongoDB.getInstance();
+        // Create Union Representative for the league
+        UnionRepresentative user = new UnionRepresentative("EuroLeagueUR", "Admin1","EuroLeagueUR");
+        // Create League
+        League league = new League("EuroLeague", user);
+        LocalDate startDate = LocalDate.of(2023, 1,1);
+        LocalDate finishDate = LocalDate.of(2023, 4,1);
+        LeagueSeason leagueSeason = new LeagueSeason(league,2023, startDate, finishDate);
+        league.addLeagueSeason(leagueSeason);
+        leagueDaoMongoDB.save(league);
+    }
 
     @Test
     public void AddSchedulingPolicy2GameTestSet(){
@@ -19,6 +34,7 @@ public class AddSchedulingPolicyUCTest {
 
     @Test
     public void GameSchedulingPolicy1GameTestSet(){
+        setUp();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         // League exist, without GameSchedulingPolicy - assert False
         assertEquals("gameSchedulingPolicy have to be entered", URUser.AddSchedulingPolicy("EuroLeague",2022, null));

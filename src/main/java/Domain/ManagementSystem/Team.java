@@ -1,7 +1,7 @@
 package Domain.ManagementSystem;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Team implements Serializable {
     private Boolean isActive;
@@ -12,7 +12,8 @@ public class Team implements Serializable {
     private ArrayList<Player> players;
     private ArrayList<Game> homeGames;
     private ArrayList<Game> awayGames;
-    private ArrayList<LeagueSeason> leagueSeasons;
+    private Hashtable<String, HashSet<Integer>> leagueSeasonDict;
+//    private ArrayList<LeagueSeason> leagueSeasons;
 
     public Team(Boolean isActive, String stadium, ArrayList<TeamOwner> teamOwner) {
         this.isActive = isActive;
@@ -23,7 +24,8 @@ public class Team implements Serializable {
         this.players = new ArrayList<>();
         this.homeGames = new ArrayList<>();
         this.awayGames = new ArrayList<>();
-        this.leagueSeasons = new ArrayList<>();
+        this.leagueSeasonDict = new Hashtable<>();
+//        this.leagueSeasons = new ArrayList<>();
     }
 
     public String getStatus(){
@@ -61,10 +63,6 @@ public class Team implements Serializable {
         return awayGames;
     }
 
-    public ArrayList<LeagueSeason> getLeagueSeasons() {
-        return leagueSeasons;
-    }
-
     public void setActive(Boolean active) {
         isActive = active;
     }
@@ -97,15 +95,42 @@ public class Team implements Serializable {
         this.awayGames = awayGames;
     }
 
-    public void setLeagueSeasons(ArrayList<LeagueSeason> leagueSeasons) {
-        this.leagueSeasons = leagueSeasons;
+    public void addLeagueSeason(LeagueSeason leagueSeason) {
+        String leagueName = leagueSeason.getLeagueName();
+        Integer leagueSeasonYear = leagueSeason.getYear();
+        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
+        if (leagueSeasons!=null)
+            leagueSeasons.add(leagueSeasonYear);
+        else
+            this.leagueSeasonDict.put(leagueName, new HashSet<>(Arrays.asList(leagueSeasonYear)));
     }
 
-    public void openTeam(){
-        //ToDo
+    public void removeLeagueSeason(LeagueSeason leagueSeason) {
+        String leagueName = leagueSeason.getLeagueName();
+        Integer leagueSeasonYear = leagueSeason.getYear();
+        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
+        if (leagueSeasons!=null && leagueSeasons.contains(leagueSeasonYear))
+            leagueSeasons.remove(leagueSeasonYear);
     }
 
-    public void closeTeam(){
-        //ToDo
+    public Hashtable<String, HashSet<Integer>> getLeagueSeasonDict() {
+        return leagueSeasonDict;
     }
+
+    public void setLeagueSeasonDict(Hashtable<String, HashSet<Integer>>leagueSeasonDict) {
+        this.leagueSeasonDict = leagueSeasonDict;
+    }
+
+
+    public void openTeam(){}
+
+    public void closeTeam(){}
+
+//    public void setLeagueSeasons(ArrayList<LeagueSeason> leagueSeasons) {
+//        this.leagueSeasons = leagueSeasons;
+//    }
+//
+//    public ArrayList<LeagueSeason> getLeagueSeasons() {
+//        return leagueSeasons;
+//    }
 }

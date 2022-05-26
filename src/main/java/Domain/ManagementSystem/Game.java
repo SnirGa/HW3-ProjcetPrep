@@ -3,7 +3,7 @@ package Domain.ManagementSystem;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Game implements Serializable {
     private LocalDate date;
@@ -13,7 +13,8 @@ public class Game implements Serializable {
     private String location;
     private GameScore gameScore;
     private ArrayList<GameEventSet> gameEventSets;
-    private LeagueSeason leagueSeason;
+    private Hashtable<String, HashSet<Integer>> leagueSeasonDict;
+//    private LeagueSeason leagueSeason;
 
     public Game(LocalDate date, Team home, Team away, LocalTime time, String location, LeagueSeason leagueSeason) {
         this.date = date;
@@ -21,9 +22,11 @@ public class Game implements Serializable {
         this.away = away;
         this.time = time;
         this.location = location;
-        this.leagueSeason = leagueSeason;
         this.gameScore=new GameScore();
         this.gameEventSets=new ArrayList<>();
+        this.leagueSeasonDict = new Hashtable<>();
+//        this.leagueSeason = leagueSeason;
+
     }
 
     public LocalDate getDate() {
@@ -58,14 +61,6 @@ public class Game implements Serializable {
         this.time = time;
     }
 
-    public LeagueSeason getLeagueSeason() {
-        return leagueSeason;
-    }
-
-    public void setLeagueSeason(LeagueSeason leagueSeason) {
-        this.leagueSeason = leagueSeason;
-    }
-
     public GameScore getGameScore() {
         return gameScore;
     }
@@ -84,28 +79,63 @@ public class Game implements Serializable {
 
     public String getEventReport(){
         String report="##Event Report##\n";
-        for (int i=0;i<gameEventSets.size();i++){
-            GameEventSet gameEventSet=gameEventSets.get(i);
-            Referee referee=gameEventSet.getReferee();
-            String refereeName=referee.getName();
-            report=report+"Refree: "+refereeName+":\n";
-            ArrayList<GameEvent> gameEvents=gameEventSet.getGameEvents();
-            for (int j=0; j<gameEvents.size();j++){
-                GameEvent gameEvent=gameEvents.get(i);
-                String type=gameEvent.getEventType().toString();
-                report=report+"Type: "+ type+"\n";
-                String time=String.valueOf(gameEvent.getTime().getHour())+":"+String.valueOf(gameEvent.getTime().getMinute());
-                report=report+"Time: "+ time+"\n";
-                String minute=String.valueOf(gameEvent.getMinute());
-                report=report+"Minute: "+ minute+"\n";
-                String description=gameEvent.getDescription();
-                report=report+"Description"+description+"\n";
-                report=report+"______";
-
-            }
-        }
+//        for (int i=0;i<gameEventSets.size();i++){
+//            GameEventSet gameEventSet=gameEventSets.get(i);
+//            Referee referee = gameEventSet.getReferee();
+//            String refereeName=referee.getName();
+//            report=report+"Refree: "+refereeName+":\n";
+//            ArrayList<GameEvent> gameEvents=gameEventSet.getGameEvents();
+//            for (int j=0; j<gameEvents.size();j++){
+//                GameEvent gameEvent=gameEvents.get(i);
+//                String type=gameEvent.getEventType().toString();
+//                report=report+"Type: "+ type+"\n";
+//                String time=String.valueOf(gameEvent.getTime().getHour())+":"+String.valueOf(gameEvent.getTime().getMinute());
+//                report=report+"Time: "+ time+"\n";
+//                String minute=String.valueOf(gameEvent.getMinute());
+//                report=report+"Minute: "+ minute+"\n";
+//                String description=gameEvent.getDescription();
+//                report=report+"Description"+description+"\n";
+//                report=report+"______";
+//
+//            }
+//        }
         return report;
     }
+
+    public void addLeagueSeason(LeagueSeason leagueSeason) {
+        String leagueName = leagueSeason.getLeagueName();
+        Integer leagueSeasonYear = leagueSeason.getYear();
+        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
+        if (leagueSeasons!=null)
+            leagueSeasons.add(leagueSeasonYear);
+        else
+            this.leagueSeasonDict.put(leagueName, new HashSet<>(Arrays.asList(leagueSeasonYear)));
+    }
+
+    public void removeLeagueSeason(LeagueSeason leagueSeason) {
+        String leagueName = leagueSeason.getLeagueName();
+        Integer leagueSeasonYear = leagueSeason.getYear();
+        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
+        if (leagueSeasons!=null && leagueSeasons.contains(leagueSeasonYear))
+            leagueSeasons.remove(leagueSeasonYear);
+    }
+
+    public Hashtable<String, HashSet<Integer>> getLeagueSeasonDict() {
+        return leagueSeasonDict;
+    }
+
+    public void setLeagueSeasonDict(Hashtable<String, HashSet<Integer>>leagueSeasonDict) {
+        this.leagueSeasonDict = leagueSeasonDict;
+    }
+
+//    public LeagueSeason getLeagueSeason() {
+//        return leagueSeason;
+//    }
+
+//    public void setLeagueSeason(LeagueSeason leagueSeason) {
+//        this.leagueSeason = leagueSeason;
+//    }
+
 }
 
 

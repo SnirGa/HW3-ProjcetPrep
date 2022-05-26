@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LeagueSeason implements Serializable {
-    private transient League league;
+    private String leagueName;
     private int year;
     private LocalDate startDate;
     private LocalDate finishDate;
@@ -19,7 +19,7 @@ public class LeagueSeason implements Serializable {
     private RecommendationSystem recommendationSystem;
 
     public LeagueSeason(League l, int y, LocalDate startdate, LocalDate finishdate) {
-        league = l;
+        leagueName = l.getName();
         year = y;
         startDate = startdate;
         finishDate = finishdate;
@@ -65,9 +65,8 @@ public class LeagueSeason implements Serializable {
         return this.lstGame;
     }
 
-    public void addReferee(Referee referee)
-    {
-        referee.addLeagueSeasons(this);
+    public void addReferee(Referee referee) {
+        referee.addLeagueSeason(this);
         this.lstReferee.add(referee);
     }
 
@@ -86,13 +85,21 @@ public class LeagueSeason implements Serializable {
         return this.lstTeam;
     }
 
-    public League getLeague() {
-        return league;
+    public String getLeagueName() {
+        return leagueName;
     }
 
-    public void setLeague(League league) {
-        this.league = league;
+    public void setLeagueName(String leagueName) {
+        this.leagueName = leagueName;
     }
+
+//    public League getLeague() {
+//        return league;
+//    }
+//
+//    public void setLeague(League league) {
+//        this.league = league;
+//    }
 
     public void setLstGame(ArrayList<Game> lstGame) {
         this.lstGame = lstGame;

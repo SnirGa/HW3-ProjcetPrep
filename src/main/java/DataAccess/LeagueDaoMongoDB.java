@@ -134,11 +134,11 @@ public class LeagueDaoMongoDB extends Dao<League> {
 
     @Override
     public void delete(League league) {
-        Bson query = eq("userName",league.getName());
+        Bson query = eq("name",league.getName());
         try {
             DeleteResult result = this.col.deleteOne(query);
         } catch (MongoException me) {
-            System.out.println("userName not found");
+            System.out.println("name not found");
         }
     }
 

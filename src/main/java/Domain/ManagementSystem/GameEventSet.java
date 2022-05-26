@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 public class GameEventSet implements Serializable {
     private ArrayList<GameEvent> GameEvents;
-    private Referee referee;
+//    private Referee referee;
+    private String refereeName;
     private Game game;
 
     public GameEventSet(Referee referee, Game game) {
-        this.referee = referee;
+//        this.referee = referee;
+        this.refereeName = referee.getName();
         this.game = game;
         this.GameEvents = new ArrayList<>();
     }
@@ -22,12 +24,20 @@ public class GameEventSet implements Serializable {
         GameEvents = gameEvents;
     }
 
-    public Referee getReferee() {
-        return this.referee;
+//    public Referee getReferee() {
+//        return this.referee;
+//    }
+
+//    public void setReferee(Referee referee) {
+//        this.referee = referee;
+//    }
+
+    public String getRefereeName() {
+        return refereeName;
     }
 
-    public void setReferee(Referee referee) {
-        this.referee = referee;
+    public void setRefereeName(Referee referee) {
+        this.refereeName = referee.getName();;
     }
 
     public Game getGame() {

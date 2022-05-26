@@ -2,7 +2,6 @@ package Domain.Controllers;
 
 import DataAccess.Dao;
 import DataAccess.LeagueDaoMongoDB;
-//import DataAccess.UnionRepresentiveMongoDB;
 import DataAccess.RefereeDaoMongoDB;
 import Domain.ManagementSystem.*;
 
@@ -33,57 +32,53 @@ public class UnionRepresentiveController extends EnrollledUserController{
         }
     }
 
-    public boolean addRefTOSL(String league, int year, String refereeUserName) throws Exception {
-        if(league==null)
+    public boolean addRefTOSL(String leagueName, int year, String refereeUserName) throws Exception {
+        if(leagueName == null)
             throw new Exception("LeagueName have to be entered");
-        if(year==0)
+        if(year <= 0)
             throw new Exception("Year can't be 0");
-        if(refereeUserName==null)
+        if(refereeUserName == null)
             throw new Exception("refereeUserName have to be entered");
         // check all arguments are not null throw Exception if yes
-        LeagueSeason leagueSeason = getLeagueBySeason(league, year);
-        try {
-            Referee referee = (Referee)(Object)rMDB.get(refereeUserName).get();
-            if (leagueSeason != null){
-                if(leagueSeason.getLstReferee().contains(referee)){
-                    return false;
+        if (!leagueMDB.get(leagueName).isEmpty()) {
+            League league = (League)(Object)leagueMDB.get(leagueName).get();
+            LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
+            // LeagueSeason leagueSeason = getLeagueBySeason(League, year);
+            try {
+                Referee referee = (Referee)(Object)rMDB.get(refereeUserName).get();
+                if (leagueSeason != null){
+                    if(leagueSeason.getLstReferee().contains(referee)){
+                        return false;
+                    }
+                    leagueSeason.addReferee(referee);
+                    rMDB.update(referee);
+                    leagueMDB.update(league);
+                    return true;
                 }
-                leagueSeason.addReferee(referee);
-                rMDB.update(referee);
-                leagueMDB.update(leagueSeason.getLeague());
-                return true;
             }
-            return false;
-        }
-        catch (NoSuchElementException e){
-            return false;
-        }
-    }
-
-    public boolean ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) throws Exception {
-        if(League==null)
-            throw new Exception("LeagueName have to be entered");
-        if(year==0)
-            throw new Exception("Year can't be 0");
-        if(gameSchedulingPolicy==null)
-            throw new Exception("gameSchedulingPolicy have to be entered");
-
-        LeagueSeason leagueSeason = getLeagueBySeason(League, year);
-        if (leagueSeason != null){
-            leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
-            return gameSchedulingPolicy.ApplyGamePolicy(leagueSeason);
+            catch (NoSuchElementException e){
+                e.printStackTrace();
+            }
         }
         return false;
     }
 
-    public LeagueSeason getLeagueBySeason(String League, int year){
-        Optional leagueOptional = leagueMDB.get(League);
-        if (!leagueOptional.isEmpty()){
-            League league = (League)(Object)leagueMDB.get(League).get();
+    public boolean ApplySchedulingPolicy(String leagueName, int year, GameSchedulingPolicy gameSchedulingPolicy) throws Exception {
+        if(leagueName == null)
+            throw new Exception("LeagueName have to be entered");
+        if(year <= 0)
+            throw new Exception("Year can't be 0");
+        if(gameSchedulingPolicy == null)
+            throw new Exception("gameSchedulingPolicy have to be entered");
+
+        if (!leagueMDB.get(leagueName).isEmpty()) {
+            League league = (League)(Object)leagueMDB.get(leagueName).get();
             LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
-            leagueSeason.setLeague(league);
-            return leagueSeason;
+            if (leagueSeason != null && gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {
+                leagueMDB.update(league);
+                return true;
+            }
         }
-        return null;
+        return false;
     }
 }

@@ -4,9 +4,11 @@ import DataAccess.RefereeDaoMongoDBStub;
 import Domain.Controllers.UnionRepresentiveController;
 import Domain.ManagementSystem.GameSchedulingPolicy;
 import Domain.ManagementSystem.GameSchedulingPolicy1Game;
+import Domain.ManagementSystem.League;
 import Domain.ManagementSystem.LeagueSeason;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class TestUnionRepresentativeController {
@@ -94,22 +96,4 @@ public class TestUnionRepresentativeController {
         }
     }
 
-    //ApplySchedulingPolicy
-    @Test
-    public void testGetLeagueBySeason(){
-        // Daniel
-        // create LeagueDaoMongoDBStub - lc
-        // use UnionRepresentiveController(Dao lc, null) for constructor
-        LeagueDaoMongoDBStub lc = LeagueDaoMongoDBStub.getInstance();
-        RefereeDaoMongoDBStub rmdb = RefereeDaoMongoDBStub.getInstance();
-        UnionRepresentiveController urc = new UnionRepresentiveController(lc, rmdb);
-        LeagueSeason ls = urc.getLeagueBySeason("Spain",2000);
-        //league does not exist
-        assertTrue(ls == null);
-        ls = urc.getLeagueBySeason("Champion",2022);
-        //league exist
-        assertTrue(ls != null);
-
-
-    }
 }
