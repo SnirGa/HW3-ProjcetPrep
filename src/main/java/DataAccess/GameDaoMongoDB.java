@@ -12,6 +12,7 @@ import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -19,26 +20,35 @@ import java.util.Optional;
 import static com.mongodb.client.model.Filters.eq;
 
 public class GameDaoMongoDB extends Dao<Game>{
-//    Gson gson;
-    MongoDatabase db;
-    MongoCollection col;
-
+    private MongoDatabase db;
+    private MongoCollection col;
     private static final GameDaoMongoDB instance=new GameDaoMongoDB();
 
-
-    public  static GameDaoMongoDB getInstance(){return instance;}
-
     private GameDaoMongoDB() {
-//        this.gson=new Gson(); //helps to convert from json to object and vice versa
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("Game"); //get the players collection from the database
     }
 
-    @Override
-    //change to id?
-    public Optional<Game> get(String date) {
-        Document doc = (Document) this.col.find(eq("date", date)).first();
+    public static GameDaoMongoDB getInstance(){return instance;}
+
+//    @Override
+//    //change to id?
+//    public Optional<Game> get(String date) {
+//        Document doc = (Document) this.col.find(eq("date", date)).first();
+//        try {
+//            String docJson = doc.toJson(); //json of the document
+//            Game game = gson.fromJson(docJson, Game.class); //convert json to Player Object
+//            return Optional.of(game);
+//        }
+//        catch (Exception e){
+//            return Optional.empty();
+//        }
+//    }
+
+    public Optional<Game> get(LocalDate date) {
+        String dateString = "{\"year\":" + date.getYear() + ", \"month\":" + date.getMonth() + " ,\"day\":" + date.getDayOfMonth() + "\"}";
+        Document doc = (Document) this.col.find(eq("date", dateString)).first();
         try {
             String docJson = doc.toJson(); //json of the document
             Game game = gson.fromJson(docJson, Game.class); //convert json to Player Object
@@ -49,17 +59,6 @@ public class GameDaoMongoDB extends Dao<Game>{
         }
     }
 
-    public Optional<Game> get(Date date) {
-        Document doc = (Document) this.col.find(eq("date", date)).first();
-        try {
-            String docJson = doc.toJson(); //json of the document
-            Game game = gson.fromJson(docJson, Game.class); //convert json to Player Object
-            return Optional.of(game);
-        }
-        catch (Exception e){
-            return Optional.empty();
-        }
-    }
     @Override
     public ArrayList<Game> getAll() {
         ArrayList<Game> games=new ArrayList<>();

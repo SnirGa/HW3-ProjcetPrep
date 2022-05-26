@@ -7,7 +7,6 @@ public class Referee extends EnrolledUser {
     private ArrayList<Game> games;
     private ArrayList<GameEventSet> gameEventSets;
     private Hashtable<String, HashSet<Integer>> leagueSeasonDict;
-    //    private ArrayList<String> leagueSeasons;
 
     public Referee(String userName, String password, String name, String qualification) {
         super(userName, password, name);
@@ -15,7 +14,6 @@ public class Referee extends EnrolledUser {
         this.games = new ArrayList<>();
         this.gameEventSets = new ArrayList<>();
         this.leagueSeasonDict = new Hashtable<>();
-//        this.leagueSeasons = new ArrayList<>();
     }
 
     public String getQualification() {
@@ -63,13 +61,4 @@ public class Referee extends EnrolledUser {
     public void setLeagueSeasonDict(Hashtable<String, HashSet<Integer>>leagueSeasonDict) {
         this.leagueSeasonDict = leagueSeasonDict;
     }
-
-//    public ArrayList<String> getLeagueSeasons() {
-//        return leagueSeasons;
-//    }
-
-//    public void setLeagueSeasons(ArrayList<String> leagueSeasons) {
-//        this.leagueSeasons = leagueSeasons;
-//    }
-
 }

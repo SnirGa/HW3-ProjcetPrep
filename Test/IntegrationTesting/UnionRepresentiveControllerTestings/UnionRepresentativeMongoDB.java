@@ -18,5 +18,6 @@ public class UnionRepresentativeMongoDB {
         LeagueSeason ls=new LeagueSeason(league,120,start,end);
         league.addLeagueSeason(ls);
         leagueDaoMongoDB.save(league);
+        leagueDaoMongoDB.delete(league);
     }
 }

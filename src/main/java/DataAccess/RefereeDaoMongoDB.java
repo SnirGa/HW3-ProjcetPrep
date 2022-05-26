@@ -1,7 +1,6 @@
 package DataAccess;
-import Domain.ManagementSystem.EnrolledUser;
+
 import Domain.ManagementSystem.Referee;
-import com.google.gson.Gson;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -10,26 +9,22 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
 import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
 public class RefereeDaoMongoDB extends Dao<Referee> {
-//    Gson gson;
-    MongoDatabase db;
-    List referees;
-    MongoCollection col;
+    private MongoDatabase db;
+    private MongoCollection col;
     private static final RefereeDaoMongoDB instance=new RefereeDaoMongoDB();
 
-    public static RefereeDaoMongoDB getInstance(){return instance;}
-
     private RefereeDaoMongoDB() {
-//        this.gson=new Gson();
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep");
         this.col=db.getCollection("Referees");
     }
+
+    public static RefereeDaoMongoDB getInstance(){return instance;}
 
     @Override
     public Optional get(String username) {

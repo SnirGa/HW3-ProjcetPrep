@@ -1,7 +1,6 @@
 package DataAccess;
 
 import Domain.ManagementSystem.*;
-import com.google.gson.Gson;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -10,10 +9,8 @@ import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static com.mongodb.client.model.Filters.eq;
 
 public class UserDaoMongoDB extends Dao<User> {
-    //Gson gson;
     MongoDatabase db;
     MongoCollection col;
     TeamOwnerDaoMongoDB teamOwnerDaoMongoDB;
@@ -27,17 +24,16 @@ public class UserDaoMongoDB extends Dao<User> {
 
     private UserDaoMongoDB(){
         // add default users
-        //this.gson=new Gson(); //helps to convert from json to object and vice versa
-        MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-        this.db=client.getDatabase("ProjectPrep"); //get the project database
-        this.col=db.getCollection("Users"); //get the players collection from the database
-        this.teamOwnerDaoMongoDB=TeamOwnerDaoMongoDB.getInstance();
-        this.teamManagerDaoMongoDB=TeamManagerDaoMongoDB.getInstance();
-        this.coachDaoMongoDB=CoachDaoMongoDB.getInstance();
-        this.playerDaoMongoDB=PlayerDaoMongoDB.getInstance();
-        this.refereeDaoMongoDB=RefereeDaoMongoDB.getInstance();
-        this.unionRepDaoMongoDB=UnionRepDaoMongoDB.getInstance();
-        this.fanDaoMongoDB=FanDaoMongoDB.getInstance();
+        MongoClient client = MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+        this.db = client.getDatabase("ProjectPrep"); //get the project database
+        this.col = db.getCollection("Users"); //get the players collection from the database
+        this.teamOwnerDaoMongoDB = TeamOwnerDaoMongoDB.getInstance();
+        this.teamManagerDaoMongoDB = TeamManagerDaoMongoDB.getInstance();
+        this.coachDaoMongoDB = CoachDaoMongoDB.getInstance();
+        this.playerDaoMongoDB = PlayerDaoMongoDB.getInstance();
+        this.refereeDaoMongoDB = RefereeDaoMongoDB.getInstance();
+        this.unionRepDaoMongoDB = UnionRepDaoMongoDB.getInstance();
+        this.fanDaoMongoDB = FanDaoMongoDB.getInstance();
 
     }
 
@@ -45,16 +41,15 @@ public class UserDaoMongoDB extends Dao<User> {
         return instance;
     }
 
-
     @Override
-    public Optional get(String username) {
-        Optional teamOwner=this.teamOwnerDaoMongoDB.get(username);
-        Optional teamManager=this.teamManagerDaoMongoDB.get(username);
-        Optional coach=this.coachDaoMongoDB.get(username);
-        Optional player=this.playerDaoMongoDB.get(username);
-        Optional referee= this.refereeDaoMongoDB.get(username);
-        Optional uniononRep=this.unionRepDaoMongoDB.get(username);
-        Optional fan=this.fanDaoMongoDB.get(username);
+    public Optional<User> get(String username) {
+        Optional<User> teamOwner = this.teamOwnerDaoMongoDB.get(username);
+        Optional<User> teamManager = this.teamManagerDaoMongoDB.get(username);
+        Optional<User> coach = this.coachDaoMongoDB.get(username);
+        Optional<User> player = this.playerDaoMongoDB.get(username);
+        Optional<User> referee = this.refereeDaoMongoDB.get(username);
+        Optional<User> uniononRep = this.unionRepDaoMongoDB.get(username);
+        Optional<User> fan = this.fanDaoMongoDB.get(username);
 
         if (!teamOwner.isEmpty()){
             return teamOwner;
@@ -84,14 +79,15 @@ public class UserDaoMongoDB extends Dao<User> {
 
     @Override
     public ArrayList<User> getAll() {
-        ArrayList<User> allUsers=new ArrayList<>();
-        ArrayList<TeamOwner> teamOwners=this.teamOwnerDaoMongoDB.getAll();
-        ArrayList<TeamManager> teamManagers=this.teamManagerDaoMongoDB.getAll();
-        ArrayList<Coach> coaches=this.coachDaoMongoDB.getAll();
-        ArrayList<Player> players=this.playerDaoMongoDB.getAll();
-        ArrayList<Referee> referees= this.refereeDaoMongoDB.getAll();
-        ArrayList<UnionRepresentative> uniononReps=this.unionRepDaoMongoDB.getAll();;
-        ArrayList<Fan> fans=this.fanDaoMongoDB.getAll();
+        ArrayList<User> allUsers = new ArrayList<>();
+        ArrayList<TeamOwner> teamOwners = this.teamOwnerDaoMongoDB.getAll();
+        ArrayList<TeamManager> teamManagers = this.teamManagerDaoMongoDB.getAll();
+        ArrayList<Coach> coaches = this.coachDaoMongoDB.getAll();
+        ArrayList<Player> players = this.playerDaoMongoDB.getAll();
+        ArrayList<Referee> referees = this.refereeDaoMongoDB.getAll();
+        ArrayList<UnionRepresentative> uniononReps = this.unionRepDaoMongoDB.getAll();;
+        ArrayList<Fan> fans = this.fanDaoMongoDB.getAll();
+
         for (int i=0;i<teamOwners.size();i++){
             User cast=(User)teamOwners.get(i);
             allUsers.add(cast);

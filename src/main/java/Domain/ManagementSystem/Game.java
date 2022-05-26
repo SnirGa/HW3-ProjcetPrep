@@ -13,8 +13,7 @@ public class Game implements Serializable {
     private String location;
     private GameScore gameScore;
     private ArrayList<GameEventSet> gameEventSets;
-    private Hashtable<String, HashSet<Integer>> leagueSeasonDict;
-//    private LeagueSeason leagueSeason;
+    private Hashtable<String, Integer> leagueSeasonDict;
 
     public Game(LocalDate date, Team home, Team away, LocalTime time, String location, LeagueSeason leagueSeason) {
         this.date = date;
@@ -25,8 +24,7 @@ public class Game implements Serializable {
         this.gameScore=new GameScore();
         this.gameEventSets=new ArrayList<>();
         this.leagueSeasonDict = new Hashtable<>();
-//        this.leagueSeason = leagueSeason;
-
+        this.leagueSeasonDict.put(leagueSeason.getLeagueName(), leagueSeason.getYear());
     }
 
     public LocalDate getDate() {
@@ -102,39 +100,9 @@ public class Game implements Serializable {
         return report;
     }
 
-    public void addLeagueSeason(LeagueSeason leagueSeason) {
-        String leagueName = leagueSeason.getLeagueName();
-        Integer leagueSeasonYear = leagueSeason.getYear();
-        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
-        if (leagueSeasons!=null)
-            leagueSeasons.add(leagueSeasonYear);
-        else
-            this.leagueSeasonDict.put(leagueName, new HashSet<>(Arrays.asList(leagueSeasonYear)));
-    }
-
-    public void removeLeagueSeason(LeagueSeason leagueSeason) {
-        String leagueName = leagueSeason.getLeagueName();
-        Integer leagueSeasonYear = leagueSeason.getYear();
-        Set<Integer> leagueSeasons = this.leagueSeasonDict.get(leagueName);
-        if (leagueSeasons!=null && leagueSeasons.contains(leagueSeasonYear))
-            leagueSeasons.remove(leagueSeasonYear);
-    }
-
-    public Hashtable<String, HashSet<Integer>> getLeagueSeasonDict() {
+    public Hashtable<String, Integer> getLeagueSeasonDict() {
         return leagueSeasonDict;
     }
-
-    public void setLeagueSeasonDict(Hashtable<String, HashSet<Integer>>leagueSeasonDict) {
-        this.leagueSeasonDict = leagueSeasonDict;
-    }
-
-//    public LeagueSeason getLeagueSeason() {
-//        return leagueSeason;
-//    }
-
-//    public void setLeagueSeason(LeagueSeason leagueSeason) {
-//        this.leagueSeason = leagueSeason;
-//    }
 
 }
 

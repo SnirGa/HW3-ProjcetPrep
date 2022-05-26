@@ -1,33 +1,29 @@
 package DataAccess;
 
 import Domain.ManagementSystem.Player;
-import com.google.gson.Gson;
 import com.mongodb.MongoException;
 import com.mongodb.client.*;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
 public class PlayerDaoMongoDB extends Dao<Player> {
-//    Gson gson;
     MongoDatabase db;
     MongoCollection col;
 
     private static final PlayerDaoMongoDB instance=new PlayerDaoMongoDB();
 
-    public  static PlayerDaoMongoDB getInstance(){return instance;}
-
     private PlayerDaoMongoDB() {
-//        this.gson=new Gson(); //helps to convert from json to object and vice versa
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("Players"); //get the players collection from the database
     }
+
+    public static PlayerDaoMongoDB getInstance(){return instance;}
 
     @Override
     public Optional get(String username) {

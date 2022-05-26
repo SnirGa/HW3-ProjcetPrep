@@ -25,7 +25,6 @@ public class Team implements Serializable {
         this.homeGames = new ArrayList<>();
         this.awayGames = new ArrayList<>();
         this.leagueSeasonDict = new Hashtable<>();
-//        this.leagueSeasons = new ArrayList<>();
     }
 
     public String getStatus(){

@@ -22,6 +22,7 @@ public class RefereeMongoDB {
         assertTrue(NotExist.isEmpty()); //check get of notexist item
 
     }
+
     @Test
     public void updateTesting(){
         RefereeDaoMongoDB refereeDaoMongoDB=RefereeDaoMongoDB.getInstance();

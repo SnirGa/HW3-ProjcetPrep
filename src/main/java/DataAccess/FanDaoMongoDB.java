@@ -1,7 +1,6 @@
 package DataAccess;
 
 import Domain.ManagementSystem.Fan;
-import com.google.gson.Gson;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -17,22 +16,20 @@ import java.util.Optional;
 import static com.mongodb.client.model.Filters.eq;
 
 public class FanDaoMongoDB extends Dao<Fan> {
-//    Gson gson;
-    MongoDatabase db;
-    MongoCollection col;
+    private MongoDatabase db;
+    private MongoCollection col;
     private static final FanDaoMongoDB instance = new FanDaoMongoDB();
-    public  static FanDaoMongoDB getInstance(){return instance;}
-
 
     public FanDaoMongoDB() {
-//        this.gson = new Gson(); //helps to convert from json to object and vice versa
         MongoClient client = MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db = client.getDatabase("ProjectPrep"); //get the project database
         this.col = db.getCollection("Fans"); //get the fan collection from the database
     }
 
+    public static FanDaoMongoDB getInstance(){return instance;}
+
     @Override
-    public Optional<Fan> get(String username) {
+    public Optional get(String username) {
         Document doc = (Document) this.col.find(eq("userName", username)).first();
         try {
             String docJson = doc.toJson(); //json of the document

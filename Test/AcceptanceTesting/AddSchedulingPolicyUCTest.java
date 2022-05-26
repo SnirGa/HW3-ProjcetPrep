@@ -1,27 +1,29 @@
 package AcceptanceTesting;
 
+import java.time.LocalDate;
 import DataAccess.LeagueDaoMongoDB;
 import DataAccess.RefereeDaoMongoDB;
+
 import Domain.ManagementSystem.*;
 import Service.UnionRepresentiveApplication;
 import org.junit.Test;
-import java.time.LocalDate;
+
 import static org.junit.Assert.assertEquals;
 
 public class AddSchedulingPolicyUCTest {
-    private void setUp(){
-        // Get referee mongodb classes
-        LeagueDaoMongoDB leagueDaoMongoDB = LeagueDaoMongoDB.getInstance();
-        // Create Union Representative for the league
-        UnionRepresentative user = new UnionRepresentative("EuroLeagueUR", "Admin1","EuroLeagueUR");
-        // Create League
-        League league = new League("EuroLeague", user);
-        LocalDate startDate = LocalDate.of(2023, 1,1);
-        LocalDate finishDate = LocalDate.of(2023, 4,1);
-        LeagueSeason leagueSeason = new LeagueSeason(league,2023, startDate, finishDate);
-        league.addLeagueSeason(leagueSeason);
-        leagueDaoMongoDB.save(league);
-    }
+//    private void setUp(){
+//        // Get referee mongodb classes
+//        LeagueDaoMongoDB leagueDaoMongoDB = LeagueDaoMongoDB.getInstance();
+//        // Create Union Representative for the league
+//        UnionRepresentative user = new UnionRepresentative("EuroLeagueUR", "Admin1","EuroLeagueUR");
+//        // Create League
+//        League league = new League("EuroLeague", user);
+//        LocalDate startDate = LocalDate.of(2023, 1,1);
+//        LocalDate finishDate = LocalDate.of(2023, 4,1);
+//        LeagueSeason leagueSeason = new LeagueSeason(league,2023, startDate, finishDate);
+//        league.addLeagueSeason(leagueSeason);
+//        leagueDaoMongoDB.save(league);
+//    }
 
     @Test
     public void AddSchedulingPolicy2GameTestSet(){
@@ -34,12 +36,13 @@ public class AddSchedulingPolicyUCTest {
 
     @Test
     public void GameSchedulingPolicy1GameTestSet(){
-        setUp();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         // League exist, without GameSchedulingPolicy - assert False
-        assertEquals("gameSchedulingPolicy have to be entered", URUser.AddSchedulingPolicy("EuroLeague",2022, null));
+        assertEquals("gameSchedulingPolicy have to be entered", URUser.AddSchedulingPolicy("EuroLeague",2023, null));
         // League exist, with  GameSchedulingPolicy1Game - assert True
-        assertEquals("Successful add Scheduling Policy", URUser.AddSchedulingPolicy("EuroLeague",2022, new GameSchedulingPolicy1Game()));
+        GameSchedulingPolicy1Game gameSchedulingPolicy1Game = new GameSchedulingPolicy1Game();
+        URUser.AddSchedulingPolicy("EuroLeague",2023, gameSchedulingPolicy1Game);
+        assertEquals("Successful add Scheduling Policy", URUser.AddSchedulingPolicy("EuroLeague",2023, new GameSchedulingPolicy1Game()));
     }
 
 
