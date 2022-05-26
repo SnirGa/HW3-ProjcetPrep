@@ -32,12 +32,6 @@ public class UnionRepresentiveController extends EnrollledUserController{
         }
     }
 
-    public void  addGameScore(){
-    }
-    @Override
-    public void showScreen() {
-    }
-
     public boolean addRefTOSL(String league, int year, String refereeUserName) {
         LeagueSeason leagueSeason = getLeagueBySeason(league, year);
         try {
@@ -69,7 +63,6 @@ public class UnionRepresentiveController extends EnrollledUserController{
         }
         return false;
     }
-
 
     public LeagueSeason getLeagueBySeason(String League, int year){
         if (leagueMDB.get(League).isPresent()){

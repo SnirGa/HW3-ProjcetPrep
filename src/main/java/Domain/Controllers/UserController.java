@@ -15,12 +15,6 @@ public class UserController {
     public UserController(Dao ud){
         udMDB = ud;
     }
-
-    public void viewInformation(){
-
-    }
-
-
     public boolean login(String userName,String password){
         if (udMDB.get(userName) != null){
             if(!udMDB.get(userName).isEmpty()) {
@@ -30,14 +24,6 @@ public class UserController {
             }
         }
         return false;
-    }
-
-//    public static EnrolledUser getUser(String userName){
-//        return (EnrolledUser)(Object)udMDB.get(userName);
-//    }
-
-    public void logout(){
-
     }
 
 }
