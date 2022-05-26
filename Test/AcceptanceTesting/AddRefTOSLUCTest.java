@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AddRefTOSLUCTest {
     private void setUp(){
         // Get league and referee mongodb classes
-        LeagueDaoMongoDB leagueDaoMongoDB = LeagueDaoMongoDB.getInstance();
         RefereeDaoMongoDB refereeDaoMongoDB = RefereeDaoMongoDB.getInstance();
+        LeagueDaoMongoDB leagueDaoMongoDB = LeagueDaoMongoDB.getInstance();
         // Create Union Representative for the league
         UnionRepresentative user = new UnionRepresentative("ChampionLeagueUR", "Admin1","ChampionLeagueUR");
         // Create League
@@ -28,17 +28,17 @@ public class AddRefTOSLUCTest {
         leagueDaoMongoDB.save(league);
         // Create new Referee to add
         Referee referee = new Referee("YossiYossi", "123456", "Yossile", "mainReferee");
-        refereeDaoMongoDB.update(referee);
+        refereeDaoMongoDB.save(referee);
     }
 
     @Test
     public void AddRefTOSLAcceptanceTestSet() {
-        setUp();
+        // setUp();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         //Referee does not exist - assert false
-        URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2");
         assertFalse(URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2"));
         //Referee exist, league exist - assert True
+        //URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
         assertTrue(URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi"));
     }
 }

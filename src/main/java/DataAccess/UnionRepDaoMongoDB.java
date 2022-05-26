@@ -16,8 +16,8 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class UnionRepDaoMongoDB implements Dao<UnionRepresentative> {
-    Gson gson;
+public class UnionRepDaoMongoDB extends Dao<UnionRepresentative> {
+    //Gson gson;
     MongoDatabase db;
     MongoCollection col;
     private static final UnionRepDaoMongoDB instance=new UnionRepDaoMongoDB();
@@ -25,7 +25,7 @@ public class UnionRepDaoMongoDB implements Dao<UnionRepresentative> {
     public  static UnionRepDaoMongoDB getInstance(){return instance;}
 
     public UnionRepDaoMongoDB() {
-        this.gson=new Gson(); //helps to convert from json to object and vice versa
+        //this.gson=new Gson(); //helps to convert from json to object and vice versa
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("UnionReps"); //get the team owner collection from the database

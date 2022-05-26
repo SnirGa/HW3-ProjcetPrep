@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LeagueSeason implements Serializable {
-    private League league;
+    private transient League league;
     private int year;
     private LocalDate startDate;
     private LocalDate finishDate;
@@ -67,6 +67,7 @@ public class LeagueSeason implements Serializable {
 
     public void addReferee(Referee referee)
     {
+        referee.addLeagueSeasons(this);
         this.lstReferee.add(referee);
     }
 

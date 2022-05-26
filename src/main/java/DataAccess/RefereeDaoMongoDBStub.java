@@ -5,7 +5,7 @@ import Domain.ManagementSystem.Referee;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class RefereeDaoMongoDBStub implements Dao{
+public class RefereeDaoMongoDBStub extends Dao{
 
     private static final RefereeDaoMongoDBStub instance = new RefereeDaoMongoDBStub();
 

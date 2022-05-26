@@ -16,8 +16,8 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class FanDaoMongoDB implements Dao<Fan> {
-    Gson gson;
+public class FanDaoMongoDB extends Dao<Fan> {
+//    Gson gson;
     MongoDatabase db;
     MongoCollection col;
     private static final FanDaoMongoDB instance = new FanDaoMongoDB();
@@ -25,7 +25,7 @@ public class FanDaoMongoDB implements Dao<Fan> {
 
 
     public FanDaoMongoDB() {
-        this.gson = new Gson(); //helps to convert from json to object and vice versa
+//        this.gson = new Gson(); //helps to convert from json to object and vice versa
         MongoClient client = MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db = client.getDatabase("ProjectPrep"); //get the project database
         this.col = db.getCollection("Fans"); //get the fan collection from the database

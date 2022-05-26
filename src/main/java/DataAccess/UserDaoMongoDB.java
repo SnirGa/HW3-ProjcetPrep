@@ -12,8 +12,8 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class UserDaoMongoDB implements Dao<User> {
-    Gson gson;
+public class UserDaoMongoDB extends Dao<User> {
+    //Gson gson;
     MongoDatabase db;
     MongoCollection col;
     TeamOwnerDaoMongoDB teamOwnerDaoMongoDB;
@@ -27,7 +27,7 @@ public class UserDaoMongoDB implements Dao<User> {
 
     private UserDaoMongoDB(){
         // add default users
-        this.gson=new Gson(); //helps to convert from json to object and vice versa
+        //this.gson=new Gson(); //helps to convert from json to object and vice versa
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("Users"); //get the players collection from the database

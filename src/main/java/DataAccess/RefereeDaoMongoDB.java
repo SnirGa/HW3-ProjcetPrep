@@ -15,8 +15,8 @@ import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class RefereeDaoMongoDB implements Dao<Referee> {
-    Gson gson;
+public class RefereeDaoMongoDB extends Dao<Referee> {
+//    Gson gson;
     MongoDatabase db;
     List referees;
     MongoCollection col;
@@ -25,7 +25,7 @@ public class RefereeDaoMongoDB implements Dao<Referee> {
     public static RefereeDaoMongoDB getInstance(){return instance;}
 
     private RefereeDaoMongoDB() {
-        this.gson=new Gson();
+//        this.gson=new Gson();
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep");
         this.col=db.getCollection("Referees");

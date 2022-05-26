@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class LeagueDaoMongoDBStub implements Dao {
+public class LeagueDaoMongoDBStub extends Dao {
 
     private static final LeagueDaoMongoDBStub instance = new LeagueDaoMongoDBStub();
 

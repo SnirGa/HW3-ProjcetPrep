@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Hashtable;
 
 public class League implements Serializable {
-    Hashtable <Integer, LeagueSeason> leagueSeasonDict;
-    String name;
-    UnionRepresentative unionRepresentative;
+    private Hashtable <Integer, LeagueSeason> leagueSeasonDict;
+    private String name;
+    private UnionRepresentative unionRepresentative;
 
     public League(String name, UnionRepresentative ur) {
         leagueSeasonDict = new Hashtable<>();

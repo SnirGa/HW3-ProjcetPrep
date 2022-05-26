@@ -5,7 +5,7 @@ import Domain.ManagementSystem.UnionRepresentative;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class UserDaoMongoDBStub implements Dao {
+public class UserDaoMongoDBStub extends Dao {
     private static final UserDaoMongoDBStub instance = new UserDaoMongoDBStub();
 
     private UserDaoMongoDBStub(){

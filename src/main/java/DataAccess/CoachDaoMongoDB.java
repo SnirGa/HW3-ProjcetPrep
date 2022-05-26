@@ -16,9 +16,8 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class CoachDaoMongoDB implements Dao<Coach>
-{
-    Gson gson;
+public class CoachDaoMongoDB extends Dao<Coach> {
+//    Gson gson;
     MongoDatabase db;
     MongoCollection col;
     private static final CoachDaoMongoDB instance=new CoachDaoMongoDB();
@@ -26,7 +25,7 @@ public class CoachDaoMongoDB implements Dao<Coach>
 
 
     public CoachDaoMongoDB() {
-        this.gson=new Gson(); //helps to convert from json to object and vice versa
+//        this.gson=new Gson(); //helps to convert from json to object and vice versa
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("Coaches"); //get the coach collection from the database

@@ -7,6 +7,7 @@ import DataAccess.RefereeDaoMongoDB;
 import Domain.ManagementSystem.*;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class UnionRepresentiveController extends EnrollledUserController{
     Dao rMDB;
@@ -66,9 +67,12 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public LeagueSeason getLeagueBySeason(String League, int year){
-        if (leagueMDB.get(League).isPresent()){
+        Optional leagueOptional = leagueMDB.get(League);
+        if (!leagueOptional.isEmpty()){
             League league = (League)(Object)leagueMDB.get(League).get();
-            return league.getLeagueSeasonByYear(year);
+            LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
+            leagueSeason.setLeague(league);
+            return leagueSeason;
         }
         return null;
     }

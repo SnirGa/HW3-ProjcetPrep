@@ -18,8 +18,8 @@ import java.util.Optional;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class GameDaoMongoDB implements Dao<Game>{
-    Gson gson;
+public class GameDaoMongoDB extends Dao<Game>{
+//    Gson gson;
     MongoDatabase db;
     MongoCollection col;
 
@@ -29,7 +29,7 @@ public class GameDaoMongoDB implements Dao<Game>{
     public  static GameDaoMongoDB getInstance(){return instance;}
 
     private GameDaoMongoDB() {
-        this.gson=new Gson(); //helps to convert from json to object and vice versa
+//        this.gson=new Gson(); //helps to convert from json to object and vice versa
         MongoClient client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("Game"); //get the players collection from the database

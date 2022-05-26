@@ -41,7 +41,12 @@ public class Referee extends EnrolledUser {
         this.leagueSeasons = leagueSeasons;
     }
 
-    private void setQualification(String Qualification) {
+    public void setQualification(String Qualification) {
         this.qualification = Qualification;
     }
+
+    public void addLeagueSeasons(LeagueSeason leagueSeasons) {
+        this.leagueSeasons.add(leagueSeasons);
+    }
+
 }
