@@ -9,14 +9,13 @@ import Domain.ManagementSystem.UnionRepresentative;
 import Service.UnionRepresentiveApplication;
 import org.junit.Test;
 import java.time.LocalDate;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class AddRefTOSLUCTest {
     private void setUp(){
         // Get league and referee mongodb classes
-        RefereeDaoMongoDB refereeDaoMongoDB = RefereeDaoMongoDB.getInstance();
         LeagueDaoMongoDB leagueDaoMongoDB = LeagueDaoMongoDB.getInstance();
+        RefereeDaoMongoDB refereeDaoMongoDB = RefereeDaoMongoDB.getInstance();
         // Create Union Representative for the league
         UnionRepresentative user = new UnionRepresentative("ChampionLeagueUR", "Admin1","ChampionLeagueUR");
         // Create League
@@ -33,12 +32,11 @@ public class AddRefTOSLUCTest {
 
     @Test
     public void AddRefTOSLAcceptanceTestSet() {
-        // setUp();
+        setUp();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         //Referee does not exist - assert false
-        assertFalse(URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2"));
+        assertEquals("league, year or refereeUserName are not valid", URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2"));
         //Referee exist, league exist - assert True
-        //URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
-        assertTrue(URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi"));
+        assertEquals("Successful add referee", URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi"));
     }
 }

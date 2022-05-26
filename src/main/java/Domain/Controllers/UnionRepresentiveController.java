@@ -33,7 +33,13 @@ public class UnionRepresentiveController extends EnrollledUserController{
         }
     }
 
-    public boolean addRefTOSL(String league, int year, String refereeUserName) {
+    public boolean addRefTOSL(String league, int year, String refereeUserName) throws Exception {
+        if(league==null)
+            throw new Exception("LeagueName have to be entered");
+        if(year==0)
+            throw new Exception("Year can't be 0");
+        if(refereeUserName==null)
+            throw new Exception("refereeUserName have to be entered");
         // check all arguments are not null throw Exception if yes
         LeagueSeason leagueSeason = getLeagueBySeason(league, year);
         try {
@@ -54,11 +60,15 @@ public class UnionRepresentiveController extends EnrollledUserController{
         }
     }
 
-    public boolean ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) {
+    public boolean ApplySchedulingPolicy(String League, int year, GameSchedulingPolicy gameSchedulingPolicy) throws Exception {
+        if(League==null)
+            throw new Exception("LeagueName have to be entered");
+        if(year==0)
+            throw new Exception("Year can't be 0");
+        if(gameSchedulingPolicy==null)
+            throw new Exception("gameSchedulingPolicy have to be entered");
+
         LeagueSeason leagueSeason = getLeagueBySeason(League, year);
-        if(gameSchedulingPolicy == null){
-            return false;
-        }
         if (leagueSeason != null){
             leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
             return gameSchedulingPolicy.ApplyGamePolicy(leagueSeason);
@@ -76,5 +86,4 @@ public class UnionRepresentiveController extends EnrollledUserController{
         }
         return null;
     }
-
 }

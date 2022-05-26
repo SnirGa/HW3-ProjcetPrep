@@ -2,19 +2,16 @@ package DataAccess;
 
 import Domain.ManagementSystem.FilledRole;
 import Domain.ManagementSystem.Player;
-//import org.junit.jupiter.api.Test;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerDaoMongoDBTest {
 
     @Test
-    void get() {
+    public void get() {
         Player player=new Player("Hodaya123","123456","Hodaya Messi",new Date(), FilledRole.GoalKeeper);
         PlayerDaoMongoDB playerDaoMongoDB=PlayerDaoMongoDB.getInstance();
         playerDaoMongoDB.save(player);
@@ -23,13 +20,11 @@ class PlayerDaoMongoDBTest {
         Optional<Player> fromdb2=playerDaoMongoDB.get("notExist");
         assertTrue(fromdb2.isEmpty());
         //playerDaoMongoDB.delete(player);
-
     }
     @Test
-    void getAll() {
+    public void getAll() {
         Player player=new Player("Hodaya123","123456","Hodaya Messi",new Date(), FilledRole.GoalKeeper);
         Player player2=new Player("Roni123","123456","Roni Ronaldo",new Date(), FilledRole.GoalKeeper);
-
         PlayerDaoMongoDB playerDaoMongoDB=PlayerDaoMongoDB.getInstance();
         playerDaoMongoDB.save(player);
         ArrayList<Player> players=playerDaoMongoDB.getAll();
@@ -41,7 +36,7 @@ class PlayerDaoMongoDBTest {
     }
 
     @Test
-    void save() {
+    public void save() {
         Player player=new Player("Hodaya123","123456","Hodaya Messi",new Date(), FilledRole.GoalKeeper);
         Player player2=new Player("Roni123","123456","Roni Ronaldo",new Date(), FilledRole.GoalKeeper);
 
@@ -59,7 +54,7 @@ class PlayerDaoMongoDBTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         PlayerDaoMongoDB playerDaoMongoDB=PlayerDaoMongoDB.getInstance();
         Player player=new Player("Hodaya123","123456","Hodaya Messi",new Date(), FilledRole.GoalKeeper);
         player.setName("Hodaya Taka");
@@ -70,7 +65,7 @@ class PlayerDaoMongoDBTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         PlayerDaoMongoDB playerDaoMongoDB=PlayerDaoMongoDB.getInstance();
         Player player=new Player("Hodaya123","123456","Hodaya Messi",new Date(), FilledRole.GoalKeeper);
         playerDaoMongoDB.save(player);

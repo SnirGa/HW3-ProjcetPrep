@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RefereeDaoMongoDBTest {
 
     @Test
-    void get() {
+    public void get() {
         Referee referee=new Referee("Hodaya123","123456","Hodaya Messi", "high");
         RefereeDaoMongoDB refereeDaoMongoDB=RefereeDaoMongoDB.getInstance();
         refereeDaoMongoDB.save(referee);
@@ -26,7 +26,7 @@ class RefereeDaoMongoDBTest {
 
     }
     @Test
-    void getAll() {
+    public void getAll() {
         Referee referee1=new Referee("Hodaya123","123456","Hodaya Messi", "high");
         Referee referee2=new Referee("Roni123","123456","Roni Ronaldo", "high");
 
@@ -41,7 +41,7 @@ class RefereeDaoMongoDBTest {
     }
 
     @Test
-    void save() {
+    public void save() {
         Referee referee1=new Referee("Hodaya123","123456","Hodaya Messi", "high");
         Referee referee2=new Referee("Roni123","123456","Roni Ronaldo", "high");
 
@@ -59,7 +59,7 @@ class RefereeDaoMongoDBTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         RefereeDaoMongoDB refereeDaoMongoDB=RefereeDaoMongoDB.getInstance();
         Referee referee=new Referee("Hodaya123","123456","Hodaya Messi", "high");
         referee.setName("Hodaya Taka");
@@ -70,7 +70,7 @@ class RefereeDaoMongoDBTest {
     }
 
 //    @Test
-//    void delete() {
+//    public void delete() {
 //        RefereeDaoMongoDB refereeDaoMongoDB=RefereeDaoMongoDB.getInstance();
 //        Referee referee=new Referee("Hodaya123","123456","Hodaya Messi", "high");
 //        refereeDaoMongoDB.save(referee);
