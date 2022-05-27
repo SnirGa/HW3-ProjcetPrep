@@ -70,8 +70,8 @@ public class UnionRepresentiveController extends EnrollledUserController{
             throw new Exception("Year can't be 0");
         if(gameSchedulingPolicy == null)
             throw new Exception("gameSchedulingPolicy have to be entered");
-
-        if (!leagueMDB.get(leagueName).isEmpty()) {
+        Optional O = leagueMDB.get(leagueName);
+        if (!O.isEmpty()) {
             League league = (League)(Object)leagueMDB.get(leagueName).get();
             LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
             if (leagueSeason != null && gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {

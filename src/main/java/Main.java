@@ -15,12 +15,16 @@ public class Main{
     private static ArrayList<League> allLeague = new ArrayList<>();
     private static ArrayList<Team> ChampionLeagueTeams = new ArrayList<>();
     private static ArrayList<Team> EuroLeagueTeams = new ArrayList<>();
+    private static LeagueSeason ChampionLeagueSeason;
+    private static LeagueSeason EuroLeagueSeason;
 
     public static void main(String[] args) throws Exception {
-        setUp();
+        setUpAll();
+//        setUpLeague();
+//        setUpLeagueSeasons();
     }
 
-    private static void setUp(){
+    private static void setUpUsers(){
         // Create all users Representatives
         UnionRepresentative unionUser1 = new UnionRepresentative("ChampionLeagueUR", "Admin1","ChampionLeagueUR");
         userDaoMongoDB.save(unionUser1);
@@ -34,56 +38,54 @@ public class Main{
         Referee referee = new Referee("YossiYossi", "123456", "Yossile", "mainReferee");
         userDaoMongoDB.save(referee);
         allUsers.add(referee);
+    }
 
-        // ChampionLeagueTeams
-        Team CLt1 = new Team(null,null,null);
-        Team CLt2 = new Team(null,null,null);
-        Team CLt3 = new Team(null,null,null);
-        Team CLt4 = new Team(null,null,null);
-        Team CLt5 = new Team(null,null,null);
-        Team CLt6 = new Team(null,null,null);
-        ChampionLeagueTeams = new ArrayList<>();
-        ChampionLeagueTeams.add(CLt1);
-        ChampionLeagueTeams.add(CLt2);
-        ChampionLeagueTeams.add(CLt3);
-        ChampionLeagueTeams.add(CLt4);
-        ChampionLeagueTeams.add(CLt5);
-        ChampionLeagueTeams.add(CLt6);
-
-        // EuroLeagueTeams
-        Team ELt1 = new Team(null,null,null);
-        Team ELt2 = new Team(null,null,null);
-        Team ELt3 = new Team(null,null,null);
-        Team ELt4 = new Team(null,null,null);
-        Team ELt5 = new Team(null,null,null);
-        Team ELt6 = new Team(null,null,null);
-        EuroLeagueTeams = new ArrayList<>();
-        EuroLeagueTeams.add(ELt1);
-        EuroLeagueTeams.add(ELt2);
-        EuroLeagueTeams.add(ELt3);
-        EuroLeagueTeams.add(ELt4);
-        EuroLeagueTeams.add(ELt5);
-        EuroLeagueTeams.add(ELt6);
-
-        // Create All League
-        League ChampionLeague = new League("ChampionLeague", unionUser1);
-        LocalDate startDateChampionLeague = LocalDate.of(2022, 1,1);
-        LocalDate finishDateChampionLeague = LocalDate.of(2022, 4,1);
-        LeagueSeason ChampionLeagueSeason = new LeagueSeason(ChampionLeague,2022, startDateChampionLeague, finishDateChampionLeague);
-        ChampionLeagueSeason.setLstTeam(ChampionLeagueTeams);
-        ChampionLeague.addLeagueSeason(ChampionLeagueSeason);
+    private static void setUpLeague(){
+        // Create All Leagues
+        League ChampionLeague = new League("ChampionLeague", (UnionRepresentative)allUsers.get(0));
         leagueDaoMongoDB.save(ChampionLeague);
         allLeague.add(ChampionLeague);
 
-        League EuroLeague = new League("EuroLeague", unionUser2);
-        LocalDate leagueEuroLeagueStartDate = LocalDate.of(2023, 1,1);
-        LocalDate leagueEuroLeagueFinishDate = LocalDate.of(2023, 4,1);
-        LeagueSeason EuroLeagueSeason = new LeagueSeason(EuroLeague,2023, leagueEuroLeagueStartDate, leagueEuroLeagueFinishDate);
-        ChampionLeagueSeason.setLstTeam(EuroLeagueTeams);
-        EuroLeague.addLeagueSeason(EuroLeagueSeason);
+        League EuroLeague = new League("EuroLeague",  (UnionRepresentative)allUsers.get(2));
         leagueDaoMongoDB.save(EuroLeague);
         allLeague.add(EuroLeague);
     }
+
+    private static void setUpLeagueSeasons(){
+        League ChampionLeague = allLeague.get(0);
+        LocalDate startDateChampionLeague = LocalDate.of(2022, 1,1);
+        LocalDate finishDateChampionLeague = LocalDate.of(2022, 4,1);
+        ChampionLeagueSeason = new LeagueSeason(ChampionLeague,2022, startDateChampionLeague, finishDateChampionLeague);
+        setUpTeams(ChampionLeagueSeason, 0 , 7);
+        ChampionLeague.addLeagueSeason(ChampionLeagueSeason);
+        leagueDaoMongoDB.update(ChampionLeague);
+
+        League EuroLeague = allLeague.get(1);
+        LocalDate leagueEuroLeagueStartDate = LocalDate.of(2023, 1,1);
+        LocalDate leagueEuroLeagueFinishDate = LocalDate.of(2023, 4,1);
+        EuroLeagueSeason = new LeagueSeason(EuroLeague,2023, leagueEuroLeagueStartDate, leagueEuroLeagueFinishDate);
+        setUpTeams(EuroLeagueSeason, 7 , 13);
+        EuroLeague.addLeagueSeason(EuroLeagueSeason);
+        leagueDaoMongoDB.update(EuroLeague);
+    }
+
+    private static void setUpTeams(LeagueSeason ls, int start, int end) {
+        // LeagueTeams
+        for (int i = start; i<end; i++){
+            Team t = new Team(true, "team" + i , null );
+            ls.addTeam(t);
+        }
+    }
+
+
+    private static void setUpAll(){
+        setUpUsers();
+        setUpLeague();
+        setUpLeagueSeasons();
+    }
+
+
+
 
 
 }
