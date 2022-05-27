@@ -93,14 +93,6 @@ public class LeagueSeason implements Serializable {
         this.leagueName = leagueName;
     }
 
-//    public League getLeague() {
-//        return league;
-//    }
-//
-//    public void setLeague(League league) {
-//        this.league = league;
-//    }
-
     public void setLstGame(ArrayList<Game> lstGame) {
         this.lstGame = lstGame;
     }
