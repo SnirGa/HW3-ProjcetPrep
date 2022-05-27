@@ -47,8 +47,12 @@ public class UnionRepresentiveController extends EnrollledUserController{
                 LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
                 Referee referee = (Referee)rMDB.get(refereeUserName).get();
                 if (leagueSeason != null){
-                    if(leagueSeason.getLstReferee().contains(referee)){
-                        return false;
+//                    if(leagueSeason.getLstReferee().contains(referee)){
+//                        return false;
+                    for (int i=0;i<leagueSeason.getLstReferee().size();i++){
+                        if (leagueSeason.getLstReferee().get(i).getUserName().equals(refereeUserName)){
+                            return false;
+                        }
                     }
                     leagueSeason.addReferee(referee);
                     rMDB.update(referee);

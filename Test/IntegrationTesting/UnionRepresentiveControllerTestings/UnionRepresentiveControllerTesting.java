@@ -25,6 +25,8 @@ public class UnionRepresentiveControllerTesting {
         //Referee exist, league exist - assert True
         ret = URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
         Assert.assertEquals("Successful add referee", ret);
+        ret = URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
+        Assert.assertEquals("league, year or refereeUserName are not valid", ret);
     }
 
     @Test
@@ -49,7 +51,7 @@ public class UnionRepresentiveControllerTesting {
         //Non-exist League-Season
 
         try {
-            boolean bool = URUser.ApplySchedulingPolicy("ChampionLeague", 2022, gameSchedulingPolicy1);
+            boolean bool = URUser.ApplySchedulingPolicy("Non-Exist", 2022, gameSchedulingPolicy1);
             assertFalse(bool);
         } catch (Exception e) {
             e.printStackTrace();
