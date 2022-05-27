@@ -18,7 +18,9 @@ public class UserControllerTestings {
         Player player=new Player("someName","123456","some name",new Date(), FilledRole.Defender);
         userDaoMongoDB.save(player);
         try {
+            //Exist player
             assertTrue(userController.login("someName", "123456"));
+            //Non-Exist player
             assertTrue(!userController.login("NotExist", "123456"));
         }
         catch (Exception e){

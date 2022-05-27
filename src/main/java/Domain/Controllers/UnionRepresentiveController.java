@@ -73,9 +73,10 @@ public class UnionRepresentiveController extends EnrollledUserController{
         Optional O = leagueMDB.get(leagueName);
         if (!O.isEmpty()) {
             League league = (League)(Object)leagueMDB.get(leagueName).get();
+
             LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
-            leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
             if (leagueSeason != null && gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {
+                leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
                 leagueMDB.update(league);
                 return true;
             }
