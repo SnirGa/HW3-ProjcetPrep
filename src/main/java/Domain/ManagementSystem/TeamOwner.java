@@ -8,19 +8,15 @@ public class TeamOwner extends EnrolledUser {
     }
 
     public void appointOwner(EnrolledUser user){
-        //ToDo
     }
 
     public void removeOwner(TeamOwner owner){
-        //ToDo
     }
 
     public void appointManager(EnrolledUser user) {
-        //ToDo
     }
 
     public void removeManager(TeamManager manager){
-        //ToDo
     }
 
     public void closeTeam(){
@@ -32,22 +28,15 @@ public class TeamOwner extends EnrolledUser {
     }
 
     public void addAsset(){
-        //Asset object???
-        //ToDo
     }
 
     public void removeAsset(){
-        //ToDo
     }
 
     public void reportIncome(){
-        //Income object???
-        //ToDo
     }
 
     public void reportExpense(){
-        //Expense object???
-        //ToDo
     }
 
     public Team getTeam() {

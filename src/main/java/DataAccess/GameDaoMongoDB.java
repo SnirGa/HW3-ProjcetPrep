@@ -32,20 +32,6 @@ public class GameDaoMongoDB extends Dao<Game>{
 
     public static GameDaoMongoDB getInstance(){return instance;}
 
-//    @Override
-//    //change to id?
-//    public Optional<Game> get(String date) {
-//        Document doc = (Document) this.col.find(eq("date", date)).first();
-//        try {
-//            String docJson = doc.toJson(); //json of the document
-//            Game game = gson.fromJson(docJson, Game.class); //convert json to Player Object
-//            return Optional.of(game);
-//        }
-//        catch (Exception e){
-//            return Optional.empty();
-//        }
-//    }
-
     public Optional<Game> get(LocalDate date) {
         String dateString = "{\"year\":" + date.getYear() + ", \"month\":" + date.getMonth() + " ,\"day\":" + date.getDayOfMonth() + "\"}";
         Document doc = (Document) this.col.find(eq("date", dateString)).first();

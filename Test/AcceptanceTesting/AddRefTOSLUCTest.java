@@ -1,13 +1,5 @@
 package AcceptanceTesting;
 
-import DataAccess.LeagueDaoMongoDB;
-import DataAccess.RefereeDaoMongoDB;
-import Domain.ManagementSystem.League;
-import Domain.ManagementSystem.LeagueSeason;
-import Domain.ManagementSystem.Referee;
-import Domain.ManagementSystem.UnionRepresentative;
-import java.time.LocalDate;
-
 import Service.UnionRepresentiveApplication;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

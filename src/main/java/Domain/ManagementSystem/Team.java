@@ -13,7 +13,6 @@ public class Team implements Serializable {
     private ArrayList<Game> homeGames;
     private ArrayList<Game> awayGames;
     private Hashtable<String, HashSet<Integer>> leagueSeasonDict;
-//    private ArrayList<LeagueSeason> leagueSeasons;
 
     public Team(Boolean isActive, String stadium, ArrayList<TeamOwner> teamOwner) {
         this.isActive = isActive;
@@ -120,16 +119,8 @@ public class Team implements Serializable {
         this.leagueSeasonDict = leagueSeasonDict;
     }
 
-
     public void openTeam(){}
 
     public void closeTeam(){}
 
-//    public void setLeagueSeasons(ArrayList<LeagueSeason> leagueSeasons) {
-//        this.leagueSeasons = leagueSeasons;
-//    }
-//
-//    public ArrayList<LeagueSeason> getLeagueSeasons() {
-//        return leagueSeasons;
-//    }
 }

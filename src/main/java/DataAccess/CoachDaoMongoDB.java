@@ -9,7 +9,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -25,6 +24,7 @@ public class CoachDaoMongoDB extends Dao<Coach> {
         this.db=client.getDatabase("ProjectPrep"); //get the project database
         this.col=db.getCollection("Coaches"); //get the coach collection from the database
     }
+
     public static CoachDaoMongoDB getInstance(){return instance;}
 
     @Override

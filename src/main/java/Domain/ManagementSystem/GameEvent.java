@@ -1,21 +1,22 @@
 package Domain.ManagementSystem;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 
 public class GameEvent implements Serializable{
     EventType type;
-    Time time;
+    LocalTime time;
     int minute;
     String description;
 
-    public GameEvent(EventType type, Time time, int minute, String description) {
+    public GameEvent(EventType type, LocalTime time, int minute, String description) {
         this.type = type;
         this.time = time;
         this.minute = minute;
         this.description = description;
     }
 
-    public Time getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
@@ -35,7 +36,7 @@ public class GameEvent implements Serializable{
         this.type = type;
     }
 
-    public void setTime(Time time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 

@@ -1,8 +1,5 @@
 package AcceptanceTesting;
 
-import DataAccess.UserDaoMongoDB;
-import Domain.ManagementSystem.UnionRepresentative;
-
 import Service.UserApplication;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;

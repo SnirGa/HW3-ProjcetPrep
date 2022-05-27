@@ -1,9 +1,5 @@
 package AcceptanceTesting;
 
-import java.time.LocalDate;
-import DataAccess.LeagueDaoMongoDB;
-import DataAccess.RefereeDaoMongoDB;
-
 import Domain.ManagementSystem.*;
 import Service.UnionRepresentiveApplication;
 import org.junit.Test;

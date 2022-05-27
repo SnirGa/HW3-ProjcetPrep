@@ -33,19 +33,19 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public boolean addRefTOSL(String leagueName, int year, String refereeUserName) throws Exception {
+        // check all arguments are not null throw Exception if yes
         if(leagueName == null)
             throw new Exception("LeagueName have to be entered");
         if(year <= 0)
             throw new Exception("Year can't be 0");
         if(refereeUserName == null)
             throw new Exception("refereeUserName have to be entered");
-        // check all arguments are not null throw Exception if yes
+        // add ref to league season
         if (!leagueMDB.get(leagueName).isEmpty()) {
-            League league = (League)(Object)leagueMDB.get(leagueName).get();
-            LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
-            // LeagueSeason leagueSeason = getLeagueBySeason(League, year);
+            League league = (League)leagueMDB.get(leagueName).get();
             try {
-                Referee referee = (Referee)(Object)rMDB.get(refereeUserName).get();
+                LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
+                Referee referee = (Referee)rMDB.get(refereeUserName).get();
                 if (leagueSeason != null){
                     if(leagueSeason.getLstReferee().contains(referee)){
                         return false;
@@ -64,15 +64,16 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public boolean ApplySchedulingPolicy(String leagueName, int year, GameSchedulingPolicy gameSchedulingPolicy) throws Exception {
+        // check all arguments are not null throw Exception if yes
         if(leagueName == null)
             throw new Exception("LeagueName have to be entered");
         if(year <= 0)
             throw new Exception("Year can't be 0");
         if(gameSchedulingPolicy == null)
             throw new Exception("gameSchedulingPolicy have to be entered");
-        Optional O = leagueMDB.get(leagueName);
-        if (!O.isEmpty()) {
-            League league = (League)(Object)leagueMDB.get(leagueName).get();
+        // Apply Game Scheduling Policy on League Season
+        if (!leagueMDB.get(leagueName).isEmpty()) {
+            League league = (League)leagueMDB.get(leagueName).get();
 
             LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
             if (leagueSeason != null && gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {

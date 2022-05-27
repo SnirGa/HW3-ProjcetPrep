@@ -4,7 +4,7 @@ import Domain.Controllers.UnionRepresentiveController;
 import Domain.ManagementSystem.GameSchedulingPolicy;
 
 public class UnionRepresentiveApplication {
-    UnionRepresentiveController unionRepresentiveController=new UnionRepresentiveController();
+    UnionRepresentiveController unionRepresentiveController = new UnionRepresentiveController();
 
     public String addRefereetoSL(String league, int year , String refereeUserName){
         //UC- add referee to league

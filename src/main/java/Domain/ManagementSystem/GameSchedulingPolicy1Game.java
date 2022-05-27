@@ -1,7 +1,5 @@
 package Domain.ManagementSystem;
 
-import DataAccess.GameDaoMongoDB;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,8 +12,8 @@ public class GameSchedulingPolicy1Game implements GameSchedulingPolicy, Serializ
         ArrayList<Team> teams = leagueSeason.getLstTeam();
         if (teams == null) return false;
         LocalDate date = leagueSeason.getStartDate();
-
         if (date == null) return false;
+
         LocalTime time = LocalTime.of(21,0,0,0);
         for (int i = 0; i < teams.size(); i++){
             for (int j = i+1; j < teams.size(); j++){

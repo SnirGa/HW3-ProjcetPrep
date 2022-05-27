@@ -3,14 +3,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PersonalPage implements Serializable {
-    private EnrolledUser pageOwner;
+    private String pageOwner;
     private int age;
     private double height;
     private String city;
     private String aboutMe;
     private ArrayList<Fan> fanSubscribers;
 
-    public PersonalPage(EnrolledUser pageOwner, int age, double height, String city, String aboutMe) {
+    public PersonalPage(String pageOwner){
+        this.pageOwner = pageOwner;
+    }
+
+    public PersonalPage(String pageOwner, int age, double height, String city, String aboutMe) {
         this.pageOwner = pageOwner;
         this.age = age;
         this.height = height;

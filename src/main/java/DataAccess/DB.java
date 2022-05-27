@@ -13,6 +13,7 @@ public class DB {
     private static final DB instance = new DB();
     MongoClient client;
     MongoDatabase db;
+
     public DB() {
         client= MongoClients.create("mongodb+srv://user:user123456user@cluster0.g7msc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
          db=client.getDatabase("ProjectPrep");
@@ -22,14 +23,9 @@ public class DB {
         return instance;
     }
 
-    //public static Connection getConnection(){
-    //}
-
     public MongoCollection getCollection(String collectionName){
         return db.getCollection(collectionName);
     }
-
-
 
 }
 

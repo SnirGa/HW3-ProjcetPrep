@@ -15,7 +15,7 @@ public class LeagueSeason implements Serializable {
     private ArrayList<Referee> lstReferee;
     private ArrayList<Team> lstTeam;
     private PointsPolicy pointsPolicy;
-    private GameSchedulingPolicy gameSchedulingPolicy;
+    private String gameSchedulingPolicy;
     private RecommendationSystem recommendationSystem;
 
     public LeagueSeason(League l, int y, LocalDate startdate, LocalDate finishdate) {
@@ -113,13 +113,12 @@ public class LeagueSeason implements Serializable {
         this.pointsPolicy = pointsPolicy;
     }
 
-    public GameSchedulingPolicy getGameSchedulingPolicy() {
+    public String getGameSchedulingPolicy() {
         return gameSchedulingPolicy;
     }
 
     public void setGameSchedulingPolicy(GameSchedulingPolicy gameSchedulingPolicy) {
-        this.gameSchedulingPolicy = gameSchedulingPolicy;
-
+        this.gameSchedulingPolicy = gameSchedulingPolicy.getClass().getName();
     }
 
     public RecommendationSystem getRecommendationSystem() {

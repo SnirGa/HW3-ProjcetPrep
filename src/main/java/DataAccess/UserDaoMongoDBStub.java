@@ -22,7 +22,7 @@ public class UserDaoMongoDBStub extends Dao {
             UnionRepresentative user = new UnionRepresentative("Admin", "Admin1", "admin");
             return Optional.of(user);
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override

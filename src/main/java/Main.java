@@ -1,11 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-
 import DataAccess.*;
 import Domain.ManagementSystem.*;
-
-import static Domain.ManagementSystem.FilledRole.GoalKeeper;
 
 public class Main{
     // Get mongodb classes
@@ -18,10 +14,24 @@ public class Main{
     private static LeagueSeason ChampionLeagueSeason;
     private static LeagueSeason EuroLeagueSeason;
 
-    public static void main(String[] args) throws Exception {
-        setUpAll();
-//        setUpLeague();
-//        setUpLeagueSeasons();
+    public static void main(String[] args){
+        //setUpAll();
+        //deleteAllTables();
+    }
+
+    private static void deleteAllTables(){
+        // Delete all users
+        ArrayList<User> allUsers = userDaoMongoDB.getAll();
+        for(User user: allUsers) userDaoMongoDB.delete(user);
+        // Delete all leagues
+        ArrayList<League> allLeagues = leagueDaoMongoDB.getAll();
+        for(League league: allLeagues) leagueDaoMongoDB.delete(league);
+    }
+
+    private static void setUpAll(){
+        setUpUsers();
+        setUpLeague();
+        setUpLeagueSeasons();
     }
 
     private static void setUpUsers(){
@@ -76,16 +86,5 @@ public class Main{
             ls.addTeam(t);
         }
     }
-
-
-    private static void setUpAll(){
-        setUpUsers();
-        setUpLeague();
-        setUpLeagueSeasons();
-    }
-
-
-
-
 
 }

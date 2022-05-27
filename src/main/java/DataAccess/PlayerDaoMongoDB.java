@@ -12,8 +12,8 @@ import java.util.Optional;
 import static com.mongodb.client.model.Filters.eq;
 
 public class PlayerDaoMongoDB extends Dao<Player> {
-    MongoDatabase db;
-    MongoCollection col;
+    private MongoDatabase db;
+    private MongoCollection col;
 
     private static final PlayerDaoMongoDB instance=new PlayerDaoMongoDB();
 

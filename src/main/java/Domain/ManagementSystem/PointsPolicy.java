@@ -5,11 +5,9 @@ import java.util.*;
 
 public class PointsPolicy implements Serializable {
     private Hashtable<String, HashSet<Integer>> leagueSeasonDict;
-//    ArrayList<LeagueSeason> lstLeagueSeason;
 
     public PointsPolicy() {
         this.leagueSeasonDict = new Hashtable<>();
-//        lstLeagueSeason = new ArrayList<>();
     }
 
     public void addLeagueSeason(LeagueSeason leagueSeason) {
@@ -37,8 +35,4 @@ public class PointsPolicy implements Serializable {
     public void setLeagueSeasonDict(Hashtable<String, HashSet<Integer>>leagueSeasonDict) {
         this.leagueSeasonDict = leagueSeasonDict;
     }
-
-//    public void addLstLeagueSeason(LeagueSeason leagueSeason) { this.lstLeagueSeason.add(leagueSeason); }
-//
-//    public ArrayList<LeagueSeason> getLstLeagueSeason() { return this.lstLeagueSeason; }
 }

@@ -65,8 +65,8 @@ public abstract class Dao<T> {
         }
 
         public LocalTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonArray LTJasonString = json.getAsJsonArray();
-            return LocalTime.of(LTJasonString.get(0).getAsInt(),LTJasonString.get(1).getAsInt());
+            JsonObject LTJasonString = json.getAsJsonObject();
+            return LocalTime.of(LTJasonString.get("hour").getAsInt(),LTJasonString.get("minute").getAsInt());
         }
     }
 }

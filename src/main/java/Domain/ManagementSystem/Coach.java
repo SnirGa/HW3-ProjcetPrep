@@ -6,10 +6,15 @@ public class Coach extends EnrolledUser {
     private Team team;
     private PersonalPage personalPage;
 
-    public Coach(String userName, String password, String name,String teamRole,String qualification,PersonalPage personalPage) {
+    public Coach(String userName, String password, String name,String teamRole,String qualification) {
         super(userName, password, name);
         this.teamRole=teamRole;
         this.qualification=qualification;
+        this.personalPage = new PersonalPage(userName);
+    }
+
+    public void updatePersonalPage(int age, double height, String city, String aboutMe){
+
     }
 
     public String getTeamRole() {
