@@ -5,12 +5,10 @@ import DataAccess.LeagueDaoMongoDB;
 import DataAccess.RefereeDaoMongoDB;
 import Domain.ManagementSystem.*;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class UnionRepresentiveController extends EnrollledUserController{
-    Dao rMDB;
-    Dao leagueMDB;
+    Dao<Referee> rMDB;
+    Dao<League> leagueMDB;
 
     public UnionRepresentiveController() {
         rMDB = RefereeDaoMongoDB.getInstance();
@@ -41,13 +39,12 @@ public class UnionRepresentiveController extends EnrollledUserController{
         if(refereeUserName == null)
             throw new Exception("refereeUserName have to be entered");
         // add ref to league season
-        if (!leagueMDB.get(leagueName).isEmpty()) { // If found league
-            League league = (League)leagueMDB.get(leagueName).get();
-            try {
+        if (leagueMDB.get(leagueName).isPresent()) { // If found league
+            League league = leagueMDB.get(leagueName).get();
                 LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
                 if (leagueSeason != null){
                     if (rMDB.get(refereeUserName).isPresent()){
-                        Referee referee = (Referee)rMDB.get(refereeUserName).get();
+                        Referee referee = rMDB.get(refereeUserName).get();
                         for (int i=0;i<leagueSeason.getLstReferee().size();i++){ //Check if referee already exist
                             if (leagueSeason.getLstReferee().get(i).getUserName().equals(refereeUserName)){
                                 throw new Exception("Referee already exist in this LeagueSeason");
@@ -58,18 +55,12 @@ public class UnionRepresentiveController extends EnrollledUserController{
                         leagueMDB.update(league);
                         return true;
                     }
-                    else{
+                    else
                         throw new Exception("Referee does not exist in DB");
-                    }
                 }
-                else{
+                else
                     throw new Exception("LeagueSeason does not exist in DB");
-                }
             }
-            catch (Exception e){
-                throw new Exception(e.getMessage());
-            }
-        }
         return false;
     }
 
@@ -77,13 +68,13 @@ public class UnionRepresentiveController extends EnrollledUserController{
         // check all arguments are not null throw Exception if yes
         if(leagueName == null)
             throw new Exception("LeagueName have to be entered");
-        if(year <= 0)
+        if(year < 1)
             throw new Exception("Year can't be 0");
         if(gameSchedulingPolicy == null)
             throw new Exception("gameSchedulingPolicy have to be entered");
         // Apply Game Scheduling Policy on League Season
-        if (!leagueMDB.get(leagueName).isEmpty()) { // If found league
-            League league = (League)leagueMDB.get(leagueName).get();
+        if (leagueMDB.get(leagueName).isPresent()) { // If found league
+            League league = leagueMDB.get(leagueName).get();
             LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
             if (leagueSeason != null) {
                 if (gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {

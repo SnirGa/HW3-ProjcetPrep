@@ -2,10 +2,7 @@ package UnitTesting;
 import DataAccess.LeagueDaoMongoDBStub;
 import DataAccess.RefereeDaoMongoDBStub;
 import Domain.Controllers.UnionRepresentiveController;
-import Domain.ManagementSystem.GameSchedulingPolicy;
 import Domain.ManagementSystem.GameSchedulingPolicy1Game;
-import Domain.ManagementSystem.League;
-import Domain.ManagementSystem.LeagueSeason;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,56 +12,69 @@ public class TestUnionRepresentativeController {
 
     @Test
     public void testAddRefTOSL(){
-        // Roni
         // create LeagueDaoMongoDBStub - lc and RefereeDaoMongoDBStub - rmdb
         LeagueDaoMongoDBStub lc = LeagueDaoMongoDBStub.getInstance();
         RefereeDaoMongoDBStub rmdb = RefereeDaoMongoDBStub.getInstance();
         UnionRepresentiveController urc = new UnionRepresentiveController(lc, rmdb);
-        try {
-            //leagueSeason != null && referee != null
-            //return true:
+        //False/True options
+        try{
+            //return true - League and Ref Exist:
             assertTrue(urc.addRefTOSL("Champion", 2022, "YossiYossi"));
-            //return false:
-            urc = new UnionRepresentiveController(LeagueDaoMongoDBStub.getInstance(), RefereeDaoMongoDBStub.getInstance());
-            assertFalse(urc.addRefTOSL("Champion", 2022, "Yossi"));
-            //leagueSeason == null && referee == null
-            assertFalse(urc.addRefTOSL("ChampionWithOutLeagueSeason", 2022, "YossiNotExist"));
-            //leagueSeason == null && referee != null
-            assertFalse(urc.addRefTOSL("ChampionWithOutLeagueSeason", 2022, "YossiYossi"));
-            //leagueSeason != null && referee == null
-            assertFalse(urc.addRefTOSL("Champion", 2022, "YossiNotExist"));
-            //unValid input(name)
-            assertFalse(urc.addRefTOSL("Champion", 2022, "Yossi2"));
+            //return false - League Not Exist:
+            assertFalse(urc.addRefTOSL("LeagueNotExist", 2022, "YossiYossi"));
         }catch (Exception e){
             assertFalse(e.getMessage().length() > 0);
         }
-
-        try{
-            urc.addRefTOSL("Champion", 2022, null);
-        }catch (Exception e){
-            assertTrue(e.getMessage().contains("refereeUserName"));
-        }
-
-        try{
-            urc.addRefTOSL("Champion", 0, "YossiYossi");
-        }catch (Exception e){
-            assertTrue(e.getMessage().contains("0"));
-        }
-
+        // check null for all arguments:
+        // String leagueName == null
         try{
             urc.addRefTOSL(null, 2022, "YossiYossi");
         }catch (Exception e){
-            assertTrue(e.getMessage().contains("LeagueName"));
+            assertEquals(e.getMessage(), "LeagueName have to be entered");
+        }
+        // int year < 1
+        try{
+            urc.addRefTOSL("Champion", 0, "YossiYossi");
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "Year can't be 0");
+        }
+        // String refereeUserName == null
+        try{
+            urc.addRefTOSL("Champion", 2022, null);
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "refereeUserName have to be entered");
+        }
+        //leagueSeason not exist
+        try{
+            urc.addRefTOSL("ChampionWithOutLeagueSeason", 2022, "YossiYossi");
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "LeagueSeason does not exist in DB");
+        }
+        //Referee not exist
+        try{
+            urc.addRefTOSL("Champion", 2022, "YossiNotExist");
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "Referee does not exist in DB");
+        }
+        //Referee already exist in LeagueSeason
+        try{
+            urc.addRefTOSL("Champion", 2022, "Yossi");
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "Referee already exist in this LeagueSeason");
+        }
+        //Referee and LeagueSeason not exist
+        try{
+            urc.addRefTOSL("ChampionWithOutLeagueSeason", 2022, "YossiNotExist");
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "LeagueSeason does not exist in DB");
         }
     }
 
     @Test
     public void testApplySchedulingPolicy(){
-        // Daniel
-        // create LeagueDaoMongoDBStub - lc
+        // create LeagueDaoMongoDBStub - lc and use UnionRepresentiveController(Dao lc, null) for constructur
         LeagueDaoMongoDBStub lc2 = LeagueDaoMongoDBStub.getInstance();
         UnionRepresentiveController unionRepresentiveController = new UnionRepresentiveController(lc2,null);
-        // use UnionRepresentiveController(Dao lc, null) for constructur
         //leageSeason == null:
         GameSchedulingPolicy1Game gameSchedulingPolicy = new GameSchedulingPolicy1Game();
         try {
