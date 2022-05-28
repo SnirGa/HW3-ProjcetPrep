@@ -12,21 +12,73 @@ import java.sql.Ref;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UnionRepresentiveControllerTesting {
 
     @Test
     public void addRefTOSLTest(){
-        UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
+        UnionRepresentiveController UrUser = new UnionRepresentiveController();
         //Referee does not exist - assert false
-        String ret = URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2");
-        Assert.assertEquals("Referee does not exist in DB", ret);
+        try{
+            UrUser.addRefTOSL("ChampionLeague", 2022, "Yossi2");
+        }catch (Exception e){
+            assertTrue(e.getMessage().contains("Referee does not exist in DB"));
+        }
         //Referee exist, league exist - assert True
-        ret = URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
-        Assert.assertEquals("Successful add referee", ret);
-        ret = URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
-        Assert.assertEquals("league, year or refereeUserName are not valid", ret);
+        try{
+            UrUser.addRefTOSL("ChampionLeague", 2022, "YossiYossi");
+        }catch (Exception e){
+            assertTrue(e.getMessage().contains("Successful add referee"));
+        }
+        //refereeUserName = null
+        try{
+            UrUser.addRefTOSL("ChampionLeague", 2022, null);
+        }catch (Exception e){
+            assertTrue(e.getMessage().contains("refereeUserName have to be entered"));
+        }
+        //Year = 0
+        try{
+            UrUser.addRefTOSL("ChampionLeague", 0, "YossiYossi");
+        }catch (Exception e){
+            assertTrue(e.getMessage().contains("Year can't be 0"));
+        }
+        //LeagueName = null
+        try{
+            UrUser.addRefTOSL(null, 2022, "YossiYossi");
+        }catch (Exception e){
+            assertTrue(e.getMessage().contains("LeagueName have to be entered"));
+        }
+        //LeagueSeason = null
+        try{
+            UrUser.addRefTOSL("ChampionLeague", 1800, "YossiYossi");
+        }catch (Exception e){
+            assertTrue(e.getMessage().contains("LeagueSeason does not exist in DB"));
+        }
+        //Referee already exist
+        try{
+            UrUser.addRefTOSL("ChampionLeague", 2022, "YossiYossi");
+        }catch (Exception e){
+            assertTrue(e.getMessage().contains("Referee already exist in this LeagueSeason"));
+        }
+        //League does not exist - assert false
+        try {
+            assertFalse(UrUser.addRefTOSL("Champ", 2022, "YossiYossi"));
+        }
+        catch (Exception e){
+
+    }
+
+//        UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
+//        //Referee does not exist - assert false
+//        String ret = URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2");
+//        Assert.assertEquals("Referee does not exist in DB", ret);
+//        //Referee exist, league exist - assert True
+//        ret = URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
+//        Assert.assertEquals("Successful add referee", ret);
+//        ret = URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
+//        Assert.assertEquals("league, year or refereeUserName are not valid", ret);
     }
 
     @Test

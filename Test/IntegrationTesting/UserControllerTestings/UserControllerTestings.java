@@ -7,8 +7,7 @@ import Domain.ManagementSystem.Player;
 import org.junit.Test;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserControllerTestings {
     @Test
@@ -21,7 +20,11 @@ public class UserControllerTestings {
             //Exist player
             assertTrue(userController.login("someName", "123456"));
             //Non-Exist player
-            assertTrue(!userController.login("NotExist", "123456"));
+            assertFalse(userController.login("NotExist", "123456"));
+            // Name = null
+            assertEquals("userName have to be entered",userController.login(null, "123456"));
+            // Password = null
+            assertEquals("password have to be entered",userController.login("someName", null));
         }
         catch (Exception e){
             assertFalse(e.getMessage().length() > 0);
