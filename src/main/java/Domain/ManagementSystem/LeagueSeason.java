@@ -117,8 +117,12 @@ public class LeagueSeason implements Serializable {
         return gameSchedulingPolicy;
     }
 
-    public void setGameSchedulingPolicy(GameSchedulingPolicy gameSchedulingPolicy) {
-        this.gameSchedulingPolicy = gameSchedulingPolicy.getClass().getName();
+    public Boolean setGameSchedulingPolicy(GameSchedulingPolicy gameSchedulingPolicy) {
+        if (this.gameSchedulingPolicy == null && this.lstGame.isEmpty()) {
+            this.gameSchedulingPolicy = gameSchedulingPolicy.getClass().getName();
+            return true;
+        }
+        return false;
     }
 
     public RecommendationSystem getRecommendationSystem() {

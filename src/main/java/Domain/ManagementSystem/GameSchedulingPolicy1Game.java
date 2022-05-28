@@ -13,7 +13,6 @@ public class GameSchedulingPolicy1Game implements GameSchedulingPolicy, Serializ
         if (teams == null) return false;
         LocalDate date = leagueSeason.getStartDate();
         if (date == null) return false;
-
         LocalTime time = LocalTime.of(21,0,0,0);
         for (int i = 0; i < teams.size(); i++){
             for (int j = i+1; j < teams.size(); j++){

@@ -75,34 +75,69 @@ public class TestUnionRepresentativeController {
         // create LeagueDaoMongoDBStub - lc and use UnionRepresentiveController(Dao lc, null) for constructur
         LeagueDaoMongoDBStub lc2 = LeagueDaoMongoDBStub.getInstance();
         UnionRepresentiveController unionRepresentiveController = new UnionRepresentiveController(lc2,null);
-        //leageSeason == null:
         GameSchedulingPolicy1Game gameSchedulingPolicy = new GameSchedulingPolicy1Game();
-        try {
-            assertFalse(unionRepresentiveController.ApplySchedulingPolicy("ChampionWithOutLeagueSeason", 2022, gameSchedulingPolicy));
-            //league != null:
+        //leagueSeason == null:
+        try{
+            unionRepresentiveController.ApplySchedulingPolicy(null, 2022, gameSchedulingPolicy);
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "LeagueName have to be entered");
+        }
+        // int year < 1
+        try{
+            unionRepresentiveController.ApplySchedulingPolicy("Champion", 0, gameSchedulingPolicy);
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "Year can't be 0");
+        }
+        // String refereeUserName == null
+        try{
+            unionRepresentiveController.ApplySchedulingPolicy("Champion", 2022, null);
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "gameSchedulingPolicy have to be entered");
+        }
+        //False/True options
+        try{
+            //return true - League and GameSchedulingPolicy Exist:
             assertTrue(unionRepresentiveController.ApplySchedulingPolicy("Champion", 2022, gameSchedulingPolicy));
-            //there is no league schedulingPolicy:
-//            assertFalse(unionRepresentiveController.ApplySchedulingPolicy("Champion", 2022, null));
+            //return false - League Not Exist:
+            assertFalse(unionRepresentiveController.ApplySchedulingPolicy("LeagueNotExist", 2022, gameSchedulingPolicy));
         }catch (Exception e){
             assertFalse(e.getMessage().length() > 0);
         }
-
-        try{
-            assertTrue(unionRepresentiveController.ApplySchedulingPolicy(null, 2022, gameSchedulingPolicy));
+        //leagueSeason not exist
+        try {
+            unionRepresentiveController.ApplySchedulingPolicy("ChampionWithOutLeagueSeason", 2022, gameSchedulingPolicy);
         }catch (Exception e){
-            assertTrue(e.getMessage().contains("LeagueName"));
+            assertEquals(e.getMessage(), "LeagueSeason does not exist in DB");
         }
-
-        try{
-            assertTrue(unionRepresentiveController.ApplySchedulingPolicy("Champion", 0, gameSchedulingPolicy));
+        //leagueSeason applied Game Scheduling Policy
+        try {
+            unionRepresentiveController.ApplySchedulingPolicy("ChampionWithGameSchedulingPolicy", 2022, gameSchedulingPolicy);
         }catch (Exception e){
-            assertTrue(e.getMessage().contains("0"));
+            assertEquals(e.getMessage(), "LeagueSeason already have applied Game Scheduling Policy");
         }
-
-        try{
-            assertTrue(unionRepresentiveController.ApplySchedulingPolicy("Champion", 2022, null));
+        //leagueSeason applied Game Scheduling Policy
+        try {
+            unionRepresentiveController.ApplySchedulingPolicy("ChampionWithGameSchedulingPolicy", 2022, gameSchedulingPolicy);
         }catch (Exception e){
-            assertTrue(e.getMessage().contains("gameSchedulingPolicy"));
+            assertEquals(e.getMessage(), "LeagueSeason already have applied Game Scheduling Policy");
+        }
+        //leagueSeason without teams and startDate
+        try {
+            unionRepresentiveController.ApplySchedulingPolicy("ChampionWithOutTeamsAndStartDate", 2022, gameSchedulingPolicy);
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "LeagueSeason must have teams and startDate");
+        }
+        //leagueSeason without teams
+        try {
+            unionRepresentiveController.ApplySchedulingPolicy("ChampionWithOutTeams", 2022, gameSchedulingPolicy);
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "LeagueSeason must have teams and startDate");
+        }
+        //leagueSeason without startDate
+        try {
+            unionRepresentiveController.ApplySchedulingPolicy("ChampionWithOutStartDate", 2022, gameSchedulingPolicy);
+        }catch (Exception e){
+            assertEquals(e.getMessage(), "LeagueSeason must have teams and startDate");
         }
     }
 

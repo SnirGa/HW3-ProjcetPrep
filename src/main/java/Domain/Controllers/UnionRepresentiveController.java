@@ -16,18 +16,8 @@ public class UnionRepresentiveController extends EnrollledUserController{
     }
 
     public UnionRepresentiveController(Dao lc, Dao rmdb) {
-        if(rmdb == null){
-            rMDB = RefereeDaoMongoDB.getInstance();
-        }
-        else {
-            rMDB = rmdb;
-        }
-        if(lc == null){
-            leagueMDB = LeagueDaoMongoDB.getInstance();
-        }
-        else{
-            leagueMDB = lc;
-        }
+        this.rMDB = rmdb;
+        this.leagueMDB = lc;
     }
 
     public boolean addRefTOSL(String leagueName, int year, String refereeUserName) throws Exception {
@@ -73,19 +63,24 @@ public class UnionRepresentiveController extends EnrollledUserController{
         if(gameSchedulingPolicy == null)
             throw new Exception("gameSchedulingPolicy have to be entered");
         // Apply Game Scheduling Policy on League Season
-        if (leagueMDB.get(leagueName).isPresent()) { // If found league
+        // league exist
+        if (leagueMDB.get(leagueName).isPresent()) {
             League league = leagueMDB.get(leagueName).get();
             LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
             if (leagueSeason != null) {
-                if (gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {
-                    leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
-                    leagueMDB.update(league);
-                    return true;
+                if (leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy)) {
+                    if (gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {
+                        leagueMDB.update(league);
+                        return true;
+                    }
+                    else
+                        throw new Exception("LeagueSeason must have teams and startDate");
                 }
+                else
+                    throw new Exception("LeagueSeason already have applied Game Scheduling Policy");
             }
-            else{
+            else
                 throw new Exception("LeagueSeason does not exist in DB");
-            }
         }
         return false;
     }
