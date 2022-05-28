@@ -13,7 +13,7 @@ public class UnionRepresentiveApplication {
             if(unionRepresentiveController.addRefTOSL(league, year, refereeUserName))
                 return("Successful add referee");
             else{
-                return("league, year or refereeUserName are not valid");
+                return("League is not valid");
             }
         }catch (Exception e){
             return e.getMessage();
@@ -27,7 +27,7 @@ public class UnionRepresentiveApplication {
                 return("Successful add Scheduling Policy");
             }
             else{
-                return("league, year or gameSchedulingPolicy are not valid");
+                return("League is not valid");
             }
         }catch (Exception e){
             return e.getMessage();

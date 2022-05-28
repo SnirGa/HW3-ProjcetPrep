@@ -15,8 +15,8 @@ public class Main{
     private static LeagueSeason EuroLeagueSeason;
 
     public static void main(String[] args){
-        //setUpAll();
-        //deleteAllTables();
+        deleteAllTables();
+        setUpAll();
     }
 
     private static void deleteAllTables(){

@@ -17,11 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UnionRepresentiveControllerTesting {
 
     @Test
-    public void addRefTOSLTest() throws Exception {
+    public void addRefTOSLTest(){
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         //Referee does not exist - assert false
         String ret = URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2");
-        Assert.assertEquals("league, year or refereeUserName are not valid", ret);
+        Assert.assertEquals("Referee does not exist in DB", ret);
         //Referee exist, league exist - assert True
         ret = URUser.addRefereetoSL("ChampionLeague", 2022, "YossiYossi");
         Assert.assertEquals("Successful add referee", ret);

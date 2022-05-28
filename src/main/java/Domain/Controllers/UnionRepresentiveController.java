@@ -41,17 +41,22 @@ public class UnionRepresentiveController extends EnrollledUserController{
         if(refereeUserName == null)
             throw new Exception("refereeUserName have to be entered");
         // add ref to league season
-        if (!leagueMDB.get(leagueName).isEmpty()) {
+        if (!leagueMDB.get(leagueName).isEmpty()) { // If found league
             League league = (League)leagueMDB.get(leagueName).get();
             try {
                 LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
-                Referee referee = (Referee)rMDB.get(refereeUserName).get();
+//                Referee referee = (Referee)rMDB.get(refereeUserName).get();
+                Optional<Referee> optionalReferee = rMDB.get(refereeUserName);
+                if (optionalReferee.isEmpty()){
+                    throw new Exception("Referee does not exist in DB");
+                }
+                Referee referee = optionalReferee.get();
                 if (leagueSeason != null){
 //                    if(leagueSeason.getLstReferee().contains(referee)){
 //                        return false;
-                    for (int i=0;i<leagueSeason.getLstReferee().size();i++){
+                    for (int i=0;i<leagueSeason.getLstReferee().size();i++){ //Check if referee already exist
                         if (leagueSeason.getLstReferee().get(i).getUserName().equals(refereeUserName)){
-                            return false;
+                            throw new Exception("Referee already exist in this LeagueSeason");
                         }
                     }
                     leagueSeason.addReferee(referee);
@@ -59,9 +64,12 @@ public class UnionRepresentiveController extends EnrollledUserController{
                     leagueMDB.update(league);
                     return true;
                 }
+                else{
+                    throw new Exception("LeagueSeason does not exist in DB");
+                }
             }
-            catch (NoSuchElementException e){
-                e.printStackTrace();
+            catch (Exception e){
+                throw new Exception(e.getMessage());
             }
         }
         return false;
@@ -76,14 +84,18 @@ public class UnionRepresentiveController extends EnrollledUserController{
         if(gameSchedulingPolicy == null)
             throw new Exception("gameSchedulingPolicy have to be entered");
         // Apply Game Scheduling Policy on League Season
-        if (!leagueMDB.get(leagueName).isEmpty()) {
+        if (!leagueMDB.get(leagueName).isEmpty()) { // If found league
             League league = (League)leagueMDB.get(leagueName).get();
-
             LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
-            if (leagueSeason != null && gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {
-                leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
-                leagueMDB.update(league);
-                return true;
+            if (leagueSeason != null) {
+                if (gameSchedulingPolicy.ApplyGamePolicy(leagueSeason)) {
+                    leagueSeason.setGameSchedulingPolicy(gameSchedulingPolicy);
+                    leagueMDB.update(league);
+                    return true;
+                }
+            }
+            else{
+                throw new Exception("LeagueSeason does not exist in DB");
             }
         }
         return false;

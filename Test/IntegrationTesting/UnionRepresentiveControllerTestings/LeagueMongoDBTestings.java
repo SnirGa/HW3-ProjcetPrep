@@ -20,9 +20,10 @@ public class LeagueMongoDBTestings {
         League TestLeague = new League("TestLeague",unionUser1);
         leagueDaoMongoDB.save(TestLeague);
 
+
         //Test Get League
         Optional getTestLeagueOptional = leagueDaoMongoDB.get("TestLeague");
-        assertTrue(!getTestLeagueOptional.isEmpty());
+        assertFalse(getTestLeagueOptional.isEmpty());
         League getTestLeague = (League)getTestLeagueOptional.get();
 
         // Test Update League
@@ -36,7 +37,7 @@ public class LeagueMongoDBTestings {
         getTestLeague.addLeagueSeason(TestLeagueSeason);
         leagueDaoMongoDB.update(getTestLeague);
         Optional getTestLeagueAfterUpdateOptional = leagueDaoMongoDB.get("TestLeague");
-        assertTrue(!getTestLeagueAfterUpdateOptional.isEmpty());
+        assertFalse(getTestLeagueAfterUpdateOptional.isEmpty());
         League getTestLeagueAfterUpdate = (League)getTestLeagueAfterUpdateOptional.get();
         assertNotNull(getTestLeagueAfterUpdate.getLeagueSeasonByYear(2022));
 
