@@ -27,7 +27,7 @@ public class RefereeDaoMongoDB extends Dao<Referee> {
     public static RefereeDaoMongoDB getInstance(){return instance;}
 
     @Override
-    public Optional get(String username) {
+    public Optional<Referee> get(String username) {
         Document doc = (Document) this.col.find(eq("userName", username)).first();
         try {
             String docJson = doc.toJson(); //json of the document
@@ -40,7 +40,7 @@ public class RefereeDaoMongoDB extends Dao<Referee> {
     }
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList<Referee> getAll() {
         ArrayList<Referee> referees=new ArrayList<>();
         for (Object obj : col.find()) {
             Document currDoc=(Document) obj;

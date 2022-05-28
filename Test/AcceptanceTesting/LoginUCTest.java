@@ -1,5 +1,6 @@
 package AcceptanceTesting;
 
+import SetUpDB.*;
 import Service.UserApplication;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,6 +9,7 @@ public class LoginUCTest {
 
     @Test
     public void loginAcceptanceTestSet(){
+        SetUp.SetUpDB();
         UserApplication userApp = new UserApplication();
         // User exist , correct password  - assert True
         assertEquals(userApp.login("Admin", "Admin1"), "Successful login");

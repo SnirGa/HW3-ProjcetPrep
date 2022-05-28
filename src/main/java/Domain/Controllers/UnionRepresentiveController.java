@@ -5,16 +5,16 @@ import DataAccess.LeagueDaoMongoDB;
 import DataAccess.RefereeDaoMongoDB;
 import Domain.ManagementSystem.*;
 
-
-public class UnionRepresentiveController extends EnrollledUserController{
-    Dao<Referee> rMDB;
-    Dao<League> leagueMDB;
+public class UnionRepresentiveController {
+    private final Dao<Referee> rMDB;
+    private final Dao<League> leagueMDB;
 
     public UnionRepresentiveController() {
         rMDB = RefereeDaoMongoDB.getInstance();
         leagueMDB = LeagueDaoMongoDB.getInstance();
     }
 
+    // For test only
     public UnionRepresentiveController(Dao lc, Dao rmdb) {
         this.rMDB = rmdb;
         this.leagueMDB = lc;

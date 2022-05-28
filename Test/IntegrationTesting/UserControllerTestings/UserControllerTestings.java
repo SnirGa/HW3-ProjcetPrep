@@ -1,33 +1,35 @@
 package IntegrationTesting.UserControllerTestings;
 
-import DataAccess.UserDaoMongoDB;
 import Domain.Controllers.UserController;
-import Domain.ManagementSystem.FilledRole;
-import Domain.ManagementSystem.Player;
 import org.junit.Test;
-import java.util.Date;
-
+import SetUpDB.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserControllerTestings {
     @Test
     public void loginTesting(){
+        SetUp.SetUpDB();
         UserController userController=new UserController();
-        UserDaoMongoDB userDaoMongoDB=UserDaoMongoDB.getInstance();
-        Player player=new Player("someName","123456","some name",new Date(), FilledRole.Defender);
-        userDaoMongoDB.save(player);
+        // True/False
         try {
             //Exist player
             assertTrue(userController.login("someName", "123456"));
             //Non-Exist player
             assertFalse(userController.login("NotExist", "123456"));
-            // Name = null
-            assertEquals("userName have to be entered",userController.login(null, "123456"));
-            // Password = null
-            assertEquals("password have to be entered",userController.login("someName", null));
-        }
-        catch (Exception e){
+        }catch (Exception e){
             assertFalse(e.getMessage().length() > 0);
+        }
+        // Name = null
+        try {
+            userController.login(null, "123456");
+        }catch (Exception e){
+            assertEquals(e.getMessage(),"userName have to be entered");
+        }
+        // Password = null
+        try {
+            userController.login("someName", null);
+        }catch (Exception e){
+            assertEquals(e.getMessage(),"password have to be entered");
         }
     }
 }

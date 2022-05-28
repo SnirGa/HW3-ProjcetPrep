@@ -1,8 +1,10 @@
 package AcceptanceTesting;
 
-import Domain.ManagementSystem.*;
+import Domain.ManagementSystem.GameSchedulingPolicy1Game;
+import Domain.ManagementSystem.GameSchedulingPolicy2Games;
 import Service.UnionRepresentiveApplication;
 import org.junit.Test;
+import SetUpDB.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,6 +12,7 @@ public class AddSchedulingPolicyUCTest {
 
     @Test
     public void AddSchedulingPolicy2GameTestSet(){
+        SetUp.SetUpDB();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         // Year = 0
         assertEquals("Year can't be 0", URUser.AddSchedulingPolicy("ChampionLeague",0, null));
@@ -24,11 +27,11 @@ public class AddSchedulingPolicyUCTest {
         assertEquals("LeagueSeason does not exist in DB", URUser.AddSchedulingPolicy("ChampionLeague",1800, gameSchedulingPolicy2Games));
         // League exist, with  GameSchedulingPolicy2Games - assert True
         assertEquals("Successful add Scheduling Policy", URUser.AddSchedulingPolicy("ChampionLeague",2022, gameSchedulingPolicy2Games));
-
     }
 
     @Test
     public void GameSchedulingPolicy1GameTestSet(){
+        SetUp.SetUpDB();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         // Year = 0
         assertEquals("Year can't be 0", URUser.AddSchedulingPolicy("EuroLeague",0, null));

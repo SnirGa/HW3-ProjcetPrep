@@ -1,4 +1,4 @@
 package Domain.Controllers;
 
-public class PlayerController extends EnrollledUserController{
+public class PlayerController {
 }

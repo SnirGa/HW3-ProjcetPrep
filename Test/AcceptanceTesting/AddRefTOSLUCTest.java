@@ -1,13 +1,13 @@
 package AcceptanceTesting;
-
 import Service.UnionRepresentiveApplication;
+import SetUpDB.SetUp;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AddRefTOSLUCTest {
-
     @Test
     public void AddRefTOSLAcceptanceTestSet() {
+        SetUp.SetUpDB();
         UnionRepresentiveApplication URUser = new UnionRepresentiveApplication();
         //Referee does not exist - assert false
         assertEquals("Referee does not exist in DB", URUser.addRefereetoSL("ChampionLeague", 2022, "Yossi2"));

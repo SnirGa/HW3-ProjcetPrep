@@ -1,5 +1,5 @@
 package Domain.Controllers;
 
-public class TeamOwnerController extends EnrollledUserController{
+public class TeamOwnerController {
 
 }

@@ -11,15 +11,15 @@ import java.util.Optional;
 
 
 public class UserDaoMongoDB extends Dao<User> {
-    MongoDatabase db;
-    MongoCollection col;
-    TeamOwnerDaoMongoDB teamOwnerDaoMongoDB;
-    TeamManagerDaoMongoDB teamManagerDaoMongoDB;
-    CoachDaoMongoDB coachDaoMongoDB;
-    PlayerDaoMongoDB playerDaoMongoDB;
-    RefereeDaoMongoDB refereeDaoMongoDB;
-    UnionRepDaoMongoDB unionRepDaoMongoDB;
-    FanDaoMongoDB fanDaoMongoDB;
+    private MongoDatabase db;
+    private MongoCollection col;
+    private TeamOwnerDaoMongoDB teamOwnerDaoMongoDB;
+    private TeamManagerDaoMongoDB teamManagerDaoMongoDB;
+    private CoachDaoMongoDB coachDaoMongoDB;
+    private PlayerDaoMongoDB playerDaoMongoDB;
+    private RefereeDaoMongoDB refereeDaoMongoDB;
+    private UnionRepDaoMongoDB unionRepDaoMongoDB;
+    private FanDaoMongoDB fanDaoMongoDB;
     private static final UserDaoMongoDB instance = new UserDaoMongoDB();
 
     private UserDaoMongoDB(){
@@ -34,7 +34,6 @@ public class UserDaoMongoDB extends Dao<User> {
         this.refereeDaoMongoDB = RefereeDaoMongoDB.getInstance();
         this.unionRepDaoMongoDB = UnionRepDaoMongoDB.getInstance();
         this.fanDaoMongoDB = FanDaoMongoDB.getInstance();
-
     }
 
     public static UserDaoMongoDB getInstance(){
@@ -42,12 +41,12 @@ public class UserDaoMongoDB extends Dao<User> {
     }
 
     @Override
-    public Optional<User> get(String username) {
+    public Optional get(String username) {
         Optional<User> teamOwner = this.teamOwnerDaoMongoDB.get(username);
         Optional<User> teamManager = this.teamManagerDaoMongoDB.get(username);
         Optional<User> coach = this.coachDaoMongoDB.get(username);
         Optional<User> player = this.playerDaoMongoDB.get(username);
-        Optional<User> referee = this.refereeDaoMongoDB.get(username);
+        Optional<Referee> referee = this.refereeDaoMongoDB.get(username);
         Optional<User> uniononRep = this.unionRepDaoMongoDB.get(username);
         Optional<User> fan = this.fanDaoMongoDB.get(username);
 
