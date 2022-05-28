@@ -1,6 +1,6 @@
 package Domain.ManagementSystem;
 
-import Domain.NotificationSystem.FanNotification;
+import Domain.RecommendationSystem.NotificationSystem.FanNotification;
 import Domain.RecommendationSystem.RecommendationSystem;
 import Domain.SearchSystem.SearchHistory;
 import java.util.ArrayList;

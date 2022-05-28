@@ -1,6 +1,6 @@
 package Domain.ManagementSystem;
 
-import Domain.NotificationSystem.FanNotification;
+import Domain.RecommendationSystem.NotificationSystem.FanNotification;
 import java.io.Serializable;
 import java.util.ArrayList;
 

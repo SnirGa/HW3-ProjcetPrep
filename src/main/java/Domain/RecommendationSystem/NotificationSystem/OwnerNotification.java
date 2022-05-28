@@ -1,4 +1,4 @@
-package Domain.NotificationSystem;
+package Domain.RecommendationSystem.NotificationSystem;
 
 public class OwnerNotification extends Notification{
     @Override

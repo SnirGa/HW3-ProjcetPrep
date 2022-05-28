@@ -1,4 +1,4 @@
-package Domain.NotificationSystem;
+package Domain.RecommendationSystem.NotificationSystem;
 
 public class RefereeNotification  extends Notification{
     @Override

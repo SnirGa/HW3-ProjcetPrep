@@ -19,7 +19,7 @@ public class Main{
         setUpAll();
     }
 
-    private static void deleteAllTables(){
+    public static void deleteAllTables(){
         // Delete all users
         ArrayList<User> allUsers = userDaoMongoDB.getAll();
         for(User user: allUsers) userDaoMongoDB.delete(user);
@@ -28,7 +28,7 @@ public class Main{
         for(League league: allLeagues) leagueDaoMongoDB.delete(league);
     }
 
-    private static void setUpAll(){
+    public static void setUpAll(){
         setUpUsers();
         setUpLeague();
         setUpLeagueSeasons();

@@ -1,6 +1,6 @@
 package Domain.ManagementSystem;
 
-import Domain.NotificationSystem.Notification;
+import Domain.RecommendationSystem.NotificationSystem.Notification;
 import java.io.Serializable;
 import java.util.ArrayList;
 
