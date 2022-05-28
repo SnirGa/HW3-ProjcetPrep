@@ -36,7 +36,7 @@ public class UnionRepresentiveController extends EnrollledUserController{
         // check all arguments are not null throw Exception if yes
         if(leagueName == null)
             throw new Exception("LeagueName have to be entered");
-        if(year <= 0)
+        if(year < 1)
             throw new Exception("Year can't be 0");
         if(refereeUserName == null)
             throw new Exception("refereeUserName have to be entered");
@@ -45,24 +45,22 @@ public class UnionRepresentiveController extends EnrollledUserController{
             League league = (League)leagueMDB.get(leagueName).get();
             try {
                 LeagueSeason leagueSeason = league.getLeagueSeasonByYear(year);
-//                Referee referee = (Referee)rMDB.get(refereeUserName).get();
-                Optional<Referee> optionalReferee = rMDB.get(refereeUserName);
-                if (optionalReferee.isEmpty()){
-                    throw new Exception("Referee does not exist in DB");
-                }
-                Referee referee = optionalReferee.get();
                 if (leagueSeason != null){
-//                    if(leagueSeason.getLstReferee().contains(referee)){
-//                        return false;
-                    for (int i=0;i<leagueSeason.getLstReferee().size();i++){ //Check if referee already exist
-                        if (leagueSeason.getLstReferee().get(i).getUserName().equals(refereeUserName)){
-                            throw new Exception("Referee already exist in this LeagueSeason");
+                    if (rMDB.get(refereeUserName).isPresent()){
+                        Referee referee = (Referee)rMDB.get(refereeUserName).get();
+                        for (int i=0;i<leagueSeason.getLstReferee().size();i++){ //Check if referee already exist
+                            if (leagueSeason.getLstReferee().get(i).getUserName().equals(refereeUserName)){
+                                throw new Exception("Referee already exist in this LeagueSeason");
+                            }
                         }
+                        leagueSeason.addReferee(referee);
+                        rMDB.update(referee);
+                        leagueMDB.update(league);
+                        return true;
                     }
-                    leagueSeason.addReferee(referee);
-                    rMDB.update(referee);
-                    leagueMDB.update(league);
-                    return true;
+                    else{
+                        throw new Exception("Referee does not exist in DB");
+                    }
                 }
                 else{
                     throw new Exception("LeagueSeason does not exist in DB");
